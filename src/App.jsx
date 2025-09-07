@@ -7,6 +7,7 @@ import { MobileMenu } from "./components/MobileMenu";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Projects } from "./pages/Projects";
+import CloudPlatform from "./pages/projects/CloudPlatform";
 import { Contact } from "./pages/Contact";
 import "./index.css";
 
@@ -29,7 +30,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/projects/cloud-platform" element={<CloudPlatform />} />
+            {/* <Route path="/contact" element={<Contact />} /> */}
           </Routes>
         </div>
       </Router>

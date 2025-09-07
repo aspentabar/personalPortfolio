@@ -35,15 +35,15 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
             <NavLink to="/" end className={navLinkStyles}>
               Home
             </NavLink>
-            <NavLink to="/about" className={navLinkStyles}>
-              About
-            </NavLink>
             <NavLink to="/projects" className={navLinkStyles}>
               Projects
             </NavLink>
-            <NavLink to="/contact" className={navLinkStyles}>
-              Contact
+            <NavLink to="/about" className={navLinkStyles}>
+              About
             </NavLink>
+            {/* <NavLink to="/contact" className={navLinkStyles}>
+              Contact
+            </NavLink> */}
           </div>
         </div>
       </div>
