@@ -117,7 +117,7 @@ export function Home() {
           <h1 className="text-7xl md:text-8xl font-extrabold mb-2 text-purple-700 tracking-tight leading-tight">
             Aspen Tabar
           </h1>
-          <p className="text-2xl text-purple-400 mb-4 font-semibold">
+          <p className="text-2xl text-black mb-4">
             Designer &amp; Developer
           </p>
           <InteractiveProcessingCanvas />

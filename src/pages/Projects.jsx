@@ -19,13 +19,15 @@ const categories = [
 
 // Add a `categories` property to each project for filtering
 const featuredProjects = [
+
+  
   {
-    id: "cloud-platform",
+    id: "ArsElectronicaFutureLab",
     title: "Cloud Platform",
     image: cloudImg,
     description: "Scalable cloud infrastructure management with real-time monitoring and automated scaling.",
     tech: ["React", "Node.js", "AWS", "Docker"],
-    url: "/projects/cloud-platform",
+    url: "/projects/ArsElectronicaFutureLab",
     categories: ["web", "cloud", "all"],
   },
   {
@@ -58,7 +60,7 @@ export function Projects() {
             </h1>
           </div>
           {/* Filter Bar */}
-          <div className="flex items-end justify-start mb-8 border-b border-gray-200 relative overflow-x-auto">
+          <div className="flex items-end justify-start mb-8 border-b border-gray-200 relative overflow-x-auto pt-5">
             {categories.map((cat) => (
               <button
                 key={cat.value}

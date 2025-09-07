@@ -3,7 +3,8 @@ import cloudImg from "../../assets/SelfPhoto.jpeg";
 import { RevealOnScroll } from "../../components/RevealOnScroll";
 
 
-export default function CloudPlatform() {
+
+export default function ArsElectronicaFutureLab() {
   const navigate = useNavigate();
 
   return (
