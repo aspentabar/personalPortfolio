@@ -7,7 +7,7 @@ import { MobileMenu } from "./components/MobileMenu";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Projects } from "./pages/Projects";
-import ArsElectronicaFutureLab from "./pages/projects/ArsElectronicaFutureLab";
+import { ArsElectronicaFutureLab } from "./pages/projects/ArsElectronicaFutureLab";
 import { Contact } from "./pages/Contact";
 import "./index.css";
 
