@@ -326,10 +326,10 @@ export function Home() {
     <section className="min-h-[70vh] flex flex-col items-center justify-center py-28 bg-gradient-to-b from-white via-purple-50/20 to-white">
       <RevealOnScroll>
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h1 className="text-7xl md:text-8xl font-extrabold mb-2 bg-gradient-to-r from-purple-700 via-indigo-600 to-purple-700 bg-clip-text text-transparent tracking-tight leading-tight animate-gradient">
+          <h1 className="text-7xl md:text-8xl font-extrabold mb-2 text-purple-400">
             Aspen Tabar
           </h1>
-          <p className="text-2xl text-gray-700 mb-2">
+          <p className="text-2xl text-gray-500 mb-2">
             Designer &amp; Developer
           </p>
           <p className="text-sm text-purple-600 mb-6 font-medium tracking-wider">
