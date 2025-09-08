@@ -86,7 +86,7 @@ export function About() {
               Hello, I’m Aspen!
             </h1>
             <p className="text-lg text-black mb-6">
-              I’m a computer science and design student at Northeastern University, passionate about human-computer interaction, user experience design, and front-end development. I love exploring innovative ways to merge technology and creativity, making digital experiences more meaningful, accessible, and impactful. I’m especially interested in VR/AR, creative coding, and building beautiful, user-friendly interfaces. When I’m not designing or coding, you might find me playing ice hockey, hiking, or strumming my guitar.
+              I’m a computer science and design student at Northeastern University, passionate about human-computer interaction, user experience design, and front-end development. I love exploring innovative ways to merge technology and creativity, making digital experiences more meaningful, accessible, and impactful. I’m especially interested in VR/AR, creative coding, and building user-friendly interfaces. When I’m not designing or coding, you might find me playing ice hockey, hiking, or practicing guitar.
             </p>
             <div className="text-md text-black mb-2">
               <span className="font-semibold text-purple-700">Currently seeking:</span> Full-time positions starting May 2025.

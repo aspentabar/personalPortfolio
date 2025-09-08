@@ -6,10 +6,9 @@ export const LoadingScreen = ({ onComplete }) => {
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    // Show all letters after the animation, then call onComplete.
     const timer = setTimeout(() => {
       setShowAll(true);
-      setTimeout(onComplete, 1500); // Wait a bit before finishing
+      setTimeout(onComplete, 1500);
     }, WELCOME_TEXT.length * 150 + 1000);
     return () => clearTimeout(timer);
   }, [onComplete]);
