@@ -1,6 +1,17 @@
+import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 
 export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+  }, [menuOpen]);
+
+  // Same styles as desktop nav
+  const navLinkStyles = ({ isActive }) =>
+    `text-2xl font-semibold my-4 transform transition-all duration-300 ${
+      menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+    } ${isActive ? "text-purple-400" : "text-purple-700"}`;
+
   return (
     <div
       className={`fixed top-0 left-0 w-full bg-white/95 z-40 flex flex-col items-center justify-center
@@ -19,21 +30,41 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
       >
         &times;
       </button>
-      {["Home", "About", "Projects", "Contact"].map((section) => (
-        <a
-          key={section}
-          href={`#${section.toLowerCase()}`}
-          onClick={() => setMenuOpen(false)}
-          className={`text-2xl font-semibold text-purple-700 my-4 transform transition-transform duration-300
-                      ${
-                        menuOpen
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-5"
-                      }`}
-        >
-          {section}
-        </a>
-      ))}
+      
+      <NavLink
+        to="/"
+        end
+        onClick={() => setMenuOpen(false)}
+        className={navLinkStyles}
+      >
+        Home
+      </NavLink>
+      
+      <NavLink
+        to="/projects"
+        onClick={() => setMenuOpen(false)}
+        className={navLinkStyles}
+      >
+        Projects
+      </NavLink>
+      
+      <NavLink
+        to="/about"
+        onClick={() => setMenuOpen(false)}
+        className={navLinkStyles}
+      >
+        About
+      </NavLink>
+      
+      {/* Uncomment when ready to add Contact page
+      <NavLink
+        to="/contact"
+        onClick={() => setMenuOpen(false)}
+        className={navLinkStyles}
+      >
+        Contact
+      </NavLink>
+      */}
     </div>
   );
 };
