@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 
-// RevealOnScroll component
+// RevealOnScroll component (unchanged)
 function RevealOnScroll({ children }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -8,21 +8,15 @@ function RevealOnScroll({ children }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    if (ref.current) observer.observe(ref.current);
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
+      if (ref.current) observer.unobserve(ref.current);
     };
   }, []);
 
@@ -39,25 +33,25 @@ function RevealOnScroll({ children }) {
 }
 
 function InteractiveCursorEffect() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const containerRef = useRef(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const animFrame = useRef(null);
+
   const [mouseInWindow, setMouseInWindow] = useState(true);
+
+  // Smoothed positions for text and particles
+  const posRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      const normalizedX = (e.clientX / window.innerWidth) * 2 - 1;
-      const normalizedY = (e.clientY / window.innerHeight) * 2 - 1;
-      setMousePos({ x: normalizedX, y: normalizedY });
+      const nx = (e.clientX / window.innerWidth) * 2 - 1;
+      const ny = (e.clientY / window.innerHeight) * 2 - 1;
+      mouseRef.current = { x: nx, y: ny };
       setMouseInWindow(true);
     };
 
-    const handleMouseLeave = () => {
-      setMouseInWindow(false);
-      setTimeout(() => setMousePos({ x: 0, y: 0 }), 300);
-    };
-
-    const handleMouseEnter = () => {
-      setMouseInWindow(true);
-    };
+    const handleMouseLeave = () => setMouseInWindow(false);
+    const handleMouseEnter = () => setMouseInWindow(true);
 
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseout", handleMouseLeave);
@@ -67,114 +61,99 @@ function InteractiveCursorEffect() {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseout", handleMouseLeave);
       document.removeEventListener("mouseover", handleMouseEnter);
+      if (animFrame.current) cancelAnimationFrame(animFrame.current);
     };
   }, []);
 
-  // Glow effect
-  const glowStyle = {
-    background: `radial-gradient(
-      circle at ${50 + mousePos.x * 30}% ${50 + mousePos.y * 30}%,
-      rgba(168, 85, 247, 0.15) 0%,
-      rgba(168, 85, 247, 0.05) 40%,
-      transparent 70%
-    )`,
-    opacity: mouseInWindow ? 1 : 0,
-    transition: "opacity 0.3s ease-out",
-  };
+  useEffect(() => {
+    const animate = () => {
+      // Smooth lerp toward target mouse position
+      posRef.current.x += (mouseRef.current.x - posRef.current.x) * 0.1;
+      posRef.current.y += (mouseRef.current.y - posRef.current.y) * 0.1;
 
-  // Text transforms
-  const nameTransform = {
-    transform: `
-      translate(${mousePos.x * 20}px, ${mousePos.y * 15}px) 
-      rotateX(${-mousePos.y * 5}deg) 
-      rotateY(${mousePos.x * 5}deg)
-      scale(${mouseInWindow ? 1.05 : 1})
-    `,
-    transition: "transform 0.2s ease-out",
-  };
+      const { x, y } = posRef.current;
 
-  const titleTransform = {
-    transform: `
-      translate(${mousePos.x * -15}px, ${mousePos.y * 10}px)
-      rotateX(${-mousePos.y * 3}deg) 
-      rotateY(${mousePos.x * -3}deg)
-    `,
-    transition: "transform 0.25s ease-out",
-  };
+      // Update glow and particle styles directly
+      const container = containerRef.current;
+      if (container) {
+        const glow = container.querySelector(".glow");
+        if (glow)
+          glow.style.background = `radial-gradient(
+            circle at ${50 + x * 30}% ${50 + y * 30}%,
+            rgba(168,85,247,0.15) 0%,
+            rgba(168,85,247,0.05) 40%,
+            transparent 70%
+          )`;
 
-  const subtitleTransform = {
-    transform: `
-      translate(${mousePos.x * 10}px, ${mousePos.y * -8}px)
-      rotateX(${mousePos.y * 2}deg) 
-      rotateY(${mousePos.x * 2}deg)
-    `,
-    transition: "transform 0.3s ease-out",
-    opacity: mouseInWindow ? 0.9 : 0.8,
-  };
+        const particles = container.querySelectorAll(".particle");
+        particles.forEach((p, i) => {
+          const factors = [
+            { fx: 150, fy: 150, t: 0.5 },
+            { fx: -100, fy: -100, t: 0.7 },
+            { fx: 120, fy: -80, t: 0.6 },
+          ];
+          const f = factors[i];
+          p.style.left = `calc(50% + ${x * f.fx}px)`;
+          p.style.top = `calc(50% + ${y * f.fy}px)`;
+        });
+
+        // Update text transforms
+        const name = container.querySelector(".name");
+        const title = container.querySelector(".title");
+        const subtitle = container.querySelector(".subtitle");
+
+        if (name)
+          name.style.transform = `translate(${x * 20}px, ${y * 15}px) rotateX(${
+            -y * 5
+          }deg) rotateY(${x * 5}deg) scale(${mouseInWindow ? 1.05 : 1})`;
+
+        if (title)
+          title.style.transform = `translate(${x * -15}px, ${y * 10}px) rotateX(${
+            -y * 3
+          }deg) rotateY(${x * -3}deg)`;
+
+        if (subtitle)
+          subtitle.style.transform = `translate(${x * 10}px, ${y * -8}px) rotateX(${
+            y * 2
+          }deg) rotateY(${x * 2}deg)`;
+      }
+
+      animFrame.current = requestAnimationFrame(animate);
+    };
+
+    animFrame.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animFrame.current);
+  }, [mouseInWindow]);
 
   return (
-    <div className="relative w-full h-screen flex items-center justify-center">
-      {/* 🔹 Fullscreen background layer for glow + particles */}
-      <div className="fixed inset-0 z-0 pointer-events-none" style={glowStyle}>
-        {mouseInWindow && (
-          <>
-            <div
-              className="absolute w-2 h-2 bg-purple-400 rounded-full opacity-60"
-              style={{
-                left: `calc(50% + ${mousePos.x * 150}px)`,
-                top: `calc(50% + ${mousePos.y * 150}px)`,
-                transform: "translate(-50%, -50%)",
-                transition: "all 0.5s ease-out",
-              }}
-            />
-            <div
-              className="absolute w-3 h-3 bg-purple-500 rounded-full opacity-40"
-              style={{
-                left: `calc(50% + ${mousePos.x * -100}px)`,
-                top: `calc(50% + ${mousePos.y * -100}px)`,
-                transform: "translate(-50%, -50%)",
-                transition: "all 0.7s ease-out",
-              }}
-            />
-            <div
-              className="absolute w-1.5 h-1.5 bg-indigo-400 rounded-full opacity-50"
-              style={{
-                left: `calc(50% + ${mousePos.x * 120}px)`,
-                top: `calc(50% + ${mousePos.y * -80}px)`,
-                transform: "translate(-50%, -50%)",
-                transition: "all 0.6s ease-out",
-              }}
-            />
-          </>
-        )}
+    <div
+      ref={containerRef}
+      className="relative w-full h-screen flex items-center justify-center"
+    >
+      {/* Background glow and particles */}
+      <div
+        className="fixed inset-0 z-0 pointer-events-none glow"
+        style={{ opacity: mouseInWindow ? 1 : 0, transition: "opacity 0.3s" }}
+      >
+        <div className="absolute w-2 h-2 bg-purple-400 rounded-full opacity-60 particle transform -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute w-3 h-3 bg-purple-500 rounded-full opacity-40 particle transform -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute w-1.5 h-1.5 bg-indigo-400 rounded-full opacity-50 particle transform -translate-x-1/2 -translate-y-1/2" />
       </div>
 
-      {/* 🔹 Foreground content */}
+      {/* Foreground content */}
       <div className="relative z-10 text-center">
-        <h1
-          className="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 select-none"
-          style={nameTransform}
-        >
-          <span className="inline-block text-purple-600">Aspen</span>
-          <span className="inline-block ml-4 text-purple-600">Tabar</span>
+        <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 select-none name text-purple-600">
+          Aspen Tabar
         </h1>
-
-        <p
-          className="text-2xl md:text-3xl text-gray-700 mb-4 font-medium select-none"
-          style={titleTransform}
-        >
+        <p className="text-2xl md:text-3xl text-gray-700 mb-4 font-medium select-none title">
           Designer <span className="mx-3 text-purple-400">&amp;</span> Developer
         </p>
-
-        <p
-          className="text-sm md:text-base text-purple-600 font-medium tracking-wider select-none"
-          style={subtitleTransform}
-        >
+        <p className="text-sm md:text-base text-purple-600 font-medium tracking-wider select-none subtitle">
           Exploring the intersection of computing and human experience
         </p>
       </div>
 
-      {/* Hint text */}
+      {/* Hint */}
       <div
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-purple-400 z-10"
         style={{
