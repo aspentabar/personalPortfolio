@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 
-// RevealOnScroll component (unchanged)
+// RevealOnScroll 
 function RevealOnScroll({ children }) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
@@ -39,7 +39,7 @@ function InteractiveCursorEffect() {
 
   const [mouseInWindow, setMouseInWindow] = useState(true);
 
-  // Smoothed positions for text and particles
+  // Smooth positions for text and particles
   const posRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -73,7 +73,7 @@ function InteractiveCursorEffect() {
 
       const { x, y } = posRef.current;
 
-      // Update glow and particle styles directly
+      // Update to glow and particle styles
       const container = containerRef.current;
       if (container) {
         const glow = container.querySelector(".glow");
@@ -148,12 +148,12 @@ function InteractiveCursorEffect() {
         <p className="text-2xl md:text-3xl text-gray-700 mb-4 font-medium select-none title">
           Designer <span className="mx-3 text-purple-400">&amp;</span> Developer
         </p>
-        <p className="text-sm md:text-base text-purple-600 font-medium tracking-wider select-none subtitle">
+        <p className="text-sm md:text-base text-purple-400 font-medium tracking-wider select-none subtitle">
           Exploring the intersection of computing and human experience
         </p>
       </div>
 
-      {/* Hint */}
+      {/* Hint at bottom */}
       <div
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-purple-400 z-10"
         style={{
@@ -161,7 +161,7 @@ function InteractiveCursorEffect() {
           transition: "opacity 0.5s ease-out",
         }}
       >
-        Move your cursor to interact
+        Move your cursor to interact!
       </div>
     </div>
   );
