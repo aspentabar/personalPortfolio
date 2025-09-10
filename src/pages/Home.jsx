@@ -135,8 +135,8 @@ function InteractiveCursorEffect() {
         className="fixed inset-0 z-0 pointer-events-none glow"
         style={{ opacity: mouseInWindow ? 1 : 0, transition: "opacity 0.3s" }}
       >
-        <div className="absolute w-2 h-2 bg-purple-400 rounded-full opacity-60 particle transform -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute w-3 h-3 bg-purple-500 rounded-full opacity-40 particle transform -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute w-2 h-2 bg-indigo-400 rounded-full opacity-60 particle transform -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute w-3 h-3 bg-indigo-500 rounded-full opacity-40 particle transform -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute w-1.5 h-1.5 bg-indigo-400 rounded-full opacity-50 particle transform -translate-x-1/2 -translate-y-1/2" />
       </div>
 
@@ -148,7 +148,7 @@ function InteractiveCursorEffect() {
         <p className="text-2xl md:text-3xl text-gray-700 mb-4 font-medium select-none title">
           Designer <span className="mx-3 text-purple-400">&amp;</span> Developer
         </p>
-        <p className="text-sm md:text-base text-purple-400 font-medium tracking-wider select-none subtitle">
+        <p className="text-sm md:text-base text-indigo-400 font-medium tracking-wider select-none subtitle">
           Exploring the intersection of computing and human experience
         </p>
       </div>

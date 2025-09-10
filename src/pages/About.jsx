@@ -46,7 +46,6 @@ const skillGroups = [
     group: "Design Tools",
     skills: [
       "Figma",
-      "Canva",
       "Adobe Illustrator",
       "Adobe Photoshop",
       "Adobe InDesign",
@@ -54,7 +53,7 @@ const skillGroups = [
       "Adobe Premiere Pro",
       "Miro",
       "Notion",
-      "WeVideo",
+      "Canva",
     ],
   },
   {
@@ -137,7 +136,7 @@ export function About() {
           <div className="flex flex-col md:flex-row gap-6">
             {skillGroups.map(({ group, skills }) => (
               <div key={group} className="bg-purple-50 rounded-lg shadow p-5 flex-1 min-w-[220px]">
-                <h3 className="text-gray-500 font-black mb-3 text-sm tracking-wide">{group}</h3>
+                <h3 className="text-gray-700 font-black mb-3 text-sm tracking-wide">{group}</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.map(skill => (
                     <span
