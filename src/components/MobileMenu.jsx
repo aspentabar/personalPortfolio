@@ -6,7 +6,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
   }, [menuOpen]);
 
-  // Same styles as desktop nav
+  // Same styles as desktop navigation
   const navLinkStyles = ({ isActive }) =>
     `text-2xl font-semibold my-4 transform transition-all duration-300 ${
       menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
