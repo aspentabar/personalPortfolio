@@ -13,7 +13,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
       : "text-purple-700 hover:text-purple-500 transition-colors";
 
   return (
-    <nav className="fixed top-0 w-full z-40 bg-white/80 backdrop-blur-lg border-b border-purple-200 shadow-lg">
+    <nav className="fixed top-0 w-full z-40 bg-white/80 backdrop-blur-lg shadow-lg">    
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <NavLink

@@ -43,47 +43,59 @@ function RevealOnScroll({ children }) {
 
 export function ArsElectronicaFutureLab() {
   return (
-    <section className="min-h-screen bg-gradient-to-b from-white via-purple-50/30 to-white py-24 md:py-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        
-        {/* Header Section with improved spacing */}
-        <RevealOnScroll>
-          <div className="mb-20 md:mb-24">
-            
-            {/* Title and Description */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-purple-900 leading-tight">
-              Color Quandary
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl">
-              An interactive installation created at Ars Electronica Futurelab Academy, 
-              transforming public movement into large-scale digital competition on the 
-              museum's programmable media façade.
-            </p>
-          </div>
-        </RevealOnScroll>
+    <section className="min-h-screen bg-white">
+      {/* Header Section with light purple background */}
+      <div className="bg-gray-50 py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          
+          <RevealOnScroll>
+            <div>
+              
+              {/* Title and Description */}
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-purple-700 leading-tight">
+                Color Quandary
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-15">
+              An interactive installation exploring how human computer interactions can turn audience movement into large-scale visual competition.
+              </p>
+            </div>
+          </RevealOnScroll>
 
-        {/* Metadata Grid with better visual separation */}
-        <RevealOnScroll>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-20 md:mb-28 p-8 md:p-10 bg-white rounded-2xl shadow-sm border border-purple-100">
-            <div className="space-y-2">
-              <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Role</h3>
-              <p className="text-gray-800 font-medium">UI/UX Designer & Creative Coder</p>
-            </div>
-            <div className="space-y-2">
-              <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Location</h3>
-              <p className="text-gray-800 font-medium">Linz, Austria</p>
-            </div>
-            <div className="space-y-2">
-              <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Platforms</h3>
-              <p className="text-gray-800 font-medium">Media Façade, Public Space</p>
-            </div>
-            <div className="space-y-2">
-              <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Focus</h3>
-              <p className="text-gray-800 font-medium">HCI, Interactive Art</p>
-            </div>
-          </div>
-        </RevealOnScroll>
+          {/* Metadata Grid - Fixed spacing */}
+          <RevealOnScroll>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 max-w-4xl">
+    <div className="space-y-2">
+      <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Role</h3>
+      <p className="text-gray-800 font-medium text-sm lg:text-base whitespace-nowrap">
+        UX Designer & Creative Coder
+      </p>
+    </div>
+    <div className="space-y-2">
+      <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Location</h3>
+      <p className="text-gray-800 font-medium text-sm lg:text-base whitespace-nowrap">
+        Linz, Austria
+      </p>
+    </div>
+    <div className="space-y-2">
+      <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Platforms</h3>
+      <p className="text-gray-800 font-medium text-sm lg:text-base whitespace-nowrap">
+        Media Façade, Public Space
+      </p>
+    </div>
+    <div className="space-y-2">
+      <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Focus</h3>
+      <p className="text-gray-800 font-medium text-sm lg:text-base whitespace-nowrap">
+        HCI & Interactive Art
+      </p>
+    </div>
+  </div>
+</RevealOnScroll>
+
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-24 md:py-32">
 
         {/* Hero Image with enhanced presentation */}
         <RevealOnScroll>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { RevealOnScroll } from "../components/RevealOnScroll";
 import { Link } from "react-router-dom";
 
-// Example images (replace with your own assets!)
+// Images
 import ArsImg from "../assets/arsElecronica.jpeg";
 import aiImg from "../assets/SelfPhoto.jpeg";
 
@@ -17,14 +17,14 @@ const categories = [
   { label: "AR", value: "ar" },
 ];
 
-// Add a `categories` property to each project for filtering
+// List of Projects:
 const featuredProjects = [
   {
     id: "ArsElectronicaFutureLab",
     title: "Color Quandary",
     image: ArsImg,
     description:
-      "An interactive installation exploring how human-computer interactions can turn audience movement into large-scale visual competition.",
+      "An interactive installation exploring how human computer interactions can turn audience movement into large-scale visual competition.",
     tech: ["Java", "Processing.js", "HCI", "UX"],
     url: "/projects/ArsElectronicaFutureLab",
     categories: ["ux", "cloud", "all"],
@@ -71,7 +71,7 @@ export function Projects() {
                   ${
                     selected === cat.value
                       ? "text-black font-semibold"
-                      : "text-gray-500"
+                      : "text-gray-700"
                   }
                   focus:outline-none relative`}
               >
