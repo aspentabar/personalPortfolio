@@ -1,5 +1,5 @@
 import React from 'react';
-import ArsImg from "../../assets/arsElecronica.jpeg";
+import ArsImg from "../../assets/ars3.jpeg";
 
 // RevealOnScroll component
 function RevealOnScroll({ children }) {
@@ -44,10 +44,11 @@ function RevealOnScroll({ children }) {
 export function ArsElectronicaFutureLab() {
   return (
     <section className="min-h-screen bg-white">
-      {/* Header Section with light purple background */}
-      <div className="bg-gray-50 py-24 md:py-32">
+      {/* Header Section with light background */}
+      <div className="bg-gray-100 pt-20 pb-12 md:pt-32 md:pb-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           
+
           <RevealOnScroll>
             <div>
               
@@ -62,44 +63,47 @@ export function ArsElectronicaFutureLab() {
             </div>
           </RevealOnScroll>
 
-          {/* Metadata Grid - Fixed spacing */}
+          {/* Information Grid */}
           <RevealOnScroll>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-12 max-w-4xl">
-    <div className="space-y-2">
-      <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Role</h3>
-      <p className="text-gray-800 font-medium text-sm lg:text-base whitespace-nowrap">
-        UX Designer & Creative Coder
-      </p>
-    </div>
-    <div className="space-y-2">
-      <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Location</h3>
-      <p className="text-gray-800 font-medium text-sm lg:text-base whitespace-nowrap">
-        Linz, Austria
-      </p>
-    </div>
-    <div className="space-y-2">
-      <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Platforms</h3>
-      <p className="text-gray-800 font-medium text-sm lg:text-base whitespace-nowrap">
-        Media Façade, Public Space
-      </p>
-    </div>
-    <div className="space-y-2">
-      <h3 className="uppercase text-xs font-bold text-purple-600 tracking-wider">Focus</h3>
-      <p className="text-gray-800 font-medium text-sm lg:text-base whitespace-nowrap">
-        HCI & Interactive Art
-      </p>
-    </div>
-  </div>
-</RevealOnScroll>
+          <div class="flex flex-col gap-6 md:flex-row my-8">
+            <div class="flex flex-col items-start pr-6">
+              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Role</p>
+              <p class="text-neutral-950">UX Designer & Creative Coder</p>
+            </div>
+
+            <div class="flex flex-col items-start pr-6 md:pl-6">
+              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Location</p>
+              <p class="text-neutral-950">Linz, Austria</p>
+            </div>
+
+            <div class="flex flex-col items-start pr-6 md:pl-6">
+              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Platforms</p>
+              <p class="text-neutral-950">Public Media Façade</p>
+            </div>
+
+            <div class="flex flex-col items-start md:pl-6">
+              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Focus</p>
+              <p class="text-neutral-950">HCI & Interactive Art</p>
+            </div>
+
+            <div class="flex flex-col items-start md:pl-6">
+              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Collaborators</p>
+              <p class="text-neutral-950">Ellie Williams, Marta Hill</p>
+            </div>
+          </div>
+        </RevealOnScroll>
 
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-24 md:py-32">
 
-        {/* Hero Image with enhanced presentation */}
+        {/* Image */}
         <RevealOnScroll>
-          <div className="mb-28 md:mb-36 -mx-6 lg:-mx-12">
+        <div className="mb-28 md:mb-36 -mx-6 lg:-mx-12 -mt-[0px]">
+
+        {/* className="w-full object-cover h-[300px] md:h-[450px]" */}
+
             <div className="relative overflow-hidden rounded-none lg:rounded-3xl shadow-2xl">
               <img
                 src={ArsImg}

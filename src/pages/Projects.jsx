@@ -3,7 +3,7 @@ import { RevealOnScroll } from "../components/RevealOnScroll";
 import { Link } from "react-router-dom";
 
 // Images
-import ArsImg from "../assets/arsElecronica.jpeg";
+import ArsImg from "../assets/ars3.jpeg";
 import aiImg from "../assets/SelfPhoto.jpeg";
 
 // Project categories
