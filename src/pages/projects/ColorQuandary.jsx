@@ -73,9 +73,21 @@ export function ColorQuandary() {
                 Color Quandary
               </h1>
               
-              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-15">
+              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-8">
               An interactive installation exploring how human computer interactions can turn audience movement into large-scale visual competition.
               </p>
+              
+              <a 
+                href="https://ars.electronica.art/futurelab/en/projects-northeastern-university-2023/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-sm"
+              >
+                Ars Electronica
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
             </div>
           </RevealOnScroll>
 
