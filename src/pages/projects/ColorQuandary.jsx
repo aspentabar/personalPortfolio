@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import ArsImg from "../../assets/arsElecronica.jpeg";
 import ArsVid from "../../assets/ArsVid1.mp4";
 
@@ -43,6 +43,22 @@ function RevealOnScroll({ children }) {
 
 
 export function ColorQuandary() {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      // Start playing the video (it will be muted initially for autoplay to work)
+      video.play().then(() => {
+        // Once playing, unmute the video
+        video.muted = false;
+      }).catch((error) => {
+        // If unmuting causes playback to stop, keep it muted
+        console.log("Autoplay with sound was prevented:", error);
+      });
+    }
+  }, []);
+
   return (
     <section className="min-h-screen bg-white">
       {/* Header Section with light background */}
@@ -99,25 +115,27 @@ export function ColorQuandary() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-24 md:py-32">
 
-        {/* Image */}
+        {/* Video */}
         <RevealOnScroll>
         <div className="mb-28 md:mb-36 -mx-6 lg:-mx-12 -mt-[0px]">
 
 
         <div className="relative overflow-hidden rounded-none lg:rounded-3xl shadow-2xl">
-          <video
-            src={ArsVid}
-            className="w-full object-cover"
-            style={{ aspectRatio: '16/9' }} 
-            autoPlay 
-            loop 
-            playsInline
-            controls
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent"></div>
+        <video
+        ref={videoRef}
+        src={ArsVid}
+        className="w-full object-cover"
+        style={{ aspectRatio: '16/9' }}
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls
+      />
+          <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none"></div>
         </div>
 
-          </div>
+        </div>
         </RevealOnScroll>
 
         {/* Case Study Content with improved spacing and typography */}
