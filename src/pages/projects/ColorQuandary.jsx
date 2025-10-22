@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import ArsImg from "../../assets/arsElecronica.jpeg";
 import ArsVid from "../../assets/ArsVid1.mp4";
 
 // RevealOnScroll component
@@ -113,7 +112,7 @@ export function ColorQuandary() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-24 md:py-32">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 md:py-16">
 
         {/* Video */}
         <RevealOnScroll>
@@ -139,21 +138,21 @@ export function ColorQuandary() {
         </RevealOnScroll>
 
         {/* Case Study Content with improved spacing and typography */}
-        <div className="max-w-4xl mx-auto">
+        <div className="-mx-6 lg:-mx-12">
           <div className="space-y-20 md:space-y-28">
             
             <RevealOnScroll>
-              <section className="relative">
-                <div className="absolute -left-4 md:-left-8 top-0 w-1 h-full bg-gradient-to-b from-purple-400 to-transparent rounded-full"></div>
-                <div className="pl-8 md:pl-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Background</h2>
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    In Summer 2023, I joined the Ars Electronica Futurelab Academy in Linz, 
-                    Austria as part of a Northeastern University cohort. Over three intensive 
-                    days, we collaborated with Futurelab researchers to design interactive 
-                    projects for the museum's iconic programmable media façade. The program 
-                    emphasized human-computer interaction, creative coding, and public engagement 
-                    through large-scale digital art.
+              <section>
+                <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Overview</h2>
+                <div className="space-y-4">
+                  <p className="text-base md:text-lg leading-relaxed text-gray-700">
+                    Color Quandary is an interactive color competition that engages viewers to vote with their feet for their favorite colors, creating a playful atmosphere on the main deck of the Ars Electronica Center.
+                  </p>
+                  <p className="text-base md:text-lg leading-relaxed text-gray-700">
+                    At the start of each competition, the Ars Electronica facade divides into two colors. Players in the plaza are tracked using motion detection software and move towards the side with their favorite color to weigh in on their preference. The winning color overtakes the entire building. A round of Color Quandary includes seven individual games: four quarterfinal games, two semifinal games and one final game. After a winner is crowned, the entire facade transforms into a display indicative of the overall standings of each color.
+                  </p>
+                  <p className="text-base md:text-lg leading-relaxed text-gray-700">
+                    Color Quandary is inspired by "this or that" games in which users are asked to make a quick decision about which option they prefer. Though the idea was simplified to translate better on the Ars Electronica Center facade, the heart of the idea is the same. Color Quandary invites passersby to use their bodies to control the facade with an accessible, easy to understand and visually interesting game.
                   </p>
                 </div>
               </section>
