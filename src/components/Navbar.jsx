@@ -10,7 +10,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
   const navLinkStyles = ({ isActive }) =>
     isActive
       ? "text-purple-400 font-semibold transition-colors"
-      : "text-purple-700 hover:text-purple-500 transition-colors";
+      : "text-gray-700 hover:text-purple-400 transition-colors";
 
   return (
     <nav className="fixed top-0 w-full z-40 bg-white/80 backdrop-blur-lg shadow-lg">    

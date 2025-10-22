@@ -7,7 +7,7 @@ import { MobileMenu } from "./components/MobileMenu";
 import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Projects } from "./pages/Projects";
-import { ArsElectronicaFutureLab } from "./pages/projects/ArsElectronicaFutureLab";
+import { ColorQuandary } from "./pages/projects/ColorQuandary";
 import { Contact } from "./pages/Contact";
 import "./index.css";
 
@@ -30,7 +30,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/ArsElectronicaFutureLab" element={<ArsElectronicaFutureLab />} />
+            <Route path="/projects/ColorQuandary" element={<ColorQuandary />} />
             {/* <Route path="/contact" element={<Contact />} /> */}
           </Routes>
         </div>

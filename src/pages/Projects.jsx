@@ -3,7 +3,7 @@ import { RevealOnScroll } from "../components/RevealOnScroll";
 import { Link } from "react-router-dom";
 
 // Images
-import ArsImg from "../assets/ars3.jpeg";
+import ArsImg from "../assets/arsElecronica.jpeg";
 import aiImg from "../assets/SelfPhoto.jpeg";
 
 // Project categories
@@ -20,13 +20,13 @@ const categories = [
 // List of Projects:
 const featuredProjects = [
   {
-    id: "ArsElectronicaFutureLab",
+    id: "ColorQuandary",
     title: "Color Quandary",
     image: ArsImg,
     description:
       "An interactive installation exploring how human computer interactions can turn audience movement into large-scale visual competition.",
     tech: ["Java", "Processing.js", "HCI", "UX"],
-    url: "/projects/ArsElectronicaFutureLab",
+    url: "/projects/ColorQuandary",
     categories: ["ux", "cloud", "all"],
   },
   {
