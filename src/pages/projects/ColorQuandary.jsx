@@ -39,8 +39,6 @@ function RevealOnScroll({ children }) {
   );
 }
 
-
-
 export function ColorQuandary() {
   const videoRef = useRef(null);
 
@@ -63,29 +61,35 @@ export function ColorQuandary() {
       {/* Header Section with light background */}
       <div className="bg-gray-100 pt-20 pb-12 md:pt-32 md:pb-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          
-
           <RevealOnScroll>
             <div>
-              
               {/* Title and Description */}
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-purple-700 leading-tight">
                 Color Quandary
               </h1>
-              
               <p className="text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-8">
-              An interactive installation exploring how human computer interactions can turn audience movement into large-scale visual competition.
+                An interactive installation exploring how human computer interactions can turn audience movement into large-scale visual competition.
               </p>
-              
-              <a 
-                href="https://ars.electronica.art/futurelab/en/projects-northeastern-university-2023/" 
-                target="_blank" 
+              <a
+                href="https://ars.electronica.art/futurelab/en/projects-northeastern-university-2023/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-sm"
               >
                 Ars Electronica
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
                 </svg>
               </a>
             </div>
@@ -93,66 +97,56 @@ export function ColorQuandary() {
 
           {/* Information Grid */}
           <RevealOnScroll>
-          <div class="flex flex-col gap-6 md:flex-row my-8">
-            <div class="flex flex-col items-start pr-6">
-              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Role</p>
-              <p class="text-neutral-950">UX Designer & Creative Coder</p>
+            <div className="flex flex-col gap-6 md:flex-row my-8">
+              <div className="flex flex-col items-start pr-6">
+                <p className="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Role</p>
+                <p className="text-neutral-950">UX Designer & Creative Coder</p>
+              </div>
+              <div className="flex flex-col items-start pr-6 md:pl-6">
+                <p className="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Location</p>
+                <p className="text-neutral-950">Linz, Austria</p>
+              </div>
+              <div className="flex flex-col items-start pr-6 md:pl-6">
+                <p className="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Platforms</p>
+                <p className="text-neutral-950">Public Media Façade</p>
+              </div>
+              <div className="flex flex-col items-start md:pl-6">
+                <p className="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Focus</p>
+                <p className="text-neutral-950">HCI & Interactive Art</p>
+              </div>
+              <div className="flex flex-col items-start md:pl-6">
+                <p className="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Collaborators</p>
+                <p className="text-neutral-950">Ellie Williams, Marta Hill</p>
+              </div>
             </div>
-
-            <div class="flex flex-col items-start pr-6 md:pl-6">
-              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Location</p>
-              <p class="text-neutral-950">Linz, Austria</p>
-            </div>
-
-            <div class="flex flex-col items-start pr-6 md:pl-6">
-              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Platforms</p>
-              <p class="text-neutral-950">Public Media Façade</p>
-            </div>
-
-            <div class="flex flex-col items-start md:pl-6">
-              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Focus</p>
-              <p class="text-neutral-950">HCI & Interactive Art</p>
-            </div>
-
-            <div class="flex flex-col items-start md:pl-6">
-              <p class="text-purple-400 uppercase font-bold tracking-wider text-[14px]">Collaborators</p>
-              <p class="text-neutral-950">Ellie Williams, Marta Hill</p>
-            </div>
-          </div>
-        </RevealOnScroll>
-
+          </RevealOnScroll>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 md:py-16">
-
         {/* Video */}
         <RevealOnScroll>
-        <div className="mb-28 md:mb-36 -mx-6 lg:-mx-12 -mt-[0px]">
-
-
-        <div className="relative overflow-hidden rounded-none lg:rounded-3xl shadow-2xl">
-        <video
-        ref={videoRef}
-        src={ArsVid}
-        className="w-full object-cover"
-        style={{ aspectRatio: '16/9' }}
-        autoPlay
-        loop
-        muted
-        playsInline
-        controls
-      />
-          <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none"></div>
-        </div>
-
-        </div>
+          <div className="mb-28 md:mb-36 -mx-6 lg:-mx-12 -mt-[0px]">
+            <div className="relative overflow-hidden rounded-none lg:rounded-3xl shadow-2xl">
+              <video
+                ref={videoRef}
+                src={ArsVid}
+                className="w-full object-cover"
+                style={{ aspectRatio: '16/9' }}
+                autoPlay
+                loop
+                muted
+                playsInline
+                controls
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none"></div>
+            </div>
+          </div>
         </RevealOnScroll>
 
         {/* Case Study Content with improved spacing and typography */}
         <div className="-mx-6 lg:-mx-12">
           <div className="space-y-20 md:space-y-28">
-            
             <RevealOnScroll>
               <section>
                 <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Overview</h2>
@@ -171,74 +165,51 @@ export function ColorQuandary() {
             </RevealOnScroll>
 
             <RevealOnScroll>
-              <section className="relative">
-                <div className="absolute -left-4 md:-left-8 top-0 w-1 h-full bg-gradient-to-b from-purple-400 to-transparent rounded-full"></div>
-                <div className="pl-8 md:pl-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Project Overview</h2>
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    My team developed <em className="font-semibold text-purple-700">Color Quandary</em>, an interactive color competition 
-                    that invited passersby to "vote with their feet" on the museum's main deck. 
-                    Using motion detection, participants chose between two colors projected on 
-                    the Ars Electronica façade. Their movement determined the outcome, with the 
-                    winning color overtaking the building in real time. The game unfolded in a 
-                    series of elimination rounds, culminating in a final champion color and a 
-                    visual display of the standings across the façade.
+              <section>
+                <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Ars Electronica Futurelab Academy</h2>
+                <div className="max-w-2xl">
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                    I was selected by Northeastern University's Design Department to take part in the Ars Electronica Futurelab Academy in Linz, Austria. This collaborative program brings together art, technology, and research at a world-renowned research museum.
+                  </p>
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700 mt-4">
+                    Over three intensive days, I worked with an interdisciplinary team of Northeastern students and Ars Electronica researchers to design and prototype an interactive art installation for the programmable media façade of the Ars Electronica Center.
                   </p>
                 </div>
               </section>
             </RevealOnScroll>
 
             <RevealOnScroll>
-              <section className="relative">
-                <div className="absolute -left-4 md:-left-8 top-0 w-1 h-full bg-gradient-to-b from-purple-400 to-transparent rounded-full"></div>
-                <div className="pl-8 md:pl-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Design & Development</h2>
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    I designed and coded the interaction system in Java/Processing, integrating 
-                    motion tracking with generative visuals for the large-scale display. The 
-                    challenge was to balance playful simplicity with technical feasibility so 
-                    that anyone walking by could intuitively participate. Inspiration came from 
-                    familiar "this or that" decision games, reimagined at architectural scale 
-                    to transform the façade into a stage for collective choice.
+              <section>
+                <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Design & Development</h2>
+                <div className="max-w-2xl">
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                    I designed and coded the interaction system in Java/Processing, integrating motion tracking with generative visuals for the large-scale display. The challenge was to balance playful simplicity with technical feasibility so that anyone walking by could intuitively participate. Inspiration came from familiar "this or that" decision games, reimagined at architectural scale to transform the façade into a stage for collective choice.
                   </p>
                 </div>
               </section>
             </RevealOnScroll>
 
             <RevealOnScroll>
-              <section className="relative">
-                <div className="absolute -left-4 md:-left-8 top-0 w-1 h-full bg-gradient-to-b from-purple-400 to-transparent rounded-full"></div>
-                <div className="pl-8 md:pl-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Final Presentation</h2>
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    At the closing event, our project was presented live to an international 
-                    audience of scientists, artists, and the Linz community. Visitors experienced 
-                    <em className="font-semibold text-purple-700"> Color Quandary </em> directly on the plaza, engaging in spontaneous 
-                    group play and discussions sparked by the visual competition. The work 
-                    demonstrated how human-computer interaction can turn public space into a 
-                    canvas for both entertainment and reflection.
+              <section>
+                <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Final Presentation</h2>
+                <div className="max-w-2xl">
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                    At the closing event, our project was presented live to an international audience of scientists, artists, and the Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous group play and discussions sparked by the visual competition. The work demonstrated how human-computer interaction can turn public space into a canvas for both entertainment and reflection.
                   </p>
                 </div>
               </section>
             </RevealOnScroll>
 
             <RevealOnScroll>
-              <section className="relative">
-                <div className="absolute -left-4 md:-left-8 top-0 w-1 h-full bg-gradient-to-b from-purple-400 to-transparent rounded-full"></div>
-                <div className="pl-8 md:pl-12">
-                  <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Impact & Reflection</h2>
-                  <p className="text-lg md:text-xl leading-relaxed text-gray-700">
-                    Through this project, I gained hands-on experience in human-centered 
-                    computing, interactive art, and cross-cultural collaboration. Showcasing 
-                    creative coding at Ars Electronica—the world's leading festival for art, 
-                    technology, and society—was both technically challenging and deeply rewarding. 
-                    The experience reinforced my interest in designing interfaces that connect 
-                    people, technology, and shared public experiences.
+              <section>
+                <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Impact & Reflection</h2>
+                <div className="max-w-2xl">
+                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                    Through this project, I gained hands-on experience in human-centered computing, interactive art, and cross-cultural collaboration. Showcasing creative coding at Ars Electronica—the world's leading festival for art, technology, and society—was both technically challenging and deeply rewarding. The experience reinforced my interest in designing interfaces that connect people, technology, and shared public experiences.
                   </p>
                 </div>
               </section>
             </RevealOnScroll>
-
           </div>
         </div>
 
@@ -261,7 +232,6 @@ export function ColorQuandary() {
             </div>
           </div>
         </RevealOnScroll>
-
       </div>
     </section>
   );
