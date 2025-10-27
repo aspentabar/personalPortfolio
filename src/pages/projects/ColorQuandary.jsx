@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import ArsVid from "../../assets/ArsVid1.mp4";
+import Ars1 from "../../assets/ars1.jpeg";
+import Ars2 from "../../assets/ars2.jpeg";
 
 // RevealOnScroll component
 function RevealOnScroll({ children }) {
@@ -163,21 +165,49 @@ export function ColorQuandary() {
                 </div>
               </section>
             </RevealOnScroll>
+          </div>
+        </div>
+      </div>
 
-            <RevealOnScroll>
-              <section>
-                <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Ars Electronica Futurelab Academy</h2>
-                <div className="max-w-2xl">
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    I was selected by Northeastern University's Design Department to take part in the Ars Electronica Futurelab Academy in Linz, Austria. This collaborative program brings together art, technology, and research at a world-renowned research museum.
-                  </p>
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700 mt-4">
-                    Over three intensive days, I worked with an interdisciplinary team of Northeastern students and Ars Electronica researchers to design and prototype an interactive art installation for the programmable media façade of the Ars Electronica Center.
-                  </p>
-                </div>
-              </section>
-            </RevealOnScroll>
+      {/* Ars Electronica Futurelab Academy Section - Full Width with Same Gray Background */}
+      <div className="bg-gray-100 py-20 md:py-24 mb-20 md:mb-28 mt-10 md:mt-14">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <RevealOnScroll>
+            <section>
+              <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Ars Electronica Futurelab Academy</h2>
+              <div className="max-w-2xl">
+                <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                  I was selected by Northeastern University's Design Department to take part in the Ars Electronica Futurelab Academy in Linz, Austria. This collaborative program brings together art, technology, and research at a world-renowned research museum.
+                </p>
+                <p className="text-sm md:text-base leading-relaxed text-gray-700 mt-4">
+                  Over three intensive days, I worked with an interdisciplinary team of Northeastern students and Ars Electronica researchers to design and prototype an interactive art installation for the programmable media façade of the Ars Electronica Center.
+                </p>
+              </div>
+            </section>
+          </RevealOnScroll>
 
+          <RevealOnScroll>
+            <div className="mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <img 
+                  src={Ars1} 
+                  alt="Ars Electronica Academy" 
+                  className="w-full h-auto rounded-lg object-cover"
+                />
+                <img 
+                  src={Ars2} 
+                  alt="Ars Electronica Academy" 
+                  className="w-full h-auto rounded-lg object-cover"
+                />
+              </div>
+            </div>
+          </RevealOnScroll>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="-mx-6 lg:-mx-12">
+          <div className="space-y-20 md:space-y-28">
             <RevealOnScroll>
               <section>
                 <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Design & Development</h2>
