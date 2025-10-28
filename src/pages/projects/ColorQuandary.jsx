@@ -52,15 +52,15 @@ function RevealOnScroll({ children }) {
 function MediaCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Media items array - mix of images and video
+  // Media items array - mix of images and video (reordered)
   const mediaItems = [
-    { type: 'image', src: Ars5, alt: 'Design Process 1' },
-    { type: 'image', src: Ars6, alt: 'Design Process 2' },
-    { type: 'image', src: Ars7, alt: 'Design Process 3' },
-    { type: 'image', src: Ars8, alt: 'Design Process 4' },
-    { type: 'video', src: FloorTracking, alt: 'Floor Tracking Demo' },
-    { type: 'image', src: Ars9, alt: 'Design Process 5' },
-    { type: 'image', src: Ars10, alt: 'Design Process 6' }
+    { type: 'image', src: Ars10, alt: 'Design Process 6', fullView: false },
+    { type: 'video', src: FloorTracking, alt: 'Floor Tracking Demo', fullView: false },
+    { type: 'image', src: Ars7, alt: 'Design Process 3', fullView: true },
+    { type: 'image', src: Ars5, alt: 'Design Process 1', fullView: false },
+    { type: 'image', src: Ars9, alt: 'Design Process 5', fullView: true },
+    { type: 'image', src: Ars6, alt: 'Design Process 2', fullView: false },
+    { type: 'image', src: Ars8, alt: 'Design Process 4', fullView: true }
   ];
 
   // Create an extended array for smooth scrolling
@@ -130,7 +130,9 @@ function MediaCarousel() {
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className="w-full h-[300px] md:h-[400px] rounded-lg object-cover"
+                      className={`w-full h-[300px] md:h-[400px] rounded-lg ${
+                        item.fullView ? 'object-contain bg-gray-50' : 'object-cover'
+                      }`}
                     />
                   ) : (
                     <video
