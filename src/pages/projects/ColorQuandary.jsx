@@ -1,7 +1,14 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import ArsVid from "../../assets/ArsVid1.mp4";
 import Ars1 from "../../assets/ars1.jpeg";
 import Ars2 from "../../assets/ars2.jpeg";
+import Ars5 from "../../assets/ars5.jpeg";
+import Ars6 from "../../assets/ars6.jpeg";
+import Ars7 from "../../assets/ars7.jpeg";
+import Ars8 from "../../assets/ars8.jpeg";
+import Ars9 from "../../assets/ars9.jpeg";
+import Ars10 from "../../assets/ars10.jpeg";
+import FloorTracking from "../../assets/FloorTracking.mp4";
 
 // RevealOnScroll component
 function RevealOnScroll({ children }) {
@@ -37,6 +44,151 @@ function RevealOnScroll({ children }) {
       }`}
     >
       {children}
+    </div>
+  );
+}
+
+// Carousel Component
+function MediaCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Media items array - mix of images and video
+  const mediaItems = [
+    { type: 'image', src: Ars5, alt: 'Design Process 1' },
+    { type: 'image', src: Ars6, alt: 'Design Process 2' },
+    { type: 'image', src: Ars7, alt: 'Design Process 3' },
+    { type: 'image', src: Ars8, alt: 'Design Process 4' },
+    { type: 'video', src: FloorTracking, alt: 'Floor Tracking Demo' },
+    { type: 'image', src: Ars9, alt: 'Design Process 5' },
+    { type: 'image', src: Ars10, alt: 'Design Process 6' }
+  ];
+
+  // Create an extended array for smooth scrolling
+  // Add extra items at the beginning for smooth backwards scrolling
+  const extendedItems = [...mediaItems, ...mediaItems, ...mediaItems];
+  const offset = mediaItems.length; // Start in the middle copy
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? mediaItems.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex >= mediaItems.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  // Calculate the translation offset
+  const adjustedIndex = currentIndex + offset;
+  const itemWidth = 50; // Each item takes 50% width
+  const gapCompensation = 0.5; // Compensate for the gap between images
+  const translateX = -(adjustedIndex * itemWidth) + gapCompensation;
+
+  return (
+    <div className="relative mt-8">
+      <div className="flex items-center">
+        {/* Previous Button */}
+        <button
+          onClick={handlePrevious}
+          className="absolute -left-12 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+          aria-label="Previous item"
+        >
+          <svg
+            className="w-6 h-6 text-purple-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+
+        {/* Media Container with Sliding Animation and Strict Masking */}
+        <div className="w-full relative">
+          <div className="w-full overflow-hidden rounded-lg">
+            <div 
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ 
+                transform: `translateX(calc(${translateX}% - 8px))`,
+              }}
+            >
+              {extendedItems.map((item, index) => (
+                <div 
+                  key={`${index}`} 
+                  className="flex-shrink-0 px-2"
+                  style={{ width: '50%' }}
+                >
+                  {item.type === 'image' ? (
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="w-full h-[300px] md:h-[400px] rounded-lg object-cover"
+                    />
+                  ) : (
+                    <video
+                      src={item.src}
+                      className="w-full h-[300px] md:h-[400px] rounded-lg object-cover"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Strong edge masks to ensure no bleeding */}
+          <div className="absolute left-0 top-0 bottom-0 w-2 bg-white pointer-events-none z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-2 bg-white pointer-events-none z-10"></div>
+        </div>
+
+        {/* Next Button */}
+        <button
+          onClick={handleNext}
+          className="absolute -right-12 z-10 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+          aria-label="Next item"
+        >
+          <svg
+            className="w-6 h-6 text-purple-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Dots Indicator */}
+      <div className="flex justify-center mt-6 gap-2">
+        {mediaItems.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              currentIndex === index || (currentIndex + 1) % mediaItems.length === index
+                ? 'bg-purple-600 w-6'
+                : 'bg-gray-300'
+            }`}
+            aria-label={`Go to item ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -170,7 +322,7 @@ export function ColorQuandary() {
       </div>
 
       {/* Ars Electronica Futurelab Academy Section - Full Width with Same Gray Background */}
-      <div className="bg-gray-100 py-20 md:py-24 mb-20 md:mb-28 mt-10 md:mt-14">
+      <div className="bg-gray-100 py-20 md:py-24 mb-20 md:mb-28 mt-20 md:mt-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <RevealOnScroll>
             <section>
@@ -187,17 +339,17 @@ export function ColorQuandary() {
           </RevealOnScroll>
 
           <RevealOnScroll>
-            <div className="mt-8">
+            <div className="mt-16 md:mt-20">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <img 
                   src={Ars1} 
                   alt="Ars Electronica Academy" 
-                  className="w-full h-auto rounded-lg object-cover"
+                  className="w-full h-[300px] md:h-[400px] rounded-lg object-cover"
                 />
                 <img 
                   src={Ars2} 
                   alt="Ars Electronica Academy" 
-                  className="w-full h-auto rounded-lg object-cover"
+                  className="w-full h-[300px] md:h-[400px] rounded-lg object-cover"
                 />
               </div>
             </div>
@@ -213,9 +365,11 @@ export function ColorQuandary() {
                 <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Design & Development</h2>
                 <div className="max-w-2xl">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    I designed and coded the interaction system in Java/Processing, integrating motion tracking with generative visuals for the large-scale display. The challenge was to balance playful simplicity with technical feasibility so that anyone walking by could intuitively participate. Inspiration came from familiar "this or that" decision games, reimagined at architectural scale to transform the façade into a stage for collective choice.
+                    After whiteboard brainstorming ways to gamify the façade, my team and I finalized our concept and developed the installation using Java and Processing.js, running simulations on our laptops to accurately mirror how the Ars Electronica media façade would behave at full architectural scale. With support from Ars Electronica Futurelab researchers, we also integrated motion sensors to track human movement in front of the building, allowing the façade to react dynamically to people in the public space.
                   </p>
                 </div>
+                {/* Add Media Carousel here */}
+                <MediaCarousel />
               </section>
             </RevealOnScroll>
 
