@@ -54,6 +54,7 @@ const skillGroups = [
       "Miro",
       "Notion",
       "Canva",
+
     ],
   },
   {
@@ -74,18 +75,18 @@ const skillGroups = [
 export function About() {
   return (
     <section className="max-w-5xl mx-auto px-4 py-20">
-      {/* Add extra margin at the top */}
-      <div className="mt-20" />
+      {/* Reduced margin on mobile, normal margin on desktop */}
+      <div className="mt-5 md:mt-20" />
       <RevealOnScroll>
         {/* Top Row: Text left, Image right */}
         <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-8 mb-12">
           {/* Text Section */}
           <div className="flex-[2] text-left md:pr-0">
             <h1 className="text-3xl md:text-4xl font-bold text-purple-700 mb-2">
-              Hello, I’m Aspen!
+              Hello, I'm Aspen!
             </h1>
             <p className="text-lg text-black mb-6">
-              I’m a computer science and design student at Northeastern University, passionate about human-computer interaction, user experience design, and front-end development. I love exploring innovative ways to merge technology and creativity, making digital experiences more meaningful, accessible, and impactful. I’m especially interested in VR/AR, creative coding, and building user-friendly interfaces. When I’m not designing or coding, you might find me playing ice hockey, hiking, or practicing guitar.
+              I'm a computer science and design student at Northeastern University, passionate about human-computer interaction, user experience design, and front-end development. I love exploring innovative ways to merge technology and creativity, making digital experiences more meaningful, accessible, and impactful. I'm especially interested in VR/AR, creative coding, and building user-friendly interfaces. When I'm not designing or coding, you might find me playing ice hockey, hiking, or practicing guitar.
             </p>
             <div className="text-md text-black mb-2">
               <span className="font-semibold text-purple-700">Currently seeking:</span> Full-time positions starting May 2025.

@@ -252,7 +252,7 @@ export function ColorQuandary() {
   return (
     <section className="min-h-screen bg-white">
       {/* Header Section */}
-      <div className="bg-gray-100 pt-16 pb-10 md:pt-32 md:pb-16">
+      <div className="bg-gray-100 pt-24 sm:pt-16 pb-10 md:pt-32 md:pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <div>
@@ -317,8 +317,8 @@ export function ColorQuandary() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 md:py-16">
         {/* Main Video */}
         <RevealOnScroll>
-          <div className="mb-20 md:mb-36 -mx-4 sm:-mx-6 lg:-mx-12">
-            <div className="relative overflow-hidden rounded-none lg:rounded-3xl shadow-2xl">
+          <div className="mb-20 md:mb-36 -mx-0 sm:-mx-6 lg:-mx-12">
+            <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
               <video
                 ref={videoRef}
                 src={ArsVid}
@@ -420,8 +420,8 @@ export function ColorQuandary() {
                   </p>
                 </div>
                 {/* Large presentation images */}
-                <div className="mt-16 md:mt-24 -mx-4 sm:-mx-6 lg:-mx-12 space-y-4 md:space-y-6">
-                  <div className="relative overflow-hidden rounded-none lg:rounded-3xl shadow-2xl">
+                <div className="mt-16 md:mt-24 -mx-0 sm:-mx-6 lg:-mx-12 space-y-4 md:space-y-6">
+                  <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
                     <img 
                       src={Ars3} 
                       alt="Final Presentation 1" 
@@ -429,7 +429,7 @@ export function ColorQuandary() {
                       style={{ aspectRatio: '16/9' }}
                     />
                   </div>
-                  <div className="relative overflow-hidden rounded-none lg:rounded-3xl shadow-2xl">
+                  <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
                     <img 
                       src={Ars4} 
                       alt="Final Presentation 2" 

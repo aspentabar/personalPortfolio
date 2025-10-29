@@ -6,11 +6,15 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
   }, [menuOpen]);
 
-  // Same styles as desktop navigation 
+  // Updated styles to match desktop navigation
   const navLinkStyles = ({ isActive }) =>
     `text-2xl font-semibold my-4 transform transition-all duration-300 ${
       menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-    } ${isActive ? "text-purple-400" : "text-purple-700"}`;
+    } ${
+      isActive 
+        ? "text-purple-400" 
+        : "text-gray-700 hover:text-purple-400"
+    }`;
 
   return (
     <div
@@ -25,7 +29,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
     >
       <button
         onClick={() => setMenuOpen(false)}
-        className="absolute top-6 right-6 text-purple-700 text-3xl focus:outline-none cursor-pointer"
+        className="absolute top-6 right-6 text-gray-700 hover:text-purple-400 text-3xl focus:outline-none cursor-pointer transition-colors"
         aria-label="Close Menu"
       >
         &times;
