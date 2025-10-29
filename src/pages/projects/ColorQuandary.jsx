@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import ArsVid from "../../assets/ArsVid1.mp4";
 import Ars1 from "../../assets/ars1.jpeg";
 import Ars2 from "../../assets/ars2.jpeg";
+import Ars3 from "../../assets/ars3.jpeg";
+import Ars4 from "../../assets/ars4.jpeg";
 import Ars5 from "../../assets/ars5.jpeg";
 import Ars6 from "../../assets/ars6.jpeg";
 import Ars7 from "../../assets/ars7.jpeg";
@@ -52,6 +54,8 @@ function RevealOnScroll({ children }) {
 function MediaCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [hasBeenViewed, setHasBeenViewed] = useState(false);
+  const carouselRef = useRef(null);
   
   // Media items array - mix of images and video (reordered)
   const mediaItems = [
@@ -81,16 +85,38 @@ function MediaCarousel() {
     );
   };
 
-  // Auto-advance carousel every 5 seconds
+  // Detect when carousel comes into view for the first time
   useEffect(() => {
-    if (!isPaused) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasBeenViewed) {
+          setHasBeenViewed(true);
+        }
+      },
+      { threshold: 0.3 } // Trigger when 30% of carousel is visible
+    );
+
+    if (carouselRef.current) {
+      observer.observe(carouselRef.current);
+    }
+
+    return () => {
+      if (carouselRef.current) {
+        observer.unobserve(carouselRef.current);
+      }
+    };
+  }, [hasBeenViewed]);
+
+  // Auto-advance carousel every 5 seconds only after it's been viewed
+  useEffect(() => {
+    if (!isPaused && hasBeenViewed) {
       const interval = setInterval(() => {
         handleNext();
       }, 5000);
       
       return () => clearInterval(interval);
     }
-  }, [currentIndex, isPaused]);
+  }, [currentIndex, isPaused, hasBeenViewed]);
 
   // Calculate the translation offset
   const adjustedIndex = currentIndex + offset;
@@ -99,7 +125,8 @@ function MediaCarousel() {
   const translateX = -(adjustedIndex * itemWidth) + gapCompensation;
 
   return (
-    <div className="relative mt-12" 
+    <div ref={carouselRef}
+         className="relative mt-12" 
          onMouseEnter={() => setIsPaused(true)}
          onMouseLeave={() => setIsPaused(false)}>
       <div className="flex items-center">
@@ -391,22 +418,30 @@ export function ColorQuandary() {
 
             <RevealOnScroll>
               <section>
-                <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Final Presentation</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6 mt-50">Final Presentation</h2>
                 <div className="max-w-2xl">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    At the closing event, our project was presented live to an international audience of scientists, artists, and the Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous group play and discussions sparked by the visual competition. The work demonstrated how human-computer interaction can turn public space into a canvas for both entertainment and reflection.
+                    At the closing presentation, our project was showcased live to an international audience of researchers, scientists, artists, and the local Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous play sparked by the visual competition.
                   </p>
                 </div>
-              </section>
-            </RevealOnScroll>
-
-            <RevealOnScroll>
-              <section>
-                <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Impact & Reflection</h2>
-                <div className="max-w-2xl">
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    Through this project, I gained hands-on experience in human-centered computing, interactive art, and cross-cultural collaboration. Showcasing creative coding at Ars Electronica—the world's leading festival for art, technology, and society—was both technically challenging and deeply rewarding. The experience reinforced my interest in designing interfaces that connect people, technology, and shared public experiences.
-                  </p>
+                {/* Large images below Final Presentation */}
+                <div className="mt-24 -mx-6 lg:-mx-12 space-y-6">
+                  <div className="relative overflow-hidden rounded-none lg:rounded-3xl shadow-2xl">
+                    <img 
+                      src={Ars3} 
+                      alt="Final Presentation 1" 
+                      className="w-full object-cover"
+                      style={{ aspectRatio: '16/9' }}
+                    />
+                  </div>
+                  <div className="relative overflow-hidden rounded-none lg:rounded-3xl shadow-2xl">
+                    <img 
+                      src={Ars4} 
+                      alt="Final Presentation 2" 
+                      className="w-full object-cover"
+                      style={{ aspectRatio: '16/9' }}
+                    />
+                  </div>
                 </div>
               </section>
             </RevealOnScroll>
@@ -415,20 +450,24 @@ export function ColorQuandary() {
 
         {/* Bottom Navigation or Call to Action */}
         <RevealOnScroll>
-          <div className="mt-32 md:mt-40 pt-16 md:pt-20 border-t border-purple-100">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="mt-24 md:mt-32 pt-12 md:pt-16 mb-16 md:mb-24 border-t border-gray-200">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8">
               <div>
-                <p className="text-sm text-purple-600 font-medium mb-2">Technologies Used</p>
-                <div className="flex flex-wrap gap-3">
-                  <span className="px-3 py-1 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Processing</span>
-                  <span className="px-3 py-1 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Java</span>
-                  <span className="px-3 py-1 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Motion Tracking</span>
-                  <span className="px-3 py-1 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Generative Design</span>
+                <p className="text-sm text-purple-600 font-medium mb-3">Key Concepts</p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-4 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Motion Tracking</span>
+                  <span className="px-4 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Creative Coding</span>
+                  <span className="px-4 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">User Experience</span>
+                  <span className="px-4 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Public Media Façade</span>
+                  <span className="px-4 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">HCI</span>
+                  <span className="px-4 py-2 bg-purple-50 text-purple-700 rounded-lg text-sm font-medium">Interactive Art</span>
                 </div>
               </div>
-              <button className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-colors">
-                View Next Project →
-              </button>
+              <div className="flex justify-center md:justify-end">
+                <button className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-colors text-base">
+                  View Next Project →
+                </button>
+              </div>
             </div>
           </div>
         </RevealOnScroll>
