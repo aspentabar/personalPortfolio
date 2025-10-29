@@ -51,6 +51,7 @@ function RevealOnScroll({ children }) {
 // Carousel Component
 function MediaCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   
   // Media items array - mix of images and video (reordered)
   const mediaItems = [
@@ -80,6 +81,17 @@ function MediaCarousel() {
     );
   };
 
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    if (!isPaused) {
+      const interval = setInterval(() => {
+        handleNext();
+      }, 5000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [currentIndex, isPaused]);
+
   // Calculate the translation offset
   const adjustedIndex = currentIndex + offset;
   const itemWidth = 50; // Each item takes 50% width
@@ -87,7 +99,9 @@ function MediaCarousel() {
   const translateX = -(adjustedIndex * itemWidth) + gapCompensation;
 
   return (
-    <div className="relative mt-8">
+    <div className="relative mt-12" 
+         onMouseEnter={() => setIsPaused(true)}
+         onMouseLeave={() => setIsPaused(false)}>
       <div className="flex items-center">
         {/* Previous Button */}
         <button
@@ -365,7 +379,7 @@ export function ColorQuandary() {
             <RevealOnScroll>
               <section>
                 <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-6">Design & Development</h2>
-                <div className="max-w-2xl">
+                <div className="max-w-2xl mb-24">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
                     After whiteboard brainstorming ways to gamify the façade, my team and I finalized our concept and developed the installation using Java and Processing.js, running simulations on our laptops to accurately mirror how the Ars Electronica media façade would behave at full architectural scale. With support from Ars Electronica Futurelab researchers, we also integrated motion sensors to track human movement in front of the building, allowing the façade to react dynamically to people in the public space.
                   </p>
