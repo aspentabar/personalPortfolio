@@ -30,13 +30,13 @@ const featuredProjects = [
     categories: ["ux", "cloud", "all"],
   },
   {
-    id: "ai-analytics-dashboard",
-    title: "AI Analytics Dashboard",
+    id: "TuneLink",
+    title: "TuneLink",
     image: aiImg,
     description:
-      "ML-powered data visualization platform with predictive analytics and interactive reports.",
+      "A social music app connecting users through shared listening habits, gamified achievements, and location-based discovery.",
     tech: ["Python", "TensorFlow", "D3.js", "Flask"],
-    url: "/projects/ai-analytics-dashboard",
+    url: "/projects/TuneLink",
     categories: ["ux", "web", "all"],
   },
 ];
