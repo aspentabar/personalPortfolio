@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 // Images
 import ArsImg from "../assets/arsElecronica.jpeg";
 import aiImg from "../assets/SelfPhoto.jpeg";
+import TuneinkImg from "../assets/tunelink3.jpeg";
+
 
 // Project categories
 const categories = [
@@ -32,7 +34,7 @@ const featuredProjects = [
   {
     id: "TuneLink",
     title: "TuneLink",
-    image: aiImg,
+    image: TuneinkImg,
     description:
       "A social music app connecting users through shared listening habits, gamified achievements, and location-based discovery.",
     tech: ["Python", "TensorFlow", "D3.js", "Flask"],
