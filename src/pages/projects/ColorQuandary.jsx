@@ -74,15 +74,24 @@ function MediaCarousel() {
 
   // Navigation handlers
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? mediaItems.length - 1 : prevIndex - 1
-    );
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex === 0) {
+        // Skip to second-to-last pair (items 5-6)
+        return mediaItems.length - 2;
+      }
+      return prevIndex - 1;
+    });
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex >= mediaItems.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentIndex((prevIndex) => {
+      // When we're at the second-to-last position (showing items 5-6), 
+      // jump to first position (items 0-1)
+      if (prevIndex >= mediaItems.length - 2) {
+        return 0;
+      }
+      return prevIndex + 1;
+    });
   };
 
   // Detect when carousel enters viewport
@@ -137,7 +146,7 @@ function MediaCarousel() {
           aria-label="Previous item"
         >
           <svg
-            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            className="w-5 h-5 md:w-6 md:h-6 text-blue-600"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -200,7 +209,7 @@ function MediaCarousel() {
           aria-label="Next item"
         >
           <svg
-            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            className="w-5 h-5 md:w-6 md:h-6 text-blue-600"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -217,18 +226,35 @@ function MediaCarousel() {
 
       {/* Dots Indicator */}
       <div className="flex justify-center mt-4 md:mt-6 gap-2">
-        {mediaItems.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentIndex === index || (currentIndex + 1) % mediaItems.length === index
-                ? 'bg-purple-600 w-6'
-                : 'bg-gray-300'
-            }`}
-            aria-label={`Go to item ${index + 1}`}
-          />
-        ))}
+        {mediaItems.map((_, index) => {
+          // Adjust dot highlighting for carousel positions
+          let isActive = false;
+          if (currentIndex === index || currentIndex === index - 1) {
+            isActive = true;
+          }
+          // Special case for wrapping - only highlight last dot when at position 0 if it's actually visible
+          if (currentIndex === mediaItems.length - 2 && index === mediaItems.length - 1) {
+            isActive = true;
+          }
+          
+          return (
+            <button
+              key={index}
+              onClick={() => {
+                // Adjust click behavior to match carousel positions
+                if (index === mediaItems.length - 1) {
+                  setCurrentIndex(mediaItems.length - 2);
+                } else {
+                  setCurrentIndex(index);
+                }
+              }}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                isActive ? 'bg-blue-600 w-6' : 'bg-gray-300'
+              }`}
+              aria-label={`Go to item ${index + 1}`}
+            />
+          );
+        })}
       </div>
     </div>
   );
@@ -256,7 +282,7 @@ export function ColorQuandary() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 text-purple-700 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 text-blue-700 leading-tight">
                 Color Quandary
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-6 md:mb-8">
@@ -290,23 +316,23 @@ export function ColorQuandary() {
           <RevealOnScroll>
             <div className="flex flex-wrap gap-4 md:gap-6 mt-8">
               <div className="flex flex-col items-start">
-                <p className="text-purple-400 uppercase font-bold tracking-wider text-xs md:text-sm">Role</p>
+                <p className="text-blue-400 uppercase font-bold tracking-wider text-xs md:text-sm">Role</p>
                 <p className="text-neutral-950 text-sm md:text-base">UX Designer & Creative Coder</p>
               </div>
               <div className="flex flex-col items-start">
-                <p className="text-purple-400 uppercase font-bold tracking-wider text-xs md:text-sm">Location</p>
+                <p className="text-blue-400 uppercase font-bold tracking-wider text-xs md:text-sm">Location</p>
                 <p className="text-neutral-950 text-sm md:text-base">Linz, Austria</p>
               </div>
               <div className="flex flex-col items-start">
-                <p className="text-purple-400 uppercase font-bold tracking-wider text-xs md:text-sm">Platforms</p>
+                <p className="text-blue-400 uppercase font-bold tracking-wider text-xs md:text-sm">Platforms</p>
                 <p className="text-neutral-950 text-sm md:text-base">Public Media Façade</p>
               </div>
               <div className="flex flex-col items-start">
-                <p className="text-purple-400 uppercase font-bold tracking-wider text-xs md:text-sm">Focus</p>
+                <p className="text-blue-400 uppercase font-bold tracking-wider text-xs md:text-sm">Focus</p>
                 <p className="text-neutral-950 text-sm md:text-base">HCI & Interactive Art</p>
               </div>
               <div className="flex flex-col items-start">
-                <p className="text-purple-400 uppercase font-bold tracking-wider text-xs md:text-sm">Collaborators</p>
+                <p className="text-blue-400 uppercase font-bold tracking-wider text-xs md:text-sm">Collaborators</p>
                 <p className="text-neutral-950 text-sm md:text-base">Ellie Williams, Marta Hill</p>
               </div>
             </div>
@@ -330,7 +356,7 @@ export function ColorQuandary() {
                 playsInline
                 controls
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none"></div>
             </div>
           </div>
         </RevealOnScroll>
@@ -340,7 +366,7 @@ export function ColorQuandary() {
           <div className="space-y-16 md:space-y-28">
             <RevealOnScroll>
               <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">Overview</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6">Overview</h2>
                 <div className="space-y-4">
                   <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700">
                     Color Quandary is an interactive color competition that engages viewers to vote with their feet for their favorite colors, creating a playful atmosphere on the main deck of the Ars Electronica Center.
@@ -363,7 +389,7 @@ export function ColorQuandary() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">Ars Electronica Futurelab Academy</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6">Ars Electronica Futurelab Academy</h2>
               <div className="max-w-2xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
                   I was selected by Northeastern University's Design Department to take part in the Ars Electronica Futurelab Academy in Linz, Austria. This collaborative program brings together art, technology, and research at a world-renowned research museum.
@@ -400,7 +426,7 @@ export function ColorQuandary() {
             {/* Design & Development Section */}
             <RevealOnScroll>
               <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">Design & Development</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6">Design & Development</h2>
                 <div className="max-w-2xl mb-16 md:mb-24">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
                     After whiteboard brainstorming ways to gamify the façade, my team and I finalized our concept and developed the installation using Java and Processing.js, running simulations on our laptops to accurately mirror how the Ars Electronica media façade would behave at full architectural scale. With support from Ars Electronica Futurelab researchers, we also integrated motion sensors to track human movement in front of the building, allowing the façade to react dynamically to people in the public space.
@@ -413,7 +439,7 @@ export function ColorQuandary() {
             {/* Final Presentation Section */}
             <RevealOnScroll>
               <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">Final Presentation</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">Final Presentation</h2>
                 <div className="max-w-2xl">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
                     At the closing presentation, our project was showcased live to an international audience of researchers, scientists, artists, and the local Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous play sparked by the visual competition.
@@ -448,18 +474,18 @@ export function ColorQuandary() {
           <div className="mt-16 md:mt-32 pt-8 md:pt-16 mb-12 md:mb-24 border-t border-gray-200">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-8">
               <div>
-                <p className="text-sm text-purple-600 font-medium mb-3">Key Concepts</p>
+                <p className="text-sm text-blue-600 font-medium mb-3">Key Concepts</p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">Motion Tracking</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">Creative Coding</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">User Experience</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">Public Media Façade</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">HCI</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">Interactive Art</span>
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">Motion Tracking</span>
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">Creative Coding</span>
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">User Experience</span>
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">Public Media Façade</span>
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">HCI</span>
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">Interactive Art</span>
                 </div>
               </div>
               <div className="flex justify-center md:justify-end">
-                <button className="px-6 py-3 md:px-8 md:py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-colors text-sm md:text-base">
+                <button className="px-6 py-3 md:px-8 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors text-sm md:text-base">
                   View Next Project →
                 </button>
               </div>
