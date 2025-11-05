@@ -36,8 +36,8 @@ const featuredProjects = [
     title: "TuneLink",
     image: TuneinkImg,
     description:
-      "A social music app connecting users through shared listening habits, gamified achievements, and location-based discovery.",
-    tech: ["Python", "TensorFlow", "D3.js", "Flask"],
+      "A social music app that connects listeners through collectible icons that reflect their shared tastes and listening habits.",
+    tech: ["Figma", "UI", "User Interviews", "Mobile App Design"],
     url: "/projects/TuneLink",
     categories: ["ux", "web", "all"],
   },
