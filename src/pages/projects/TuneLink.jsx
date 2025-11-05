@@ -3,6 +3,26 @@ import tunelink3 from "../../assets/tunelink3.png";
 import tunelink4 from "../../assets/tunelink4.jpeg";
 import tunelink5 from "../../assets/tunelink5.jpeg";
 import tunelink6 from "../../assets/tunelink6.jpeg";
+import tunelink7 from "../../assets/tunelink7.jpeg";
+import tunelink8 from "../../assets/tunelink8.jpeg";
+import tunelink9 from "../../assets/tunelink9.jpeg";
+import tunelink10 from "../../assets/tunelink10.jpeg";
+import tunelink11 from "../../assets/tunelink11.jpeg";
+import tunelink12 from "../../assets/tunelink12.jpeg";
+import tunelink13 from "../../assets/tunelink13.jpeg";
+import tunelink14 from "../../assets/tunelink14.jpeg";
+import tunelink15 from "../../assets/tunelink15.jpeg";
+import tunelink16 from "../../assets/tunelink16.jpeg";
+import tunelink17 from "../../assets/tunelink17.jpeg";
+import tunelink18 from "../../assets/tunelink18.jpeg";
+import tunelink19 from "../../assets/tunelink19.jpeg";
+import tunelink20 from "../../assets/tunelink20.jpeg";
+import tunelink21 from "../../assets/tunelink21.jpeg";
+import tunelink22 from "../../assets/tunelink22.jpeg";
+import tunelink23 from "../../assets/tunelink23.jpeg";
+import tunelink24 from "../../assets/tunelink24.jpeg";
+import tunelink25 from "../../assets/tunelink25.jpeg";
+import tunelink26 from "../../assets/tunelink26.jpeg";
 
 // Scroll reveal animation
 function RevealOnScroll({ children }) {
@@ -42,6 +62,140 @@ function RevealOnScroll({ children }) {
   );
 }
 
+// Drawing Conclusions Carousel Component
+function DrawingConclusionsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Create array of 20 images - first 4 are actual images, rest are placeholders
+  const conclusions = [
+    { id: 1, src: tunelink7, alt: 'Drawing conclusion 1', caption: 'User 1: Pop - Party in the USA' },
+    { id: 2, src: tunelink8, alt: 'Drawing conclusion 2', caption: 'User 2: Pop - Party in the USA' },
+    { id: 3, src: tunelink9, alt: 'Drawing conclusion 3', caption: 'User 3: Pop - Party in the USA' },
+    { id: 4, src: tunelink10, alt: 'Drawing conclusion 4', caption: 'User 4: Pop - Party in the USA' },
+    { id: 5, src: tunelink11, alt: 'Drawing conclusion 5', caption: 'User 1: Rap - 1738' },
+    { id: 6, src: tunelink12, alt: 'Drawing conclusion 6', caption: 'User 2: Rap - 1738' },
+    { id: 7, src: tunelink13, alt: 'Drawing conclusion 7', caption: 'User 3: Rap - 1738' },
+    { id: 8, src: tunelink14, alt: 'Drawing conclusion 8', caption: 'User 4: Rap - 1738' },
+    { id: 9, src: tunelink15, alt: 'Drawing conclusion 9', caption: 'User 1: Country - Take Me Home, Country Roads' },
+    { id: 10, src: tunelink16, alt: 'Drawing conclusion 10', caption: 'User 2: Country - Take Me Home, Country Roads' },
+    { id: 11, src: tunelink17, alt: 'Drawing conclusion 11', caption: 'User 3: Country - Take Me Home, Country Roads' },
+    { id: 12, src: tunelink18, alt: 'Drawing conclusion 12', caption: 'User 4: Country - Take Me Home, Country Roads' },
+    { id: 13, src: tunelink19, alt: 'Drawing conclusion 13', caption: 'User 1: Rock - We Will Rock You' },
+    { id: 14, src: tunelink20, alt: 'Drawing conclusion 14', caption: 'User 2: Rock - We Will Rock You' },
+    { id: 15, src: tunelink21, alt: 'Drawing conclusion 15', caption: 'User 3: Rock - We Will Rock You' },
+    { id: 16, src: tunelink22, alt: 'Drawing conclusion 16', caption: 'User 4: Rock - We Will Rock You' },
+    { id: 17, src: tunelink23, alt: 'Drawing conclusion 17', caption: 'User 1: Classical - Autumn' },
+    { id: 18, src: tunelink24, alt: 'Drawing conclusion 18', caption: 'User 2: Classical - Autumn' },
+    { id: 19, src: tunelink25, alt: 'Drawing conclusion 19', caption: 'User 3: Classical - Autumn' },
+    { id: 20, src: tunelink26, alt: 'Drawing conclusion 20', caption: 'User 4: Classical - Autumn' }
+  ];
+
+  const itemsPerPage = 4;
+  const totalPages = Math.ceil(conclusions.length / itemsPerPage);
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) => {
+      return prevIndex === 0 ? totalPages - 1 : prevIndex - 1;
+    });
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => {
+      return prevIndex === totalPages - 1 ? 0 : prevIndex + 1;
+    });
+  };
+
+  // Get current page items
+  const startIdx = currentIndex * itemsPerPage;
+  const endIdx = startIdx + itemsPerPage;
+  const currentItems = conclusions.slice(startIdx, endIdx);
+
+  return (
+    <div className="relative mt-8">
+      <div className="flex items-center">
+        {/* Previous Button */}
+        <button
+          onClick={handlePrevious}
+          className="absolute -left-4 md:-left-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+          aria-label="Previous items"
+        >
+          <svg
+            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+
+        {/* Images Grid */}
+        <div className="w-full">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {currentItems.map((item) => (
+              <div 
+                key={item.id} 
+                className="flex flex-col animate-fadeIn"
+                style={{ animation: 'fadeIn 0.5s ease-in-out' }}
+              >
+                <div className="flex-grow flex items-end">
+                  <img 
+                    src={item.src}
+                    alt={item.alt}
+                    className="w-full rounded-lg object-contain transition-all duration-500"
+                    style={{ maxHeight: '300px' }}
+                  />
+                </div>
+                <p className="text-sm text-gray-600 mt-2 text-center">{item.caption}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Next Button */}
+        <button
+          onClick={handleNext}
+          className="absolute -right-4 md:-right-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+          aria-label="Next items"
+        >
+          <svg
+            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Dots Indicator */}
+      <div className="flex justify-center mt-6 gap-2">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              currentIndex === index ? 'bg-purple-600 w-6' : 'bg-gray-300'
+            }`}
+            aria-label={`Go to page ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // Main TuneLink Component
 export default function TuneLink() {
   const videoRef = useRef(null);
@@ -51,6 +205,25 @@ export default function TuneLink() {
     if (video) {
       video.play().catch(() => {});
     }
+  }, []);
+
+  // Add CSS for fade animation
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
   }, []);
 
   return (
@@ -218,41 +391,8 @@ export default function TuneLink() {
                     />
                   </div>
                   
-                  {/* Marisol grid of 4 images */}
-                  <div className="grid grid-cols-2 gap-4 mt-8">
-                    <div>
-                      <img 
-                        src="https://via.placeholder.com/400x300/E9D5FF/9333EA?text=Conclusion+1" 
-                        alt="Drawing conclusion 1" 
-                        className="w-full rounded-lg"
-                      />
-                      <p className="text-sm text-gray-600 mt-2 text-center">Drawing conclusion 1</p>
-                    </div>
-                    <div>
-                      <img 
-                        src="https://via.placeholder.com/400x300/E9D5FF/9333EA?text=Conclusion+2" 
-                        alt="Drawing conclusion 2" 
-                        className="w-full rounded-lg"
-                      />
-                      <p className="text-sm text-gray-600 mt-2 text-center">Drawing conclusion 2</p>
-                    </div>
-                    <div>
-                      <img 
-                        src="https://via.placeholder.com/400x300/E9D5FF/9333EA?text=Conclusion+3" 
-                        alt="Drawing conclusion 3" 
-                        className="w-full rounded-lg"
-                      />
-                      <p className="text-sm text-gray-600 mt-2 text-center">Drawing conclusion 3</p>
-                    </div>
-                    <div>
-                      <img 
-                        src="https://via.placeholder.com/400x300/E9D5FF/9333EA?text=Conclusion+4" 
-                        alt="Drawing conclusion 4" 
-                        className="w-full rounded-lg"
-                      />
-                      <p className="text-sm text-gray-600 mt-2 text-center">Drawing conclusion 4</p>
-                    </div>
-                  </div>
+                  {/* Drawing Conclusions Carousel */}
+                  <DrawingConclusionsCarousel />
                 </div>
               </section>
             </RevealOnScroll>
