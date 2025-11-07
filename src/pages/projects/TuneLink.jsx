@@ -23,6 +23,11 @@ import tunelink23 from "../../assets/tunelink23.jpeg";
 import tunelink24 from "../../assets/tunelink24.jpeg";
 import tunelink25 from "../../assets/tunelink25.jpeg";
 import tunelink26 from "../../assets/tunelink26.jpeg";
+import tunelink27 from "../../assets/tunelink27.jpeg";
+import tunelink28 from "../../assets/tunelink28.jpeg";
+import tunelink29 from "../../assets/tunelink29.jpeg";
+import tunelink30 from "../../assets/tunelink30.jpeg";
+import tunelink31 from "../../assets/tunelink31.jpeg";
 
 // Scroll reveal animation
 function RevealOnScroll({ children }) {
@@ -62,11 +67,117 @@ function RevealOnScroll({ children }) {
   );
 }
 
+// Activity 1 Single Image Carousel Component
+function Activity1Carousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  // Array of 5 images
+  const activityImages = [
+    { id: 1, src: tunelink27, alt: 'Activity 1 Image 1', caption: 'Pop Data Visualization' },
+    { id: 2, src: tunelink28, alt: 'Activity 1 Image 2', caption: 'Rap Data Visualization' },
+    { id: 3, src: tunelink29, alt: 'Activity 1 Image 3', caption: 'Country Data Visualization' },
+    { id: 4, src: tunelink30, alt: 'Activity 1 Image 4', caption: 'Rock Data Visualization' },
+    { id: 5, src: tunelink31, alt: 'Activity 1 Image 5', caption: 'Classical Data Visualization' }
+  ];
+
+  const handlePrevious = () => {
+    setCurrentIndex((prevIndex) => {
+      return prevIndex === 0 ? activityImages.length - 1 : prevIndex - 1;
+    });
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => {
+      return prevIndex === activityImages.length - 1 ? 0 : prevIndex + 1;
+    });
+  };
+
+  const currentImage = activityImages[currentIndex];
+
+  return (
+    <div className="relative mt-8">
+      <div className="flex items-center justify-center">
+        {/* Previous Button */}
+        <button
+          onClick={handlePrevious}
+          className="absolute left-0 md:-left-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+          aria-label="Previous image"
+        >
+          <svg
+            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+
+        {/* Single Image Display */}
+        <div className="w-full max-w-2xl">
+          <div 
+            className="flex flex-col animate-fadeIn"
+            style={{ animation: 'fadeIn 0.5s ease-in-out' }}
+          >
+            <img 
+              src={currentImage.src}
+              alt={currentImage.alt}
+              className="w-full rounded-lg object-contain transition-all duration-500"
+              style={{ maxHeight: '400px' }}
+            />
+            <p className="text-sm text-gray-600 mt-2 text-center">{currentImage.caption}</p>
+          </div>
+        </div>
+
+        {/* Next Button */}
+        <button
+          onClick={handleNext}
+          className="absolute right-0 md:-right-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+          aria-label="Next image"
+        >
+          <svg
+            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      </div>
+
+      {/* Dots Indicator */}
+      <div className="flex justify-center mt-6 gap-2">
+        {activityImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              currentIndex === index ? 'bg-purple-600 w-6' : 'bg-gray-300'
+            }`}
+            aria-label={`Go to image ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // Drawing Conclusions Carousel Component
 function DrawingConclusionsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Create array of 20 images - first 4 are actual images, rest are placeholders
+  // Create array of 20 images
   const conclusions = [
     { id: 1, src: tunelink7, alt: 'Drawing conclusion 1', caption: 'User 1: Pop - Party in the USA' },
     { id: 2, src: tunelink8, alt: 'Drawing conclusion 2', caption: 'User 2: Pop - Party in the USA' },
@@ -314,22 +425,18 @@ export default function TuneLink() {
         </RevealOnScroll>
 
         {/* Project Overview Section */}
-        <div className="-mx-4 sm:-mx-6 lg:-mx-12">
-          <div className="space-y-16 md:space-y-28">
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
-                  Project Overview
-                </h2>
-                <div className="space-y-4">
-                  <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700">
-                    TuneLink is a social music app that connects listeners through collectible icons that reflect their shared tastes and listening habits. These icons are earned based on users' music activity, ranging from total listening time to the exploration of new genres. Beyond statistics, TuneLink encourages connection through a shared love of music, allowing users to chat, compare achievements, and discover others nearby with similar interests.
-                  </p>
-                </div>
-              </section>
-            </RevealOnScroll>
-          </div>
-        </div>
+        <RevealOnScroll>
+          <section>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              Project Overview
+            </h2>
+            <div className="max-w-3xl">
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700">
+                TuneLink is a social music app that connects listeners through collectible icons that reflect their shared tastes and listening habits. These icons are earned based on users' music activity, ranging from total listening time to the exploration of new genres. Beyond statistics, TuneLink encourages connection through a shared love of music, allowing users to chat, compare achievements, and discover others nearby with similar interests.
+              </p>
+            </div>
+          </section>
+        </RevealOnScroll>
       </div>
 
       {/* Background Section */}
@@ -351,53 +458,64 @@ export default function TuneLink() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="-mx-4 sm:-mx-6 lg:-mx-12">
-          <div className="space-y-16 md:space-y-28">
-            {/* Need Finding Interviews Section */}
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
-                  Need Finding Interviews
-                </h2>
-                <div className="space-y-4 mb-8">
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    To better understand how people relate to music socially, I conducted interviews focused on how users visualize and emotionally connect with sound. These insights guided TuneLink's visual and interaction design, ensuring it reflected how people already use music as a form of expression.
-                  </p>
-                  <div className="flex justify-center">
-                    <img 
-                      src={tunelink4}
-                      alt="Medium Script" 
-                      className="w-full max-w-2xl rounded-lg mt-6"
-                    />
-                  </div>
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700 mt-6">
-                    For the first activity, participants completed "this or that" questions while five different songs were played one at a time. This activity helped describe how different genres of music "felt" to them.
-                  </p>
-                  <div className="flex justify-center">
-                    <img 
-                      src={tunelink5}
-                      alt="Medium Activity 1" 
-                      className="w-full max-w-2xl rounded-lg mt-6"
-                    />
-                  </div>
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700 mt-6">
-                    For the second activity, participants created simple digital images using basic shapes in response to the same five songs, played one at a time. This activity represented how different music genres "looked" to them. Both of these activities helped me make design choices for the app.
-                  </p>
-                  <div className="flex justify-center">
-                    <img 
-                      src={tunelink6}
-                      alt="Medium Activity 2" 
-                      className="w-full max-w-2xl rounded-lg mt-6"
-                    />
-                  </div>
-                  
-                  {/* Drawing Conclusions Carousel */}
-                  <DrawingConclusionsCarousel />
-                </div>
-              </section>
-            </RevealOnScroll>
-          </div>
-        </div>
+        {/* Need Finding Interviews Section */}
+        <RevealOnScroll>
+          <section>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              Need Finding Interviews
+            </h2>
+            <div className="max-w-3xl">
+              <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-6">
+                To better understand how people relate to music socially, I conducted interviews focused on how users visualize and emotionally connect with sound. These insights guided TuneLink's visual and interaction design, ensuring it reflected how people already use music as a form of expression.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <img 
+                src={tunelink4}
+                alt="Medium Script" 
+                className="w-full max-w-2xl rounded-lg"
+              />
+            </div>
+            
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-900 mb-4 mt-8">
+              Activity 1
+            </h3>
+            <div className="max-w-3xl">
+              <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                For the first activity, participants completed "this or that" questions while five different songs were played one at a time. This activity helped describe how different genres of music "felt" to them.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <img 
+                src={tunelink5}
+                alt="Medium Activity 1" 
+                className="w-full max-w-2xl rounded-lg mt-6"
+              />
+            </div>
+            
+            {/* Activity 1 Image Carousel */}
+            <Activity1Carousel />
+            
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-900 mb-4 mt-12">
+              Activity 2
+            </h3>
+            <div className="max-w-3xl">
+              <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                For the second activity, participants created simple digital images using basic shapes in response to the same five songs, played one at a time. This activity represented how different music genres "looked" to them. Both of these activities helped me make design choices for the app.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <img 
+                src={tunelink6}
+                alt="Medium Activity 2" 
+                className="w-full max-w-2xl rounded-lg mt-6"
+              />
+            </div>
+            
+            {/* Drawing Conclusions Carousel */}
+            <DrawingConclusionsCarousel />
+          </section>
+        </RevealOnScroll>
       </div>
 
       {/* How Might We Question Section */}
@@ -419,46 +537,44 @@ export default function TuneLink() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="-mx-4 sm:-mx-6 lg:-mx-12">
-          <div className="space-y-16 md:space-y-28">
-            {/* User Personas Section */}
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
-                  User Personas
-                </h2>
-                <div className="space-y-4">
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    I developed a user personas to represent a typical TuneLink users, such as college students who spend hours each week exploring new artists and sharing tracks with friends.
-                  </p>
-                  <img 
-                    src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Medium+1+Persona+Image" 
-                    alt="User Persona" 
-                    className="w-full rounded-lg mt-6"
-                  />
-                </div>
-              </section>
-            </RevealOnScroll>
+        <div className="space-y-16 md:space-y-28">
+          {/* User Personas Section */}
+          <RevealOnScroll>
+            <section>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+                User Personas
+              </h2>
+              <div className="max-w-3xl">
+                <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                  I developed a user personas to represent a typical TuneLink users, such as college students who spend hours each week exploring new artists and sharing tracks with friends.
+                </p>
+              </div>
+              <img 
+                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Medium+1+Persona+Image" 
+                alt="User Persona" 
+                className="w-full rounded-lg mt-6"
+              />
+            </section>
+          </RevealOnScroll>
 
-            {/* Site Map Section */}
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">
-                  Site Map
-                </h2>
-                <div className="space-y-4">
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    The site map outlines how TuneLink's core features connect, from earning icons and chatting with users to exploring the map and managing a personalized profile. Mapping this structure early helped clarify the app's hierarchy, ensuring that discovery and connection remained intuitive and easy to access.
-                  </p>
-                  <img 
-                    src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Medium+Image+of+Site+Map" 
-                    alt="Site Map" 
-                    className="w-full rounded-lg mt-6"
-                  />
-                </div>
-              </section>
-            </RevealOnScroll>
-          </div>
+          {/* Site Map Section */}
+          <RevealOnScroll>
+            <section>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+                Site Map
+              </h2>
+              <div className="max-w-3xl">
+                <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                  The site map outlines how TuneLink's core features connect, from earning icons and chatting with users to exploring the map and managing a personalized profile. Mapping this structure early helped clarify the app's hierarchy, ensuring that discovery and connection remained intuitive and easy to access.
+                </p>
+              </div>
+              <img 
+                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Medium+Image+of+Site+Map" 
+                alt="Site Map" 
+                className="w-full rounded-lg mt-6"
+              />
+            </section>
+          </RevealOnScroll>
         </div>
       </div>
 
@@ -493,46 +609,44 @@ export default function TuneLink() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="-mx-4 sm:-mx-6 lg:-mx-12">
-          <div className="space-y-16 md:space-y-28">
-            {/* Paper Wireframes Section */}
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
-                  Paper Wireframes
-                </h2>
-                <div className="space-y-4">
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    Initial paper sketches explored different layout possibilities for TuneLink's main screens. These wireframes emphasized clear navigation, a minimal look, and easily recognizable visual cues tied to the music icons. Rapid sketching helped me iterate quickly before committing to digital prototypes.
-                  </p>
-                  <img 
-                    src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Paper+Wireframes" 
-                    alt="Paper Wireframes" 
-                    className="w-full rounded-lg mt-6"
-                  />
-                </div>
-              </section>
-            </RevealOnScroll>
+        <div className="space-y-16 md:space-y-28">
+          {/* Paper Wireframes Section */}
+          <RevealOnScroll>
+            <section>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+                Paper Wireframes
+              </h2>
+              <div className="max-w-3xl">
+                <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                  Initial paper sketches explored different layout possibilities for TuneLink's main screens. These wireframes emphasized clear navigation, a minimal look, and easily recognizable visual cues tied to the music icons. Rapid sketching helped me iterate quickly before committing to digital prototypes.
+                </p>
+              </div>
+              <img 
+                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Paper+Wireframes" 
+                alt="Paper Wireframes" 
+                className="w-full rounded-lg mt-6"
+              />
+            </section>
+          </RevealOnScroll>
 
-            {/* Low Fidelity Wireframe Section */}
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">
-                  Low Fidelity Wireframe
-                </h2>
-                <div className="space-y-4">
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    The low-fidelity wireframes translated early ideas into functional screen designs. They demonstrated the placement of icons, menus, and navigation elements, and were used for early usability feedback to confirm that users could intuitively navigate between listening stats, profiles, and chat features.
-                  </p>
-                  <img 
-                    src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Low+Fidelity+Wireframe" 
-                    alt="Low Fidelity Wireframe" 
-                    className="w-full rounded-lg mt-6"
-                  />
-                </div>
-              </section>
-            </RevealOnScroll>
-          </div>
+          {/* Low Fidelity Wireframe Section */}
+          <RevealOnScroll>
+            <section>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+                Low Fidelity Wireframe
+              </h2>
+              <div className="max-w-3xl">
+                <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                  The low-fidelity wireframes translated early ideas into functional screen designs. They demonstrated the placement of icons, menus, and navigation elements, and were used for early usability feedback to confirm that users could intuitively navigate between listening stats, profiles, and chat features.
+                </p>
+              </div>
+              <img 
+                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Low+Fidelity+Wireframe" 
+                alt="Low Fidelity Wireframe" 
+                className="w-full rounded-lg mt-6"
+              />
+            </section>
+          </RevealOnScroll>
         </div>
       </div>
 
@@ -560,65 +674,63 @@ export default function TuneLink() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="-mx-4 sm:-mx-6 lg:-mx-12">
-          <div className="space-y-16 md:space-y-28">
-            {/* Spotify Scheme Section */}
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
-                  Incorporation of Spotify Scheme
-                </h2>
-                <div className="space-y-4">
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    Since TuneLink integrates with existing streaming platforms, I adopted elements of Spotify's recognizable color palette to establish familiarity while maintaining TuneLink's unique identity. The use of deep greens and clean neutrals helps connect the interface to users' existing mental models while enhancing the visual cohesion of the app.
-                  </p>
+        <div className="space-y-16 md:space-y-28">
+          {/* Spotify Scheme Section */}
+          <RevealOnScroll>
+            <section>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+                Incorporation of Spotify Scheme
+              </h2>
+              <div className="max-w-3xl">
+                <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                  Since TuneLink integrates with existing streaming platforms, I adopted elements of Spotify's recognizable color palette to establish familiarity while maintaining TuneLink's unique identity. The use of deep greens and clean neutrals helps connect the interface to users' existing mental models while enhancing the visual cohesion of the app.
+                </p>
+              </div>
+              <img 
+                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Spotify+Scheme+Integration" 
+                alt="Spotify Scheme" 
+                className="w-full rounded-lg mt-6"
+              />
+            </section>
+          </RevealOnScroll>
+
+          {/* High Fidelity Prototype Section */}
+          <RevealOnScroll>
+            <section>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+                High Fidelity Prototype
+              </h2>
+              <div className="max-w-3xl">
+                <p className="text-sm md:text-base leading-relaxed text-gray-700">
+                  The final high-fidelity prototype reflects TuneLink's complete visual identity, featuring strong iconography inspired by music genres and multiple ways for users to connect socially.
+                </p>
+              </div>
+              {/* Large presentation images */}
+              <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
+                <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
                   <img 
-                    src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Spotify+Scheme+Integration" 
-                    alt="Spotify Scheme" 
-                    className="w-full rounded-lg mt-6"
+                    src="https://via.placeholder.com/1200x675/E9D5FF/9333EA?text=High+Fidelity+Prototype" 
+                    alt="High Fidelity Prototype" 
+                    className="w-full object-cover" 
+                    style={{ aspectRatio: '16/9' }}
                   />
                 </div>
-              </section>
-            </RevealOnScroll>
-
-            {/* High Fidelity Prototype Section */}
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">
-                  High Fidelity Prototype
-                </h2>
-                <div className="max-w-2xl">
-                  <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    The final high-fidelity prototype reflects TuneLink's complete visual identity, featuring strong iconography inspired by music genres and multiple ways for users to connect socially.
-                  </p>
+                <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
+                  <video 
+                    className="w-full object-cover" 
+                    style={{ aspectRatio: '16/9' }} 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    controls
+                  >
+                    <source src="https://videos.pexels.com/video-files/3129971/3129971-hd_1280_720_25fps.mp4" type="video/mp4" />
+                  </video>
                 </div>
-                {/* Large presentation images */}
-                <div className="mt-16 md:mt-24 -mx-0 sm:-mx-6 lg:-mx-12 space-y-4 md:space-y-6">
-                  <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
-                    <img 
-                      src="https://via.placeholder.com/1200x675/E9D5FF/9333EA?text=High+Fidelity+Prototype" 
-                      alt="High Fidelity Prototype" 
-                      className="w-full object-cover" 
-                      style={{ aspectRatio: '16/9' }}
-                    />
-                  </div>
-                  <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
-                    <video 
-                      className="w-full object-cover" 
-                      style={{ aspectRatio: '16/9' }} 
-                      autoPlay 
-                      loop 
-                      muted 
-                      playsInline 
-                      controls
-                    >
-                      <source src="https://videos.pexels.com/video-files/3129971/3129971-hd_1280_720_25fps.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                </div>
-              </section>
-            </RevealOnScroll>
-          </div>
+              </div>
+            </section>
+          </RevealOnScroll>
         </div>
 
         {/* Bottom Navigation */}
