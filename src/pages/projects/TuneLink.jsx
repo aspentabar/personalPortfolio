@@ -28,6 +28,14 @@ import tunelink28 from "../../assets/tunelink28.jpeg";
 import tunelink29 from "../../assets/tunelink29.jpeg";
 import tunelink30 from "../../assets/tunelink30.jpeg";
 import tunelink31 from "../../assets/tunelink31.jpeg";
+import tunelink32 from "../../assets/tunelink32.jpeg";
+import tunelink33 from "../../assets/tunelink33.jpeg";
+import tunelink34 from "../../assets/tunelink34.jpeg";
+import tunelink35 from "../../assets/tunelink35.jpeg";
+import tunelink36 from "../../assets/tunelink36.jpeg";
+import tunelink37 from "../../assets/tunelink37.jpeg";
+import tunelink38 from "../../assets/tunelink38.jpeg";
+import tunelink39 from "../../assets/tunelink39.jpeg";
 
 // Scroll reveal animation
 function RevealOnScroll({ children }) {
@@ -104,10 +112,11 @@ function Activity1Carousel() {
           aria-label="Previous image"
         >
           <svg
-            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            className="w-5 h-5 md:w-6 md:h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            style={{color: '#000000'}}
           >
             <path
               strokeLinecap="round"
@@ -141,10 +150,11 @@ function Activity1Carousel() {
           aria-label="Next image"
         >
           <svg
-            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            className="w-5 h-5 md:w-6 md:h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            style={{color: '#000000'}}
           >
             <path
               strokeLinecap="round"
@@ -163,8 +173,9 @@ function Activity1Carousel() {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentIndex === index ? 'bg-purple-600 w-6' : 'bg-gray-300'
+              currentIndex === index ? 'w-6' : ''
             }`}
+            style={{backgroundColor: currentIndex === index ? '#20BF50' : '#D1D5DB'}}
             aria-label={`Go to image ${index + 1}`}
           />
         ))}
@@ -231,10 +242,11 @@ function DrawingConclusionsCarousel() {
           aria-label="Previous items"
         >
           <svg
-            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            className="w-5 h-5 md:w-6 md:h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            style={{color: '#000000'}}
           >
             <path
               strokeLinecap="round"
@@ -251,14 +263,13 @@ function DrawingConclusionsCarousel() {
             {currentItems.map((item) => (
               <div 
                 key={item.id} 
-                className="flex flex-col animate-fadeIn"
-                style={{ animation: 'fadeIn 0.5s ease-in-out' }}
+                className="flex flex-col"
               >
                 <div className="flex-grow flex items-end">
                   <img 
                     src={item.src}
                     alt={item.alt}
-                    className="w-full rounded-lg object-contain transition-all duration-500"
+                    className="w-full rounded-lg object-contain"
                     style={{ maxHeight: '300px' }}
                   />
                 </div>
@@ -275,10 +286,11 @@ function DrawingConclusionsCarousel() {
           aria-label="Next items"
         >
           <svg
-            className="w-5 h-5 md:w-6 md:h-6 text-purple-600"
+            className="w-5 h-5 md:w-6 md:h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            style={{color: '#000000'}}
           >
             <path
               strokeLinecap="round"
@@ -297,8 +309,9 @@ function DrawingConclusionsCarousel() {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentIndex === index ? 'bg-purple-600 w-6' : 'bg-gray-300'
+              currentIndex === index ? 'w-6' : ''
             }`}
+            style={{backgroundColor: currentIndex === index ? '#20BF50' : '#D1D5DB'}}
             aria-label={`Go to page ${index + 1}`}
           />
         ))}
@@ -332,6 +345,19 @@ export default function TuneLink() {
           transform: translateY(0);
         }
       }
+      @keyframes fadeInSmooth {
+        0% {
+          opacity: 0;
+          transform: translateY(20px) scale(0.95);
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
     `;
     document.head.appendChild(style);
     return () => document.head.removeChild(style);
@@ -344,7 +370,7 @@ export default function TuneLink() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 text-purple-700 leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 leading-tight" style={{color: '#20BF50'}}>
                 TuneLink
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-6 md:mb-8">
@@ -380,7 +406,7 @@ export default function TuneLink() {
           <RevealOnScroll>
             <div className="flex flex-wrap gap-4 md:gap-6 mt-8">
               <div className="flex flex-col items-start">
-                <p className="text-purple-400 uppercase font-bold tracking-wider text-xs md:text-sm">
+                <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#4FD17A'}}>
                   Role
                 </p>
                 <p className="text-neutral-950 text-sm md:text-base">
@@ -388,19 +414,19 @@ export default function TuneLink() {
                 </p>
               </div>
               <div className="flex flex-col items-start">
-                <p className="text-purple-400 uppercase font-bold tracking-wider text-xs md:text-sm">
+                <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#4FD17A'}}>
                   Focus
                 </p>
                 <p className="text-neutral-950 text-sm md:text-base">
-                  HCI, Social Interaction, UX
+                  Social Interaction, UX, Prototyping
                 </p>
               </div>
               <div className="flex flex-col items-start">
-                <p className="text-purple-400 uppercase font-bold tracking-wider text-xs md:text-sm">
+                <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#4FD17A'}}>
                   Tools
                 </p>
                 <p className="text-neutral-950 text-sm md:text-base">
-                  Figma, Notion, Illustrator
+                  Figma
                 </p>
               </div>
             </div>
@@ -419,7 +445,7 @@ export default function TuneLink() {
                 className="w-full object-cover"
                 style={{ aspectRatio: '16/9' }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent pointer-events-none"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-green-900/20 to-transparent pointer-events-none"></div>
             </div>
           </div>
         </RevealOnScroll>
@@ -427,7 +453,7 @@ export default function TuneLink() {
         {/* Project Overview Section */}
         <RevealOnScroll>
           <section>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#20BF50'}}>
               Project Overview
             </h2>
             <div className="max-w-3xl">
@@ -444,7 +470,7 @@ export default function TuneLink() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
                 Background
               </h2>
               <div className="max-w-3xl">
@@ -461,15 +487,15 @@ export default function TuneLink() {
         {/* Need Finding Interviews Section */}
         <RevealOnScroll>
           <section>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
               Need Finding Interviews
             </h2>
             <div className="max-w-3xl">
-              <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-6">
+              <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-8">
                 To better understand how people relate to music socially, I conducted interviews focused on how users visualize and emotionally connect with sound. These insights guided TuneLink's visual and interaction design, ensuring it reflected how people already use music as a form of expression.
               </p>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-12">
               <img 
                 src={tunelink4}
                 alt="Medium Script" 
@@ -477,41 +503,49 @@ export default function TuneLink() {
               />
             </div>
             
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-900 mb-4 mt-8">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 mt-12" style={{color: '#000000'}}>
               Activity 1
             </h3>
             <div className="max-w-3xl">
-              <p className="text-sm md:text-base leading-relaxed text-gray-700">
+              <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-8">
                 For the first activity, participants completed "this or that" questions while five different songs were played one at a time. This activity helped describe how different genres of music "felt" to them.
               </p>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-10">
               <img 
                 src={tunelink5}
                 alt="Medium Activity 1" 
-                className="w-full max-w-2xl rounded-lg mt-6"
+                className="w-full max-w-2xl rounded-lg"
               />
             </div>
             
+            <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 mt-10" style={{color: '#000000'}}>
+              Results
+            </h4>
             {/* Activity 1 Image Carousel */}
-            <Activity1Carousel />
+            <div className="mb-12">
+              <Activity1Carousel />
+            </div>
             
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-900 mb-4 mt-12">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 mt-16" style={{color: '#000000'}}>
               Activity 2
             </h3>
             <div className="max-w-3xl">
-              <p className="text-sm md:text-base leading-relaxed text-gray-700">
+              <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-8">
                 For the second activity, participants created simple digital images using basic shapes in response to the same five songs, played one at a time. This activity represented how different music genres "looked" to them. Both of these activities helped me make design choices for the app.
               </p>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-10">
               <img 
                 src={tunelink6}
                 alt="Medium Activity 2" 
-                className="w-full max-w-2xl rounded-lg mt-6"
+                className="w-full max-w-2xl rounded-lg"
               />
             </div>
             
+            <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 mt-10" style={{color: '#000000'}}>
+              Results
+            </h4>
             {/* Drawing Conclusions Carousel */}
             <DrawingConclusionsCarousel />
           </section>
@@ -523,12 +557,20 @@ export default function TuneLink() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
                 How Might We Question
               </h2>
               <div className="max-w-3xl">
+                <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-4">
+                  From the interviews, I developed the guiding question:
+                </p>
+              </div>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-black mb-4 lg:whitespace-nowrap">
+                "How might we make listening to music a community bonding activity for college students?"
+              </p>
+              <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  From the interviews, I developed the guiding question: "How might we make listening to music a community bonding activity for college students?" This question shaped every design decision, focusing the app around connection, identity, and the social side of music discovery.
+                  This question shaped every design decision, focusing the app around connection, identity, and the social side of music discovery.
                 </p>
               </div>
             </section>
@@ -538,29 +580,31 @@ export default function TuneLink() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="space-y-16 md:space-y-28">
-          {/* User Personas Section */}
+          {/* User Persona Section */}
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
-                User Personas
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
+                User Persona
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  I developed a user personas to represent a typical TuneLink users, such as college students who spend hours each week exploring new artists and sharing tracks with friends.
+                  I developed a user persona to represent a typical TuneLink user, such as college students who spend hours each week exploring new artists and sharing tracks with friends.
                 </p>
               </div>
-              <img 
-                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Medium+1+Persona+Image" 
-                alt="User Persona" 
-                className="w-full rounded-lg mt-6"
-              />
+              <div className="flex justify-center mt-10">
+                <img 
+                  src={tunelink32}
+                  alt="User Persona" 
+                  className="w-full max-w-2xl rounded-lg"
+                />
+              </div>
             </section>
           </RevealOnScroll>
 
           {/* Site Map Section */}
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
                 Site Map
               </h2>
               <div className="max-w-3xl">
@@ -568,11 +612,13 @@ export default function TuneLink() {
                   The site map outlines how TuneLink's core features connect, from earning icons and chatting with users to exploring the map and managing a personalized profile. Mapping this structure early helped clarify the app's hierarchy, ensuring that discovery and connection remained intuitive and easy to access.
                 </p>
               </div>
-              <img 
-                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Medium+Image+of+Site+Map" 
-                alt="Site Map" 
-                className="w-full rounded-lg mt-6"
-              />
+              <div className="flex justify-center mt-10">
+                <img 
+                  src={tunelink33}
+                  alt="Site Map" 
+                  className="w-full max-w-3xl rounded-lg"
+                />
+              </div>
             </section>
           </RevealOnScroll>
         </div>
@@ -583,7 +629,7 @@ export default function TuneLink() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
                 Workflows
               </h2>
               <div className="max-w-3xl">
@@ -593,12 +639,12 @@ export default function TuneLink() {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
                 <img 
-                  src="https://via.placeholder.com/600x400/E9D5FF/9333EA?text=Workflow+1" 
+                  src={tunelink38}
                   alt="Workflow 1" 
                   className="w-full rounded-lg"
                 />
                 <img 
-                  src="https://via.placeholder.com/600x400/E9D5FF/9333EA?text=Workflow+2" 
+                  src={tunelink39}
                   alt="Workflow 2" 
                   className="w-full rounded-lg"
                 />
@@ -613,7 +659,7 @@ export default function TuneLink() {
           {/* Paper Wireframes Section */}
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
                 Paper Wireframes
               </h2>
               <div className="max-w-3xl">
@@ -622,7 +668,7 @@ export default function TuneLink() {
                 </p>
               </div>
               <img 
-                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Paper+Wireframes" 
+                src={tunelink34}
                 alt="Paper Wireframes" 
                 className="w-full rounded-lg mt-6"
               />
@@ -632,19 +678,44 @@ export default function TuneLink() {
           {/* Low Fidelity Wireframe Section */}
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
                 Low Fidelity Wireframe
               </h2>
+              <div className="mb-6">
+                <a
+                  href="https://www.figma.com/proto/DsjplEabs6ynZ6VC2O5u4B/T-Aspen-Tabar?page-id=1%3A4&node-id=6095-11627&viewport=498%2C-369%2C0.1&t=afKqycP2ZWnDdq0I-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=6095%3A11627&show-proto-sidebar=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-sm"
+                >
+                  View Low Fidelity Prototype
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+              </div>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
                   The low-fidelity wireframes translated early ideas into functional screen designs. They demonstrated the placement of icons, menus, and navigation elements, and were used for early usability feedback to confirm that users could intuitively navigate between listening stats, profiles, and chat features.
                 </p>
               </div>
-              <img 
-                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Low+Fidelity+Wireframe" 
-                alt="Low Fidelity Wireframe" 
-                className="w-full rounded-lg mt-6"
-              />
+              <div className="-mx-4 sm:-mx-6 lg:-mx-12 mt-6">
+                <img 
+                  src={tunelink35}
+                  alt="Low Fidelity Wireframe" 
+                  className="w-full rounded-lg"
+                />
+              </div>
             </section>
           </RevealOnScroll>
         </div>
@@ -655,7 +726,7 @@ export default function TuneLink() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
                 Usability Testing
               </h2>
               <div className="max-w-3xl">
@@ -675,20 +746,20 @@ export default function TuneLink() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="space-y-16 md:space-y-28">
-          {/* Spotify Scheme Section */}
+          {/* Incorporation of Familiar Design Systems Section */}
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
-                Incorporation of Spotify Scheme
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
+                Incorporation of Familiar Design Systems
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  Since TuneLink integrates with existing streaming platforms, I adopted elements of Spotify's recognizable color palette to establish familiarity while maintaining TuneLink's unique identity. The use of deep greens and clean neutrals helps connect the interface to users' existing mental models while enhancing the visual cohesion of the app.
+                  In designing TuneLink, I studied Snapchat's interface to understand how its simple iconography and smooth transitions create an intuitive user experience. I applied similar interaction patterns to make TuneLink feel natural and engaging. I also examined Spotify's visual language, drawing inspiration from its color palette and typography to build familiarity and trust. The result is a cohesive design that blends the playful interactivity of Snapchat with the visual identity and familiarity of Spotify.
                 </p>
               </div>
               <img 
-                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Spotify+Scheme+Integration" 
-                alt="Spotify Scheme" 
+                src={tunelink36}
+                alt="Design Systems Integration" 
                 className="w-full rounded-lg mt-6"
               />
             </section>
@@ -697,7 +768,7 @@ export default function TuneLink() {
           {/* High Fidelity Prototype Section */}
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 mb-4 md:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#20BF50'}}>
                 High Fidelity Prototype
               </h2>
               <div className="max-w-3xl">
@@ -709,10 +780,9 @@ export default function TuneLink() {
               <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
                 <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
                   <img 
-                    src="https://via.placeholder.com/1200x675/E9D5FF/9333EA?text=High+Fidelity+Prototype" 
+                    src={tunelink37}
                     alt="High Fidelity Prototype" 
-                    className="w-full object-cover" 
-                    style={{ aspectRatio: '16/9' }}
+                    className="w-full object-contain"
                   />
                 </div>
                 <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
@@ -738,30 +808,34 @@ export default function TuneLink() {
           <div className="mt-16 md:mt-32 pt-8 md:pt-16 mb-12 md:mb-24 border-t border-gray-200">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-8">
               <div>
-                <p className="text-sm text-purple-600 font-medium mb-3">Key Concepts</p>
+                <p className="text-sm font-medium mb-3" style={{color: '#20BF50'}}>Key Concepts</p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     UX Research
                   </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     HCI
                   </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Gamification
                   </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Social UX
                   </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Prototyping
                   </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-purple-50 text-purple-700 rounded-lg text-xs md:text-sm font-medium">
+                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Music Discovery
                   </span>
                 </div>
               </div>
               <div className="flex justify-center md:justify-end">
-                <button className="px-6 py-3 md:px-8 md:py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-medium transition-colors text-sm md:text-base">
+                <button 
+                  className="px-6 py-3 md:px-8 md:py-4 text-white rounded-xl font-medium transition-colors text-sm md:text-base" 
+                  style={{backgroundColor: '#20BF50'}}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = '#188A3E'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = '#20BF50'}>
                   View Next Project →
                 </button>
               </div>
