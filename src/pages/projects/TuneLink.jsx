@@ -368,14 +368,14 @@ export default function TuneLink() {
   return (
     <section className="min-h-screen bg-white">
       {/* Header Section */}
-      <div className="bg-gray-100 pt-24 sm:pt-16 pb-10 md:pt-32 md:pb-16">
+      <div className="bg-gray-100 pt-20 sm:pt-24 pb-8 md:pt-32 md:pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 leading-tight" style={{color: '#20BF50'}}>
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-8 leading-tight" style={{color: '#20BF50'}}>
                 TuneLink
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-6 md:mb-8">
+              <p className="text-base sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-4 md:mb-8">
                 A social music app that connects listeners through collectible icons that reflect their shared tastes and listening habits.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -383,11 +383,11 @@ export default function TuneLink() {
                 href="https://www.figma.com/proto/DsjplEabs6ynZ6VC2O5u4B/T-Aspen-Tabar?page-id=1%3A5&node-id=6400-12408&viewport=-761%2C882%2C0.08&t=1Vgh0AGgNGbX5x1L-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=6400%3A12408"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-3 py-2 sm:px-4 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-xs sm:text-sm"
               >
                 View Figma Prototype
                 <svg
-                  className="w-4 h-4"
+                  className="w-3 h-3 sm:w-4 sm:h-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -406,7 +406,7 @@ export default function TuneLink() {
 
           {/* Information Grid */}
           <RevealOnScroll>
-            <div className="flex flex-wrap gap-4 md:gap-6 mt-8">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 mt-6 md:mt-8">
               <div className="flex flex-col items-start">
                 <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#4FD17A'}}>
                   Role
@@ -436,11 +436,11 @@ export default function TuneLink() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 md:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-6 md:py-16">
         {/* Main Image */}
         <RevealOnScroll>
-          <div className="mb-20 md:mb-36 -mx-0 sm:-mx-6 lg:-mx-12">
-            <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
+          <div className="mb-12 md:mb-36 -mx-4 sm:-mx-6 lg:-mx-12">
+            <div className="relative overflow-hidden rounded-lg lg:rounded-3xl shadow-2xl">
               <img
                 src={tunelink3}
                 alt="TuneLink App Interface"
@@ -468,7 +468,7 @@ export default function TuneLink() {
       </div>
 
       {/* Background Section */}
-      <div className="bg-gray-100 py-16 md:py-24 mb-16 md:mb-28 mt-16 md:mt-24">
+      <div className="bg-gray-100 py-12 md:py-24 mb-12 md:mb-28 mt-12 md:mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <section>
@@ -688,11 +688,11 @@ export default function TuneLink() {
                   href="https://www.figma.com/proto/DsjplEabs6ynZ6VC2O5u4B/T-Aspen-Tabar?page-id=1%3A4&node-id=6095-11627&viewport=498%2C-369%2C0.1&t=afKqycP2ZWnDdq0I-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=6095%3A11627&show-proto-sidebar=1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-sm"
+                  className="inline-flex items-center gap-2 px-3 py-2 sm:px-4 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-xs sm:text-sm"
                 >
                   View Low Fidelity Prototype
                   <svg
-                    className="w-4 h-4"
+                    className="w-3 h-3 sm:w-4 sm:h-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -778,11 +778,11 @@ export default function TuneLink() {
                   href="https://www.figma.com/proto/DsjplEabs6ynZ6VC2O5u4B/T-Aspen-Tabar?page-id=1%3A5&node-id=6400-12408&viewport=-761%2C882%2C0.08&t=1Vgh0AGgNGbX5x1L-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=6400%3A12408"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-sm"
+                  className="inline-flex items-center gap-2 px-3 py-2 sm:px-4 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-xs sm:text-sm"
                 >
                   View High Fidelity Prototype
                   <svg
-                    className="w-4 h-4"
+                    className="w-3 h-3 sm:w-4 sm:h-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -829,31 +829,31 @@ export default function TuneLink() {
 
         {/* Bottom Navigation */}
         <RevealOnScroll>
-          <div className="mt-16 md:mt-32 pt-8 md:pt-16 mb-12 md:mb-24 border-t border-gray-200">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-8">
-              <div>
-                <p className="text-sm font-medium mb-3" style={{color: '#20BF50'}}>Key Concepts</p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
+          <div className="mt-12 md:mt-32 pt-6 md:pt-16 mb-8 md:mb-24 border-t border-gray-200">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-8">
+              <div className="w-full md:w-auto">
+                <p className="text-xs sm:text-sm font-medium mb-2 md:mb-3" style={{color: '#20BF50'}}>Key Concepts</p>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     UX Research
                   </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
+                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     HCI
                   </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
+                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Social UX
                   </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
+                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Prototyping
                   </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
+                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Music Discovery
                   </span>
                 </div>
               </div>
-              <div className="flex justify-center md:justify-end">
+              <div className="flex justify-center md:justify-end mt-4 md:mt-0">
                 <button 
-                  className="px-6 py-3 md:px-8 md:py-4 text-white rounded-xl font-medium transition-colors text-sm md:text-base" 
+                  className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-white rounded-xl font-medium transition-colors text-xs sm:text-sm md:text-base w-full sm:w-auto" 
                   style={{backgroundColor: '#20BF50'}}
                   onMouseEnter={(e) => e.target.style.backgroundColor = '#188A3E'}
                   onMouseLeave={(e) => e.target.style.backgroundColor = '#20BF50'}>
