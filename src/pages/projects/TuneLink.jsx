@@ -36,6 +36,8 @@ import tunelink36 from "../../assets/tunelink36.jpeg";
 import tunelink37 from "../../assets/tunelink37.jpeg";
 import tunelink38 from "../../assets/tunelink38.jpeg";
 import tunelink39 from "../../assets/tunelink39.jpeg";
+import tunelink40 from "../../assets/tunelink40.jpeg";
+import tunelinkvid from "../../assets/tunelinkvid.mp4";
 
 // Scroll reveal animation
 function RevealOnScroll({ children }) {
@@ -175,7 +177,7 @@ function Activity1Carousel() {
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               currentIndex === index ? 'w-6' : ''
             }`}
-            style={{backgroundColor: currentIndex === index ? '#20BF50' : '#D1D5DB'}}
+            style={{backgroundColor: currentIndex === index ? '#000000' : '#D1D5DB'}}
             aria-label={`Go to image ${index + 1}`}
           />
         ))}
@@ -311,7 +313,7 @@ function DrawingConclusionsCarousel() {
             className={`w-2 h-2 rounded-full transition-all duration-300 ${
               currentIndex === index ? 'w-6' : ''
             }`}
-            style={{backgroundColor: currentIndex === index ? '#20BF50' : '#D1D5DB'}}
+            style={{backgroundColor: currentIndex === index ? '#000000' : '#D1D5DB'}}
             aria-label={`Go to page ${index + 1}`}
           />
         ))}
@@ -735,7 +737,7 @@ export default function TuneLink() {
                 </p>
               </div>
               <img 
-                src="https://via.placeholder.com/800x500/E9D5FF/9333EA?text=Usability+Testing" 
+                src={tunelink40}
                 alt="Usability Testing" 
                 className="w-full rounded-lg mt-6"
               />
@@ -771,6 +773,29 @@ export default function TuneLink() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#20BF50'}}>
                 High Fidelity Prototype
               </h2>
+              <div className="mb-6">
+                <a
+                  href="https://www.figma.com/proto/DsjplEabs6ynZ6VC2O5u4B/T-Aspen-Tabar?page-id=1%3A5&node-id=6400-12408&viewport=-761%2C882%2C0.08&t=1Vgh0AGgNGbX5x1L-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=6400%3A12408"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-sm"
+                >
+                  View High Fidelity Prototype
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+              </div>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
                   The final high-fidelity prototype reflects TuneLink's complete visual identity, featuring strong iconography inspired by music genres and multiple ways for users to connect socially.
@@ -787,15 +812,14 @@ export default function TuneLink() {
                 </div>
                 <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
                   <video 
-                    className="w-full object-cover" 
-                    style={{ aspectRatio: '16/9' }} 
+                    className="w-full object-contain" 
                     autoPlay 
                     loop 
                     muted 
                     playsInline 
                     controls
                   >
-                    <source src="https://videos.pexels.com/video-files/3129971/3129971-hd_1280_720_25fps.mp4" type="video/mp4" />
+                    <source src={tunelinkvid} type="video/mp4" />
                   </video>
                 </div>
               </div>
@@ -815,9 +839,6 @@ export default function TuneLink() {
                   </span>
                   <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     HCI
-                  </span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
-                    Gamification
                   </span>
                   <span className="px-3 py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Social UX
