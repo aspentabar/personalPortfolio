@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import ArsImg from "../assets/arsElecronica.jpeg";
 import aiImg from "../assets/SelfPhoto.jpeg";
 import TuneinkImg from "../assets/tunelink3.jpeg";
-
+// Add your Filosophia image import here
+// import FilosophiaImg from "../assets/filosophia.jpeg";
 
 // Project categories
 const categories = [
@@ -40,6 +41,16 @@ const featuredProjects = [
     tech: ["Figma", "UI", "User Interviews", "Mobile App Design"],
     url: "/projects/TuneLink",
     categories: ["ux", "web", "all"],
+  },
+  {
+    id: "Filosophia",
+    title: "Filosophia's Diary",
+    image: aiImg,
+    description:
+      "A typography specimen for the typeface 'Filosophia', showcasing its features and history through the format of a diary.",
+    tech: ["Indesign", "Typography", "Graphic Design", "Mockup"],
+    url: "/projects/Filosophia",
+    categories: ["web", "ux", "all"],
   },
 ];
 

@@ -11,6 +11,7 @@ import { ColorQuandary } from "./pages/projects/ColorQuandary";
 import { Contact } from "./pages/Contact";
 import "./index.css";
 import TuneLink from "./pages/projects/TuneLink";
+import { Filosophia } from "./pages/projects/FiloSofia";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -33,6 +34,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/ColorQuandary" element={<ColorQuandary />} />
             <Route path="/projects/TuneLink" element={<TuneLink />} />
+            <Route path="/projects/Filosophia" element={<Filosophia />} />
             {/* <Route path="/contact" element={<Contact />} /> */}
           </Routes>
         </div>
