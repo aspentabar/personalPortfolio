@@ -445,9 +445,9 @@ export function ColorQuandary() {
                     At the closing presentation, our project was showcased live to an international audience of researchers, scientists, artists, and the local Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous play sparked by the visual competition.
                   </p>
                 </div>
-                {/* Large presentation images */}
-                <div className="mt-16 md:mt-24 -mx-0 sm:-mx-6 lg:-mx-12 space-y-4 md:space-y-6">
-                  <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
+                {/* Large presentation images - MADE SMALLER */}
+                <div className="mt-16 md:mt-24 space-y-4 md:space-y-6 max-w-5xl mx-auto">
+                  <div className="relative overflow-hidden rounded-xl lg:rounded-2xl shadow-xl">
                     <img 
                       src={Ars3} 
                       alt="Final Presentation 1" 
@@ -455,7 +455,7 @@ export function ColorQuandary() {
                       style={{ aspectRatio: '16/9' }}
                     />
                   </div>
-                  <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
+                  <div className="relative overflow-hidden rounded-xl lg:rounded-2xl shadow-xl">
                     <img 
                       src={Ars4} 
                       alt="Final Presentation 2" 

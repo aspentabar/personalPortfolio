@@ -74,9 +74,10 @@ function RevealOnScroll({ children }) {
   );
 }
 
-// Mockup Gallery Component
+// Fixed Mockup Gallery Component
 function MockupGallery() {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [loadedImages, setLoadedImages] = useState({});
+  const [errorImages, setErrorImages] = useState({});
   
   // Mockup items configuration
   const mockupItems = [
@@ -95,32 +96,61 @@ function MockupGallery() {
     { src: Filo13, alt: 'Filosophia Specimen Page 13' }
   ];
 
+  const handleImageLoad = (index) => {
+    setLoadedImages(prev => ({ ...prev, [index]: true }));
+  };
+
+  const handleImageError = (index, src) => {
+    console.error(`Failed to load image ${index + 1}:`, src);
+    setErrorImages(prev => ({ ...prev, [index]: true }));
+  };
+
+  // Debug: Log the first image source to check if imports are working
   useEffect(() => {
-    // Force a reflow after component mounts
-    setImagesLoaded(true);
+    console.log('First image source:', mockupItems[0]?.src);
+    console.log('All image sources:', mockupItems.map(item => item.src));
   }, []);
 
   return (
     <div className="mt-12 space-y-6 md:space-y-8 max-w-3xl mx-auto">
       {mockupItems.map((item, index) => (
-        <div key={index} className="relative overflow-hidden rounded-lg shadow-lg bg-gray-50 min-h-[200px]">
-          <img
-            src={item.src}
-            alt={item.alt}
-            className="w-full h-auto object-contain block"
-            loading="eager"
-            style={{ 
-              display: 'block',
-              width: '100%',
-              height: 'auto'
-            }}
-            onLoad={(e) => {
-              e.target.style.opacity = '1';
-            }}
-            onError={(e) => {
-              console.error(`Failed to load image ${index + 1}:`, e.target.src);
-            }}
-          />
+        <div key={index} className="relative overflow-hidden rounded-lg shadow-lg bg-gray-50">
+          {/* Loading placeholder */}
+          {!loadedImages[index] && !errorImages[index] && (
+            <div className="absolute inset-0 flex items-center justify-center min-h-[200px]">
+              <div className="text-gray-400">
+                <svg className="animate-spin h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </div>
+            </div>
+          )}
+          
+          {/* Error state */}
+          {errorImages[index] && (
+            <div className="flex flex-col items-center justify-center min-h-[200px] p-8 text-center">
+              <svg className="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <p className="text-gray-500 text-sm">Failed to load image</p>
+              <p className="text-gray-400 text-xs mt-1">{item.alt}</p>
+            </div>
+          )}
+          
+          {/* Image */}
+          {!errorImages[index] && (
+            <img
+              src={item.src}
+              alt={item.alt}
+              className={`w-full h-auto object-contain block transition-opacity duration-300 ${
+                loadedImages[index] ? 'opacity-100' : 'opacity-0'
+              }`}
+              loading="lazy"
+              onLoad={() => handleImageLoad(index)}
+              onError={() => handleImageError(index, item.src)}
+            />
+          )}
         </div>
       ))}
     </div>
@@ -350,11 +380,9 @@ export function Filosophia() {
             </RevealOnScroll>
 
             {/* Mockups Section */}
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0">
-                <MockupGallery />
-              </section>
-            </RevealOnScroll>
+            <section className="px-4 sm:px-6 lg:px-0">
+              <MockupGallery />
+            </section>
 
             {/* Full Document Section */}
             <RevealOnScroll>

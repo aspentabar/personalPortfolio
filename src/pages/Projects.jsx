@@ -57,9 +57,9 @@ const featuredProjects = [
     title: "Personal Portfolio",
     image: PortfolioImg,
     description:
-      "You're already here! This React-based portfolio showcases my work with smooth animations, responsive design, and a touch of purple magic. Meta, isn't it?",
-    tech: ["React", "Tailwind CSS", "React Router", "Responsive Design"],
-    url: "#",
+      "You're already here! This React-based portfolio showcases my work with a touch of purple magic. Cute, isn't it?",
+    tech: ["React", "Tailwind CSS", "Vite", "JavaScript"],
+    url: "https://github.com/aspentabar/personalPortfolio",
     categories: ["web", "ux", "all"],
     isCurrentSite: true, // Special flag for unique behavior
   },
@@ -131,10 +131,12 @@ export function Projects() {
                 }}
               >
                 {proj.isCurrentSite ? (
-                  // Special handling for the portfolio project
-                  <div 
-                    className="block group cursor-pointer"
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  // Special handling for the portfolio project - now links to GitHub
+                  <a 
+                    href={proj.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block group"
                   >
                     <div className="relative w-full overflow-hidden">
                       <img
@@ -161,11 +163,11 @@ export function Projects() {
                         ))}
                       </div>
                       <span className="text-purple-700 hover:text-purple-500 transition-colors font-semibold text-sm sm:text-base inline-flex items-center">
-                        Scroll to top 
-                        <span className="ml-1">↑</span>
+                        View on GitHub 
+                        <span className="ml-1">→</span>
                       </span>
                     </div>
-                  </div>
+                  </a>
                 ) : (
                   // Regular project link
                   <Link to={proj.url} className="block group">
