@@ -76,6 +76,8 @@ function RevealOnScroll({ children }) {
 
 // Mockup Gallery Component
 function MockupGallery() {
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  
   // Mockup items configuration
   const mockupItems = [
     { src: Filo1, alt: 'Filosophia Specimen Page 1' },
@@ -93,25 +95,33 @@ function MockupGallery() {
     { src: Filo13, alt: 'Filosophia Specimen Page 13' }
   ];
 
-  // Debug: Log the first image source to check if it's loading
-  console.log('First image source:', Filo1);
-  console.log('All mockup items:', mockupItems);
+  useEffect(() => {
+    // Force a reflow after component mounts
+    setImagesLoaded(true);
+  }, []);
 
   return (
     <div className="mt-12 space-y-6 md:space-y-8 max-w-3xl mx-auto">
       {mockupItems.map((item, index) => (
-        <RevealOnScroll key={index}>
-          <div className="relative overflow-hidden rounded-lg shadow-lg bg-gray-50">
-            <img
-              src={item.src}
-              alt={item.alt}
-              className="w-full h-auto object-contain"
-              onError={(e) => {
-                console.error(`Failed to load image ${index + 1}:`, e.target.src);
-              }}
-            />
-          </div>
-        </RevealOnScroll>
+        <div key={index} className="relative overflow-hidden rounded-lg shadow-lg bg-gray-50 min-h-[200px]">
+          <img
+            src={item.src}
+            alt={item.alt}
+            className="w-full h-auto object-contain block"
+            loading="eager"
+            style={{ 
+              display: 'block',
+              width: '100%',
+              height: 'auto'
+            }}
+            onLoad={(e) => {
+              e.target.style.opacity = '1';
+            }}
+            onError={(e) => {
+              console.error(`Failed to load image ${index + 1}:`, e.target.src);
+            }}
+          />
+        </div>
       ))}
     </div>
   );
@@ -256,15 +266,15 @@ export function Filosophia() {
           <RevealOnScroll>
             <div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8 text-black leading-tight">
-                Filosophia's Diary
+                Filosofia's Diary
               </h1>
               <p className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-6 md:mb-8">
-                A typography specimen for the typeface 'Filosophia', showcasing its features and history through the format of a diary.
+                A typography specimen for the typeface 'Filosofia', showcasing its features and history through the format of a diary.
               </p>
               <a 
                 href={FilosofiaPDF} 
                 download="Filosofia.pdf"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded-full font-medium transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-full font-medium transition-colors text-sm"
               >
                 Download PDF
                 <svg
@@ -354,7 +364,7 @@ export function Filosophia() {
                   <a 
                     href={FilosofiaPDF} 
                     download="Filosofia.pdf"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-gray-400 hover:bg-gray-500 text-white rounded-full font-medium transition-colors text-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-full font-medium transition-colors text-sm"
                   >
                     Download Full PDF
                     <svg
