@@ -12,11 +12,10 @@ import PortfolioImg from "../assets/webcover.jpeg";
 // Project categories
 const categories = [
   { label: "All Work", value: "all" },
-  { label: "UX Design", value: "ux" },
-  { label: "Mobile Development", value: "mobile" },
+  { label: "UI/UX Design", value: "ux" },
+  { label: "Human-Computer Interaction", value: "HCI" },
   { label: "Web Development", value: "web" },
   { label: "Graphic Design", value: "graphic" },
-  { label: "Branding", value: "branding" },
   { label: "AR", value: "ar" },
 ];
 
@@ -28,9 +27,9 @@ const featuredProjects = [
     image: ArsImg,
     description:
       "An interactive installation exploring how human computer interactions can turn audience movement into large-scale visual competition.",
-    tech: ["Creative Coding", "UX", "User Experience", "Public Media Façade", "HCI"],
+    tech: ["Creative Coding", "User Experience", "Public Media Façade", "Human-Computer Interaction"],
     url: "/projects/ColorQuandary",
-    categories: ["ux", "cloud", "all"],
+    categories: ["HCI", "all"],
   },
   {
     id: "TuneLink",
@@ -38,9 +37,9 @@ const featuredProjects = [
     image: TuneinkImg,
     description:
       "A social music app that connects listeners through collectible icons that reflect their shared tastes and listening habits.",
-    tech: ["Figma", "UI", "User Interviews", "Mobile App Design"],
+    tech: ["Figma", "User Interface", "User Interviews", "Mobile App Design"],
     url: "/projects/TuneLink",
-    categories: ["ux", "web", "all"],
+    categories: ["ux", "all"],
   },
   {
     id: "Filosophia",
@@ -50,7 +49,7 @@ const featuredProjects = [
       "A typography specimen for the typeface 'Filosofia', showcasing its features and history through the format of a diary.",
     tech: ["Adobe Indesign", "Typography", "Graphic Design", "Mockup"],
     url: "/projects/Filosophia",
-    categories: ["web", "ux", "all"],
+    categories: ["graphic", "all"],
   },
   {
     id: "Portfolio",
