@@ -8,6 +8,14 @@ import aiImg from "../assets/SelfPhoto.jpeg";
 import TuneinkImg from "../assets/tunelink3.jpeg";
 import Typebook from "../assets/typebookMockup.png";
 import PortfolioImg from "../assets/webcover.jpeg";
+import OmNomImg from "../assets/omnom4.png";
+// Add import for OmNom image when you have it
+// import OmNomImg from "../assets/omnom.jpeg";
+
+// Scroll to top handler
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'instant' });
+};
 
 // Project categories
 const categories = [
@@ -42,6 +50,16 @@ const featuredProjects = [
     categories: ["ux", "all"],
   },
   {
+    id: "OmNom",
+    title: "OmNom.ai",
+    image: OmNomImg,
+    description:
+      "An AI-powered recipe app that recommends meals based on ingredients you already have, reducing food waste while making cooking accessible and enjoyable.",
+    tech: ["Figma", "User Interface", "User Interviews", "Mobile App Design"],
+    url: "/projects/OmNom",
+    categories: ["ux", "all"],
+  },
+  {
     id: "Filosophia",
     title: "Filosofia's Diary",
     image: Typebook,
@@ -60,7 +78,7 @@ const featuredProjects = [
     tech: ["React", "Tailwind CSS", "Vite", "JavaScript"],
     url: "https://github.com/aspentabar/personalPortfolio",
     categories: ["web", "ux", "all"],
-    isCurrentSite: true, // Special flag for unique behavior
+    isCurrentSite: true,
   },
 ];
 
@@ -169,7 +187,7 @@ export function Projects() {
                   </a>
                 ) : (
                   // Regular project link
-                  <Link to={proj.url} className="block group">
+                  <Link to={proj.url} className="block group" onClick={scrollToTop}>
                     <div className="relative w-full overflow-hidden">
                       <img
                         src={proj.image}
