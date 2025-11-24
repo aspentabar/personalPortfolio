@@ -160,7 +160,6 @@ function MockupGallery() {
 // Filosofia Document Carousel Component
 function FilosofiaCarousel() {
   const [currentPage, setCurrentPage] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   
   // Filosofia pages configuration
   const filosofiaPages = [
@@ -187,20 +186,8 @@ function FilosofiaCarousel() {
     setCurrentPage((prev) => (prev === filosofiaPages.length - 1 ? 0 : prev + 1));
   };
 
-  // Auto-advance carousel
-  useEffect(() => {
-    if (!isPaused) {
-      const interval = setInterval(() => {
-        handleNext();
-      }, 4000);
-      return () => clearInterval(interval);
-    }
-  }, [currentPage, isPaused]);
-
   return (
-    <div className="relative mt-12"
-         onMouseEnter={() => setIsPaused(true)}
-         onMouseLeave={() => setIsPaused(false)}>
+    <div className="relative mt-12">
 
       <div className="flex items-center justify-center">
         {/* Previous Button */}
@@ -383,61 +370,65 @@ export function Filosophia() {
             <section className="px-4 sm:px-6 lg:px-0">
               <MockupGallery />
             </section>
-
-            {/* Full Document Section */}
-            <RevealOnScroll>
-              <section className="px-4 sm:px-6 lg:px-0 mt-16 md:mt-24">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 md:mb-6">Full Document</h2>
-                <div className="max-w-4xl mb-8">
-                  <a 
-                    href={FilosofiaPDF} 
-                    download="Filosofia.pdf"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-full font-medium transition-colors text-sm"
-                  >
-                    Download Full PDF
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                  </a>
-                </div>
-                <FilosofiaCarousel />
-              </section>
-            </RevealOnScroll>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Navigation */}
-        <RevealOnScroll>
-          <div className="mt-16 md:mt-32 pt-8 md:pt-16 mb-12 md:mb-24 border-t border-gray-200">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-8">
-              <div>
-                <p className="text-sm text-gray-600 font-medium mb-3">Key Concepts</p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-100 text-black rounded-lg text-xs md:text-sm font-medium">Typography</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-100 text-black rounded-lg text-xs md:text-sm font-medium">Type Specimen</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-100 text-black rounded-lg text-xs md:text-sm font-medium">Editorial Design</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-100 text-black rounded-lg text-xs md:text-sm font-medium">Visual Storytelling</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-gray-100 text-black rounded-lg text-xs md:text-sm font-medium">Graphic Design</span>
+      {/* Full Document Section with Gray Background - extends to bottom */}
+      <div className="bg-gray-100 py-16 md:py-24 mt-16 md:mt-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <RevealOnScroll>
+            <section>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 md:mb-6">Filosofia Document</h2>
+              <div className="max-w-4xl mb-8">
+                <a 
+                  href={FilosofiaPDF} 
+                  download="Filosofia.pdf"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-800 text-white rounded-full font-medium transition-colors text-sm"
+                >
+                  Download PDF
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <FilosofiaCarousel />
+            </section>
+          </RevealOnScroll>
+
+          {/* Bottom Navigation - Inside Gray Background */}
+          <RevealOnScroll>
+            <div className="mt-16 md:mt-32 pt-8 md:pt-16 pb-12 md:pb-24 border-t border-gray-300">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-8">
+                <div>
+                  <p className="text-sm text-gray-600 font-medium mb-3">Key Concepts</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Typography</span>
+                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Type Specimen</span>
+                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Editorial Design</span>
+                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Visual Storytelling</span>
+                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Graphic Design</span>
+                  </div>
+                </div>
+                <div className="flex justify-center md:justify-end">
+                  <button className="px-6 py-3 md:px-8 md:py-4 bg-black hover:bg-gray-800 text-white rounded-xl font-medium transition-colors text-sm md:text-base">
+                    View Next Project →
+                  </button>
                 </div>
               </div>
-              <div className="flex justify-center md:justify-end">
-                <button className="px-6 py-3 md:px-8 md:py-4 bg-black hover:bg-gray-800 text-white rounded-xl font-medium transition-colors text-sm md:text-base">
-                  View Next Project →
-                </button>
-              </div>
             </div>
-          </div>
-        </RevealOnScroll>
+          </RevealOnScroll>
+        </div>
       </div>
     </section>
   );
