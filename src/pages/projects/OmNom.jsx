@@ -1,5 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
+import omnom2 from "../../assets/omnom2.png";
 import omnom3 from "../../assets/omnom3.png";
+import omnom5 from "../../assets/omnom5.png";
+import omnom6 from "../../assets/omnom6.png";
+import omnom7 from "../../assets/omnom7.png";
+import omnom8 from "../../assets/omnom8.png";
 
 // Placeholder images - replace these with your actual image imports
 const placeholderImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23e0e0e0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage Placeholder%3C/text%3E%3C/svg%3E";
@@ -374,9 +379,9 @@ export default function OmNom() {
                   Based on our research, we developed two primary personas representing our target users: Eric, a retired engineer eager to explore cooking, and Emily, a busy student needing quick, efficient meal solutions.
                 </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-                <img src={placeholderImg} alt="Eric Persona" className="w-full rounded-lg shadow-md" />
-                <img src={placeholderImg} alt="Emily Persona" className="w-full rounded-lg shadow-md" />
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 mt-12 max-w-7xl mx-auto">
+                <img src={omnom7} alt="Eric Persona" className="w-full rounded-lg shadow-lg" />
+                <img src={omnom8} alt="Emily Persona" className="w-full rounded-lg shadow-lg" />
               </div>
             </section>
           </RevealOnScroll>
@@ -392,8 +397,11 @@ export default function OmNom() {
                   We created detailed user stories and storyboards to visualize how our personas would interact with OmNom.ai in their daily lives, from discovering the app to successfully cooking meals.
                 </p>
               </div>
-              {/* Storyboard Carousel */}
-              <StoryboardCarousel />
+              {/* Two storyboard images side by side */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                <img src={omnom5} alt="Eric's User Journey Storyboard" className="w-full rounded-lg shadow-md" />
+                <img src={omnom6} alt="Emily's User Journey Storyboard" className="w-full rounded-lg shadow-md" />
+              </div>
             </section>
           </RevealOnScroll>
 
@@ -523,7 +531,7 @@ export default function OmNom() {
               {/* Large presentation images */}
               <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
                 <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
-                  <img src={placeholderImg} alt="App Screens Overview" className="w-full object-contain" />
+                  <img src={omnom2} alt="App Screens Overview" className="w-full object-contain" />
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <img src={placeholderImg} alt="Camera Screen" className="w-full rounded-lg shadow-md" />
