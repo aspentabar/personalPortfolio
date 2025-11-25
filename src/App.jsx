@@ -8,7 +8,6 @@ import { Home } from "./pages/Home";
 import { About } from "./pages/About";
 import { Projects } from "./pages/Projects";
 import { ColorQuandary } from "./pages/projects/ColorQuandary";
-import { Contact } from "./pages/Contact";
 import "./index.css";
 import TuneLink from "./pages/projects/TuneLink";
 import { Filosophia } from "./pages/projects/FiloSofia";
@@ -39,7 +38,7 @@ function App() {
             <Route path="/projects/Filosophia" element={<Filosophia />} />
             <Route path="/projects/OmNom" element={<OmNom />} />
             <Route path="/projects/ColorContest" element={<ColorContest />} />
-            {/* <Route path="/contact" element={<Contact />} /> */}
+            
           </Routes>
         </div>
       </Router>
