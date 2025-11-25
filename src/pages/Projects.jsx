@@ -10,8 +10,8 @@ import Typebook from "../assets/typebookMockup.png";
 import PortfolioImg from "../assets/webcover.jpeg";
 import OmNomImg from "../assets/omnom4.png";
 import PS5Img from "../assets/ps5.png";
-// Add import for OmNom image when you have it
-// import OmNomImg from "../assets/omnom.jpeg";
+// Add this import for Color Contest image
+// import ColorContestImg from "../assets/colorcontest.png";
 
 // Scroll to top handler
 const scrollToTop = () => {
@@ -69,6 +69,16 @@ export const featuredProjects = [
     tech: ["Adobe Indesign", "Typography", "Graphic Design", "Mockup"],
     url: "/projects/Filosophia",
     categories: ["graphic", "all"],
+  },
+  {
+    id: "ColorContest",
+    title: "Color Contest",
+    image: ArsImg, // Replace with ColorContestImg when you have it
+    description:
+      "An interactive color competition game where players vote with their movement to determine winning colors.",
+    tech: ["Interactive Design", "Game Design", "Creative Coding"],
+    url: "/projects/ColorContest",
+    categories: ["HCI", "all"],
   },
   {
     id: "PlaystationVR",
@@ -302,7 +312,6 @@ export function Projects() {
         @media (max-width: 640px) {
           body {
             overflow-x: hidden;
-
           }
         }
       `}</style>
