@@ -25,11 +25,11 @@ const categories = [
   { label: "Human-Computer Interaction", value: "HCI" },
   { label: "Web Development", value: "web" },
   { label: "Graphic Design", value: "graphic" },
-  { label: "AR", value: "ar" },
+  { label: "XR", value: "xr" },
 ];
 
 // List of Projects:
-const featuredProjects = [
+export const featuredProjects = [
   {
     id: "ColorQuandary",
     title: "Color Quandary",
@@ -78,7 +78,7 @@ const featuredProjects = [
       "Designing and developing a VR game using gaze as a way a user can interact with the world around them.",
     tech: ["VR Development", "Gaze Interaction", "Game Design", "Unity"],
     url: "#",
-    categories: ["HCI", "all"],
+    categories: ["HCI", "xr", "all"],
     comingSoon: true,
   },
   {
@@ -93,6 +93,7 @@ const featuredProjects = [
     isCurrentSite: true,
   },
 ];
+
 
 export function Projects() {
   const [selected, setSelected] = useState("all");
@@ -301,6 +302,7 @@ export function Projects() {
         @media (max-width: 640px) {
           body {
             overflow-x: hidden;
+
           }
         }
       `}</style>

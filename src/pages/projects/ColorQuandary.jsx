@@ -1,4 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getNextProject } from '../../utils/projectNavigationUtils';
 import ArsVid from "../../assets/ArsVid1.mp4";
 import Ars1 from "../../assets/ars1.jpeg";
 import Ars2 from "../../assets/ars2.jpeg";
@@ -263,6 +265,16 @@ function MediaCarousel() {
 // Main Component
 export function ColorQuandary() {
   const videoRef = useRef(null);
+  const navigate = useNavigate();
+  
+  // Get the next project for navigation
+  const nextProject = getNextProject("ColorQuandary");
+  
+  // Handler for next project navigation
+  const handleNextProject = () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    navigate(nextProject.url);
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -469,7 +481,7 @@ export function ColorQuandary() {
           </div>
         </div>
 
-        {/* Bottom Navigation */}
+        {/* Bottom Navigation - Updated with working navigation */}
         <RevealOnScroll>
           <div className="mt-16 md:mt-32 pt-8 md:pt-16 mb-12 md:mb-24 border-t border-gray-200">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-8">
@@ -485,8 +497,12 @@ export function ColorQuandary() {
                 </div>
               </div>
               <div className="flex justify-center md:justify-end">
-                <button className="px-6 py-3 md:px-8 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors text-sm md:text-base">
-                  View Next Project →
+                <button 
+                  onClick={handleNextProject}
+                  className="px-6 py-3 md:px-8 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors text-sm md:text-base group"
+                >
+                  Next Project
+                  <span className="ml-2 group-hover:translate-x-1 inline-block transition-transform">→</span>
                 </button>
               </div>
             </div>

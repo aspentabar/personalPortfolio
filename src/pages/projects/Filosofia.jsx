@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getNextProject } from '../../utils/projectNavigationUtils';
 
-// Import your assets - update these paths to match your project structure
 // Video
 import FiloVid from "../../assets/filovid.mp4";
 
@@ -265,6 +266,16 @@ function FilosofiaCarousel() {
 // Main Component
 export function Filosophia() {
   const videoRef = useRef(null);
+  const navigate = useNavigate();
+  
+  // Get the next project for navigation
+  const nextProject = getNextProject("Filosophia");
+  
+  // Handler for next project navigation
+  const handleNextProject = () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    navigate(nextProject.url);
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -406,7 +417,7 @@ export function Filosophia() {
             </section>
           </RevealOnScroll>
 
-          {/* Bottom Navigation - Inside Gray Background */}
+          {/* Bottom Navigation - Updated with working navigation */}
           <RevealOnScroll>
             <div className="mt-16 md:mt-32 pt-8 md:pt-16 pb-12 md:pb-24 border-t border-gray-300">
               <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-8">
@@ -421,8 +432,12 @@ export function Filosophia() {
                   </div>
                 </div>
                 <div className="flex justify-center md:justify-end">
-                  <button className="px-6 py-3 md:px-8 md:py-4 bg-black hover:bg-gray-800 text-white rounded-xl font-medium transition-colors text-sm md:text-base">
-                    View Next Project →
+                  <button 
+                    onClick={handleNextProject}
+                    className="px-6 py-3 md:px-8 md:py-4 bg-black hover:bg-gray-800 text-white rounded-xl font-medium transition-colors text-sm md:text-base group"
+                  >
+                    Next Project
+                    <span className="ml-2 group-hover:translate-x-1 inline-block transition-transform">→</span>
                   </button>
                 </div>
               </div>

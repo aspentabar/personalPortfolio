@@ -1,4 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getNextProject } from '../../utils/projectNavigationUtils';
 import tunelink3 from "../../assets/tunelink3.png";
 import tunelink4 from "../../assets/tunelink4.jpeg";
 import tunelink5 from "../../assets/tunelink5.jpeg";
@@ -65,6 +67,7 @@ function RevealOnScroll({ children }) {
     };
   }, []);
 
+
   return (
     <div
       ref={ref}
@@ -76,6 +79,7 @@ function RevealOnScroll({ children }) {
     </div>
   );
 }
+
 
 // Activity 1 Single Image Carousel Component
 function Activity1Carousel() {
@@ -325,6 +329,16 @@ function DrawingConclusionsCarousel() {
 // Main TuneLink Component
 export default function TuneLink() {
   const videoRef = useRef(null);
+  const navigate = useNavigate();
+  
+  // Get the next project for navigation
+  const nextProject = getNextProject("TuneLink");
+  
+  // Handler for next project navigation
+  const handleNextProject = () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    navigate(nextProject.url);
+  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -827,7 +841,7 @@ export default function TuneLink() {
           </RevealOnScroll>
         </div>
 
-        {/* Bottom Navigation */}
+        {/* Bottom Navigation - Updated with working navigation */}
         <RevealOnScroll>
           <div className="mt-12 md:mt-32 pt-6 md:pt-16 mb-8 md:mb-24 border-t border-gray-200">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-8">
@@ -853,11 +867,13 @@ export default function TuneLink() {
               </div>
               <div className="flex justify-center md:justify-end mt-4 md:mt-0">
                 <button 
-                  className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-white rounded-xl font-medium transition-colors text-xs sm:text-sm md:text-base w-full sm:w-auto" 
+                  onClick={handleNextProject}
+                  className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-white rounded-xl font-medium transition-colors text-xs sm:text-sm md:text-base w-full sm:w-auto group" 
                   style={{backgroundColor: '#20BF50'}}
                   onMouseEnter={(e) => e.target.style.backgroundColor = '#188A3E'}
                   onMouseLeave={(e) => e.target.style.backgroundColor = '#20BF50'}>
-                  View Next Project →
+                  Next Project
+                  <span className="ml-2 group-hover:translate-x-1 inline-block transition-transform">→</span>
                 </button>
               </div>
             </div>

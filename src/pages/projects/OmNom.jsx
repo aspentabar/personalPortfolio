@@ -1,4 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getNextProject } from '../../utils/projectNavigationUtils';
 import omnom2 from "../../assets/omnom2.png";
 import omnom3 from "../../assets/omnom3.png";
 import omnom5 from "../../assets/omnom5.png";
@@ -53,6 +55,17 @@ function RevealOnScroll({ children }) {
 
 // Main OmNom Component
 export default function OmNom() {
+  const navigate = useNavigate();
+  
+  // Get the next project for navigation
+  const nextProject = getNextProject("OmNom");
+  
+  // Handler for next project navigation
+  const handleNextProject = () => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    navigate(nextProject.url);
+  };
+
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -449,7 +462,7 @@ export default function OmNom() {
           </RevealOnScroll>
         </div>
 
-        {/* Bottom Navigation */}
+        {/* Bottom Navigation - Updated with working navigation */}
         <RevealOnScroll>
           <div className="mt-12 md:mt-32 pt-6 md:pt-16 mb-8 md:mb-24 border-t border-gray-200">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-8">
@@ -472,11 +485,13 @@ export default function OmNom() {
               </div>
               <div className="flex justify-center md:justify-end mt-4 md:mt-0">
                 <button 
-                  className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-white rounded-xl font-medium transition-colors text-xs sm:text-sm md:text-base w-full sm:w-auto" 
+                  onClick={handleNextProject}
+                  className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-white rounded-xl font-medium transition-colors text-xs sm:text-sm md:text-base w-full sm:w-auto group" 
                   style={{backgroundColor: '#4CA347'}}
                   onMouseEnter={(e) => e.target.style.backgroundColor = '#3A8A37'}
                   onMouseLeave={(e) => e.target.style.backgroundColor = '#4CA347'}>
-                  View Next Project →
+                  Next Project
+                  <span className="ml-2 group-hover:translate-x-1 inline-block transition-transform">→</span>
                 </button>
               </div>
             </div>
