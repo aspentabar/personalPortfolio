@@ -5,6 +5,10 @@ import omnom5 from "../../assets/omnom5.png";
 import omnom6 from "../../assets/omnom6.png";
 import omnom7 from "../../assets/omnom7.png";
 import omnom8 from "../../assets/omnom8.png";
+import omnom9 from "../../assets/omnom9.png";
+import omnom10 from "../../assets/omnom10.png";
+import omnom11 from "../../assets/omnom11.png";
+import omnomvid from "../../assets/omnom.mp4";
 
 // Placeholder images - replace these with your actual image imports
 const placeholderImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23e0e0e0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage Placeholder%3C/text%3E%3C/svg%3E";
@@ -43,90 +47,6 @@ function RevealOnScroll({ children }) {
       }`}
     >
       {children}
-    </div>
-  );
-}
-
-// Storyboard Carousel Component
-function StoryboardCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
-  const storyboards = [
-    { id: 1, src: placeholderImg, alt: 'Eric Storyboard Frame 1', caption: 'Eric searches for recipes online' },
-    { id: 2, src: placeholderImg, alt: 'Eric Storyboard Frame 2', caption: 'Eric remembers OmNom.ai' },
-    { id: 3, src: placeholderImg, alt: 'Eric Storyboard Frame 3', caption: 'Takes pictures of pantry' },
-    { id: 4, src: placeholderImg, alt: 'Eric Storyboard Frame 4', caption: 'Selects recipe and cooks' },
-    { id: 5, src: placeholderImg, alt: 'Emily Storyboard Frame 1', caption: 'Emily comes home late' },
-    { id: 6, src: placeholderImg, alt: 'Emily Storyboard Frame 2', caption: 'Remembers OmNom.ai' },
-    { id: 7, src: placeholderImg, alt: 'Emily Storyboard Frame 3', caption: 'Takes picture of ingredients' },
-    { id: 8, src: placeholderImg, alt: 'Emily Storyboard Frame 4', caption: 'Makes dinner quickly' }
-  ];
-
-  const itemsPerPage = 4;
-  const totalPages = Math.ceil(storyboards.length / itemsPerPage);
-
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => {
-      return prevIndex === 0 ? totalPages - 1 : prevIndex - 1;
-    });
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => {
-      return prevIndex === totalPages - 1 ? 0 : prevIndex + 1;
-    });
-  };
-
-  const startIdx = currentIndex * itemsPerPage;
-  const endIdx = startIdx + itemsPerPage;
-  const currentItems = storyboards.slice(startIdx, endIdx);
-
-  return (
-    <div className="relative mt-8">
-      <div className="flex items-center">
-        <button
-          onClick={handlePrevious}
-          className="absolute -left-4 md:-left-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
-          aria-label="Previous items"
-        >
-          <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{color: '#000000'}}>
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        <div className="w-full">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {currentItems.map((item) => (
-              <div key={item.id} className="flex flex-col">
-                <img src={item.src} alt={item.alt} className="w-full rounded-lg object-contain" style={{ maxHeight: '200px' }} />
-                <p className="text-sm text-gray-600 mt-2 text-center">{item.caption}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <button
-          onClick={handleNext}
-          className="absolute -right-4 md:-right-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
-          aria-label="Next items"
-        >
-          <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{color: '#000000'}}>
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-      </div>
-
-      <div className="flex justify-center mt-6 gap-2">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${currentIndex === index ? 'w-6' : ''}`}
-            style={{backgroundColor: currentIndex === index ? '#000000' : '#D1D5DB'}}
-            aria-label={`Go to page ${index + 1}`}
-          />
-        ))}
-      </div>
     </div>
   );
 }
@@ -282,6 +202,14 @@ export default function OmNom() {
               </p>
             </div>
             
+            <div className="flex justify-center mb-12">
+              <img 
+                src={omnom9}
+                alt="User Research Process" 
+                className="w-full max-w-3xl rounded-lg"
+              />
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
               <div className="bg-white p-6 rounded-xl shadow-md">
                 <h3 className="text-lg font-bold mb-3" style={{color: '#4CA347'}}>Key Findings</h3>
@@ -386,11 +314,11 @@ export default function OmNom() {
             </section>
           </RevealOnScroll>
 
-          {/* User Stories & Storyboards Section */}
+          {/* User Storyboards Section */}
           <RevealOnScroll>
             <section>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6" style={{color: '#000000'}}>
-                User Stories & Storyboards
+                User Storyboards
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
@@ -416,11 +344,8 @@ export default function OmNom() {
                   Initial sketches explored different layouts for key screens including the camera interface for ingredient recognition, recipe browsing, and user profile customization. These rapid iterations helped establish the app's information architecture.
                 </p>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-                <img src={placeholderImg} alt="Wireframe 1" className="w-full rounded-lg" />
-                <img src={placeholderImg} alt="Wireframe 2" className="w-full rounded-lg" />
-                <img src={placeholderImg} alt="Wireframe 3" className="w-full rounded-lg" />
-                <img src={placeholderImg} alt="Wireframe 4" className="w-full rounded-lg" />
+              <div className="flex justify-center mt-10 -mx-4 sm:-mx-6 lg:-mx-12">
+                <img src={omnom10} alt="Paper Wireframes" className="w-full rounded-lg" />
               </div>
             </section>
           </RevealOnScroll>
@@ -439,6 +364,14 @@ export default function OmNom() {
                 <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-8">
                   We conducted Wizard of Oz testing with 4 participants to evaluate the app's core functionality before building the AI components. Key tasks included ingredient recognition and profile customization.
                 </p>
+              </div>
+              
+              <div className="flex justify-center mb-12">
+                <img 
+                  src={omnom11}
+                  alt="Wizard of Oz Testing Process" 
+                  className="w-full max-w-5xl rounded-lg"
+                />
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -494,50 +427,22 @@ export default function OmNom() {
                 </p>
               </div>
               
-              {/* Key Features Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6" fill="none" stroke="#4CA347" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="font-bold mb-2" style={{color: '#4CA347'}}>AI Image Recognition</h3>
-                  <p className="text-sm text-gray-700">Instantly identify ingredients with your camera and build your digital pantry</p>
-                </div>
-                
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6" fill="none" stroke="#4CA347" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                    </svg>
-                  </div>
-                  <h3 className="font-bold mb-2" style={{color: '#4CA347'}}>Smart Filtering</h3>
-                  <p className="text-sm text-gray-700">Filter recipes by dietary restrictions, cooking time, and available appliances</p>
-                </div>
-                
-                <div className="bg-white p-6 rounded-xl shadow-md">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="w-6 h-6" fill="none" stroke="#4CA347" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                    </svg>
-                  </div>
-                  <h3 className="font-bold mb-2" style={{color: '#4CA347'}}>Recipe Collection</h3>
-                  <p className="text-sm text-gray-700">Save and organize your favorite recipes for quick access</p>
-                </div>
-              </div>
-              
               {/* Large presentation images */}
               <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
                 <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
                   <img src={omnom2} alt="App Screens Overview" className="w-full object-contain" />
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <img src={placeholderImg} alt="Camera Screen" className="w-full rounded-lg shadow-md" />
-                  <img src={placeholderImg} alt="Recipe List" className="w-full rounded-lg shadow-md" />
-                  <img src={placeholderImg} alt="Profile Screen" className="w-full rounded-lg shadow-md" />
-                  <img src={placeholderImg} alt="Recipe Detail" className="w-full rounded-lg shadow-md" />
+                <div className="relative overflow-hidden rounded-xl lg:rounded-3xl shadow-2xl">
+                  <video 
+                    className="w-full object-contain" 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline 
+                    controls
+                  >
+                    <source src={omnomvid} type="video/mp4" />
+                  </video>
                 </div>
               </div>
             </section>
@@ -556,9 +461,6 @@ export default function OmNom() {
                   </span>
                   <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Mobile UX
-                  </span>
-                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
-                    Food Tech
                   </span>
                   <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
                     Sustainability

@@ -9,6 +9,7 @@ import TuneinkImg from "../assets/tunelink3.jpeg";
 import Typebook from "../assets/typebookMockup.png";
 import PortfolioImg from "../assets/webcover.jpeg";
 import OmNomImg from "../assets/omnom4.png";
+import PS5Img from "../assets/ps5.png";
 // Add import for OmNom image when you have it
 // import OmNomImg from "../assets/omnom.jpeg";
 
@@ -68,6 +69,17 @@ const featuredProjects = [
     tech: ["Adobe Indesign", "Typography", "Graphic Design", "Mockup"],
     url: "/projects/Filosophia",
     categories: ["graphic", "all"],
+  },
+  {
+    id: "PlaystationVR",
+    title: "PlayStation Game Development",
+    image: PS5Img,
+    description:
+      "Designing and developing a VR game using gaze as a way a user can interact with the world around them.",
+    tech: ["VR Development", "Gaze Interaction", "Game Design", "Unity"],
+    url: "#",
+    categories: ["HCI", "all"],
+    comingSoon: true,
   },
   {
     id: "Portfolio",
@@ -185,6 +197,38 @@ export function Projects() {
                       </span>
                     </div>
                   </a>
+                ) : proj.comingSoon ? (
+                  // Coming Soon project - non-clickable
+                  <div className="block group cursor-not-allowed opacity-90">
+                    <div className="relative w-full overflow-hidden">
+                      <img
+                        src={proj.image}
+                        alt={proj.title}
+                        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div className="p-5 sm:p-6 md:p-7">
+                      <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-purple-700 break-words">
+                        {proj.title}
+                      </h3>
+                      <p className="text-gray-800 mb-4 sm:mb-5 text-sm sm:text-base leading-relaxed break-words">
+                        {proj.description}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
+                        {proj.tech.map((tech) => (
+                          <span
+                            key={tech}
+                            className="bg-purple-100 text-purple-600 py-1 px-2 sm:px-3 rounded-full text-xs sm:text-sm"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-purple-700 font-semibold text-sm sm:text-base inline-flex items-center">
+                        Coming Soon...
+                      </span>
+                    </div>
+                  </div>
                 ) : (
                   // Regular project link
                   <Link to={proj.url} className="block group" onClick={scrollToTop}>
