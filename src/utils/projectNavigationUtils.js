@@ -1,4 +1,4 @@
-// src/utils/projectNavigationUtils.js
+//Vite needs extra handler file for NextProject feature:
 
 // Import the projects data from Projects.jsx
 import { featuredProjects } from '../pages/Projects';

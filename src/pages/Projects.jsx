@@ -10,8 +10,7 @@ import Typebook from "../assets/typebookMockup.png";
 import PortfolioImg from "../assets/webcover.jpeg";
 import OmNomImg from "../assets/omnom4.png";
 import PS5Img from "../assets/ps5.png";
-// Add this import for Color Contest image
-// import ColorContestImg from "../assets/colorcontest.png";
+import color from "../assets/color1.jpeg";
 
 // Scroll to top handler
 const scrollToTop = () => {
@@ -73,7 +72,7 @@ export const featuredProjects = [
   {
     id: "ColorContest",
     title: "Color Contest",
-    image: ArsImg, // Replace with ColorContestImg when you have it
+    image: color,
     description:
       "An interactive color competition game where players vote with their movement to determine winning colors.",
     tech: ["Interactive Design", "Game Design", "Creative Coding"],
