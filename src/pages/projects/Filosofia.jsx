@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getNextProject } from '../../utils/projectNavigationUtils';
+import { Link } from 'react-router-dom';
+import { featuredProjects, getRandomProjects } from '../Projects'; // Adjust path as needed
 
 // Video
 import FiloVid from "../../assets/filovid.mp4";
@@ -263,19 +263,53 @@ function FilosofiaCarousel() {
   );
 }
 
+// More Projects Component
+function MoreProjects({ currentProjectId }) {
+  const moreProjects = getRandomProjects(currentProjectId, 3);
+  
+  return (
+    <section className="w-full pt-24 pb-16 bg-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="border-t border-gray-200 pt-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-700 mb-8">
+            More Projects
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {moreProjects.map((project) => (
+              <Link
+                key={project.id}
+                to={project.url}
+                className="group block bg-white rounded-lg shadow hover:shadow-xl transition-shadow overflow-hidden"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+              >
+                <div className="relative w-full overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-lg text-purple-700 mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    {project.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Main Component
 export function Filosophia() {
   const videoRef = useRef(null);
-  const navigate = useNavigate();
-  
-  // Get the next project for navigation
-  const nextProject = getNextProject("Filosophia");
-  
-  // Handler for next project navigation
-  const handleNextProject = () => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    navigate(nextProject.url);
-  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -385,7 +419,7 @@ export function Filosophia() {
         </div>
       </div>
 
-      {/* Full Document Section with Gray Background - extends to bottom */}
+      {/* Full Document Section with Gray Background */}
       <div className="bg-gray-100 py-16 md:py-24 mt-16 md:mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
@@ -416,35 +450,11 @@ export function Filosophia() {
               <FilosofiaCarousel />
             </section>
           </RevealOnScroll>
-
-          {/* Bottom Navigation - Updated with working navigation */}
-          <RevealOnScroll>
-            <div className="mt-16 md:mt-32 pt-8 md:pt-16 pb-12 md:pb-24 border-t border-gray-300">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-8">
-                <div>
-                  <p className="text-sm text-gray-600 font-medium mb-3">Key Concepts</p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Typography</span>
-                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Type Specimen</span>
-                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Editorial Design</span>
-                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Visual Storytelling</span>
-                    <span className="px-3 py-1.5 md:px-4 md:py-2 bg-white text-black rounded-lg text-xs md:text-sm font-medium">Graphic Design</span>
-                  </div>
-                </div>
-                <div className="flex justify-center md:justify-end">
-                  <button 
-                    onClick={handleNextProject}
-                    className="px-6 py-3 md:px-8 md:py-4 bg-black hover:bg-gray-800 text-white rounded-xl font-medium transition-colors text-sm md:text-base group"
-                  >
-                    Next Project
-                    <span className="ml-2 group-hover:translate-x-1 inline-block transition-transform">→</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </RevealOnScroll>
         </div>
       </div>
+
+      {/* More Projects Section */}
+      <MoreProjects currentProjectId="Filosophia" />
     </section>
   );
 }

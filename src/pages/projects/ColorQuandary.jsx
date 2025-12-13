@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getNextProject } from '../../utils/projectNavigationUtils';
+import { Link } from 'react-router-dom';
+import { featuredProjects, getRandomProjects } from '../Projects'; // Adjust path as needed
 import ArsVid from "../../assets/ArsVid1.mp4";
 import Ars1 from "../../assets/ars1.jpeg";
 import Ars2 from "../../assets/ars2.jpeg";
@@ -262,19 +262,53 @@ function MediaCarousel() {
   );
 }
 
+// More Projects Component
+function MoreProjects({ currentProjectId }) {
+  const moreProjects = getRandomProjects(currentProjectId, 3);
+  
+  return (
+    <section className="w-full pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="border-t border-gray-200 pt-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-700 mb-8">
+            More Projects
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {moreProjects.map((project) => (
+              <Link
+                key={project.id}
+                to={project.url}
+                className="group block bg-white rounded-lg shadow hover:shadow-xl transition-shadow overflow-hidden"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+              >
+                <div className="relative w-full overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-lg text-purple-700 mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    {project.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Main Component
 export function ColorQuandary() {
   const videoRef = useRef(null);
-  const navigate = useNavigate();
-  
-  // Get the next project for navigation
-  const nextProject = getNextProject("ColorQuandary");
-  
-  // Handler for next project navigation
-  const handleNextProject = () => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    navigate(nextProject.url);
-  };
 
   useEffect(() => {
     const video = videoRef.current;
@@ -457,8 +491,8 @@ export function ColorQuandary() {
                     At the closing presentation, our project was showcased live to an international audience of researchers, scientists, artists, and the local Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous play sparked by the visual competition.
                   </p>
                 </div>
-                {/* Large presentation images - MADE SMALLER */}
-                <div className="mt-16 md:mt-24 space-y-4 md:space-y-6 max-w-5xl mx-auto">
+                {/* Large presentation images - Updated alignment */}
+                <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
                   <div className="relative overflow-hidden rounded-xl lg:rounded-2xl shadow-xl">
                     <img 
                       src={Ars3} 
@@ -481,34 +515,11 @@ export function ColorQuandary() {
           </div>
         </div>
 
-        {/* Bottom Navigation - Updated with working navigation */}
-        <RevealOnScroll>
-          <div className="mt-16 md:mt-32 pt-8 md:pt-16 mb-12 md:mb-24 border-t border-gray-200">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 md:gap-8">
-              <div>
-                <p className="text-sm text-blue-600 font-medium mb-3">Key Concepts</p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">Motion Tracking</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">Creative Coding</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">User Experience</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">Public Media Façade</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">HCI</span>
-                  <span className="px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 text-blue-700 rounded-lg text-xs md:text-sm font-medium">Interactive Art</span>
-                </div>
-              </div>
-              <div className="flex justify-center md:justify-end">
-                <button 
-                  onClick={handleNextProject}
-                  className="px-6 py-3 md:px-8 md:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors text-sm md:text-base group"
-                >
-                  Next Project
-                  <span className="ml-2 group-hover:translate-x-1 inline-block transition-transform">→</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </RevealOnScroll>
+
       </div>
+
+      {/* More Projects Section */}
+      <MoreProjects currentProjectId="ColorQuandary" />
     </section>
   );
 }

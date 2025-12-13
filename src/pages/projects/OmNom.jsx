@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getNextProject } from '../../utils/projectNavigationUtils';
+import { Link } from 'react-router-dom';
+import { featuredProjects, getRandomProjects } from '../Projects'; // Adjust path as needed
 import omnom2 from "../../assets/omnom2.png";
 import omnom3 from "../../assets/omnom3.png";
 import omnom5 from "../../assets/omnom5.png";
@@ -53,19 +53,52 @@ function RevealOnScroll({ children }) {
   );
 }
 
+// More Projects Component
+function MoreProjects({ currentProjectId }) {
+  const moreProjects = getRandomProjects(currentProjectId, 3);
+  
+  return (
+    <section className="w-full pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="border-t border-gray-200 pt-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-700 mb-8">
+            More Projects
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {moreProjects.map((project) => (
+              <Link
+                key={project.id}
+                to={project.url}
+                className="group block bg-white rounded-lg shadow hover:shadow-xl transition-shadow overflow-hidden"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
+              >
+                <div className="relative w-full overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-bold text-lg text-purple-700 mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    {project.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Main OmNom Component
 export default function OmNom() {
-  const navigate = useNavigate();
-  
-  // Get the next project for navigation
-  const nextProject = getNextProject("OmNom");
-  
-  // Handler for next project navigation
-  const handleNextProject = () => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    navigate(nextProject.url);
-  };
-
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -461,43 +494,10 @@ export default function OmNom() {
             </section>
           </RevealOnScroll>
         </div>
-
-        {/* Bottom Navigation - Updated with working navigation */}
-        <RevealOnScroll>
-          <div className="mt-12 md:mt-32 pt-6 md:pt-16 mb-8 md:mb-24 border-t border-gray-200">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 md:gap-8">
-              <div className="w-full md:w-auto">
-                <p className="text-xs sm:text-sm font-medium mb-2 md:mb-3" style={{color: '#4CA347'}}>Key Concepts</p>
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
-                    AI Integration
-                  </span>
-                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
-                    Mobile UX
-                  </span>
-                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
-                    Sustainability
-                  </span>
-                  <span className="px-2 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 text-green-700 rounded-lg text-xs md:text-sm font-medium" style={{backgroundColor: '#E6F9EC'}}>
-                    User Research
-                  </span>
-                </div>
-              </div>
-              <div className="flex justify-center md:justify-end mt-4 md:mt-0">
-                <button 
-                  onClick={handleNextProject}
-                  className="px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 text-white rounded-xl font-medium transition-colors text-xs sm:text-sm md:text-base w-full sm:w-auto group" 
-                  style={{backgroundColor: '#4CA347'}}
-                  onMouseEnter={(e) => e.target.style.backgroundColor = '#3A8A37'}
-                  onMouseLeave={(e) => e.target.style.backgroundColor = '#4CA347'}>
-                  Next Project
-                  <span className="ml-2 group-hover:translate-x-1 inline-block transition-transform">→</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </RevealOnScroll>
       </div>
+
+      {/* More Projects Section */}
+      <MoreProjects currentProjectId="OmNom" />
     </section>
   );
 }

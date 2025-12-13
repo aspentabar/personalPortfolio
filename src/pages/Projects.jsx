@@ -17,6 +17,19 @@ const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'instant' });
 };
 
+// Helper function to get random projects excluding current
+export const getRandomProjects = (excludeId, count = 3) => {
+  const availableProjects = featuredProjects.filter(
+    project => project.id !== excludeId && !project.comingSoon && !project.isCurrentSite
+  );
+  
+  // Shuffle array
+  const shuffled = [...availableProjects].sort(() => 0.5 - Math.random());
+  
+  // Return requested number of projects
+  return shuffled.slice(0, count);
+};
+
 // Project categories
 const categories = [
   { label: "All Work", value: "all" },
@@ -161,7 +174,9 @@ export function Projects() {
             {filtered.map((proj, i) => (
               <div
                 key={proj.id}
-                className="w-full rounded-xl sm:rounded-2xl bg-white shadow hover:shadow-2xl transition overflow-hidden flex flex-col animate-fadeIn"
+                className={`w-full rounded-xl sm:rounded-2xl bg-white shadow overflow-hidden flex flex-col animate-fadeIn ${
+                  proj.comingSoon ? '' : 'hover:shadow-2xl transition'
+                }`}
                 style={{
                   minHeight: 'auto',
                   animationDelay: `${i * 80}ms`,
@@ -208,13 +223,13 @@ export function Projects() {
                     </div>
                   </a>
                 ) : proj.comingSoon ? (
-                  // Coming Soon project - non-clickable
-                  <div className="block group cursor-not-allowed opacity-90">
+                  // Coming Soon project - non-clickable and no hover effects
+                  <div className="block cursor-not-allowed opacity-90">
                     <div className="relative w-full overflow-hidden">
                       <img
                         src={proj.image}
                         alt={proj.title}
-                        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 object-cover object-center"
                       />
                     </div>
                     <div className="p-5 sm:p-6 md:p-7">
