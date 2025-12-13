@@ -390,7 +390,6 @@ export function Filosophia() {
                 loop
                 muted
                 playsInline
-                controls
               />
               <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent pointer-events-none"></div>
             </div>

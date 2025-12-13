@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RevealOnScroll } from "../components/RevealOnScroll";
 import { Link } from "react-router-dom";
 
@@ -11,24 +11,6 @@ import PortfolioImg from "../assets/webcover.jpeg";
 import OmNomImg from "../assets/omnom4.png";
 import PS5Img from "../assets/ps5.png";
 import color from "../assets/color1.jpeg";
-
-// Scroll to top handler
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'instant' });
-};
-
-// Helper function to get random projects excluding current
-export const getRandomProjects = (excludeId, count = 3) => {
-  const availableProjects = featuredProjects.filter(
-    project => project.id !== excludeId && !project.comingSoon && !project.isCurrentSite
-  );
-  
-  // Shuffle array
-  const shuffled = [...availableProjects].sort(() => 0.5 - Math.random());
-  
-  // Return requested number of projects
-  return shuffled.slice(0, count);
-};
 
 // Project categories
 const categories = [
@@ -116,9 +98,26 @@ export const featuredProjects = [
   },
 ];
 
+// Helper function to get random projects excluding current
+export const getRandomProjects = (excludeId, count = 3) => {
+  const availableProjects = featuredProjects.filter(
+    project => project.id !== excludeId && !project.comingSoon && !project.isCurrentSite
+  );
+  
+  // Shuffle array
+  const shuffled = [...availableProjects].sort(() => 0.5 - Math.random());
+  
+  // Return requested number of projects
+  return shuffled.slice(0, count);
+};
 
 export function Projects() {
   const [selected, setSelected] = useState("all");
+
+  // Scroll to top when component mounts or updates
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Filter logic
   const filtered =
@@ -256,7 +255,7 @@ export function Projects() {
                   </div>
                 ) : (
                   // Regular project link
-                  <Link to={proj.url} className="block group" onClick={scrollToTop}>
+                  <Link to={proj.url} className="block group" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
                     <div className="relative w-full overflow-hidden">
                       <img
                         src={proj.image}
