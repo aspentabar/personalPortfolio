@@ -33,6 +33,7 @@ const skillGroups = [
     skills: [
       "Java",
       "Python",
+      "Git",
       "HTML",
       "CSS",
       "JavaScript",
@@ -51,15 +52,15 @@ const skillGroups = [
       "Adobe InDesign",
       "Adobe XD",
       "Adobe Premiere Pro",
-      "Miro",
       "Notion",
       "Canva",
 
     ],
   },
   {
-    group: "Engineering & 3D",
+    group: "Other Applications",
     skills: [
+      "Unity",
       "AutoCAD",
       "SolidWorks",
       "Rhino 3D",
@@ -67,7 +68,7 @@ const skillGroups = [
       "SketchUp",
       "Tinkercad",
       "Hoverlay",
-      "Unity",
+      "Google Analytics",
     ],
   },
 ];
@@ -136,7 +137,7 @@ export function About() {
           {/* <h2 className="text-xl font-semibold text-purple-700 mb-6">Skills</h2> */}
           <div className="flex flex-col md:flex-row gap-6">
             {skillGroups.map(({ group, skills }) => (
-              <div key={group} className="bg-purple-50 rounded-lg shadow p-5 flex-1 min-w-[220px]">
+              <div key={group} className="border-1 border-purple-300 rounded-lg shadow p-5 flex-1 min-w-[220px]">
                 <h3 className="text-gray-700 font-black mb-3 text-sm tracking-wide">{group}</h3>
                 <div className="flex flex-wrap gap-2">
                   {skills.map(skill => (
