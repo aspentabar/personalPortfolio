@@ -10,7 +10,7 @@ import { Projects } from "./pages/Projects";
 import { ColorQuandary } from "./pages/projects/ColorQuandary";
 import "./index.css";
 import TuneLink from "./pages/projects/TuneLink";
-import { Filosophia } from "./pages/projects/FiloSofia";
+import { Filosofia } from "./pages/projects/FiloSofia";
 import  OmNom   from "./pages/projects/OmNom";
 import { ColorContest } from "./pages/projects/ColorContest";
 
@@ -35,7 +35,7 @@ function App() {
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/ColorQuandary" element={<ColorQuandary />} />
             <Route path="/projects/TuneLink" element={<TuneLink />} />
-            <Route path="/projects/Filosophia" element={<Filosophia />} />
+            <Route path="/projects/Filosofia" element={<Filosofia />} />
             <Route path="/projects/OmNom" element={<OmNom />} />
             <Route path="/projects/ColorContest" element={<ColorContest />} />
             

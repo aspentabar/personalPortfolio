@@ -270,7 +270,7 @@ function MoreProjects({ currentProjectId }) {
     <section className="w-full pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="border-t border-gray-200 pt-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-700 mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-8">
             More Projects
           </h2>
           
@@ -282,18 +282,18 @@ function MoreProjects({ currentProjectId }) {
                 className="group block bg-white rounded-lg shadow hover:shadow-xl transition-shadow overflow-hidden"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
               >
-                <div className="relative w-full overflow-hidden">
+                <div className="aspect-w-16 aspect-h-9 overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold text-lg text-purple-700 mb-2">
+                  <h3 className="font-bold text-lg text-blue-700 mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-gray-600 text-sm line-clamp-2">
                     {project.description}
                   </p>
                 </div>

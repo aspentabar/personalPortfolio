@@ -308,7 +308,7 @@ function MoreProjects({ currentProjectId }) {
 }
 
 // Main Component
-export function Filosophia() {
+export function Filosofia() {
   const videoRef = useRef(null);
 
   useEffect(() => {

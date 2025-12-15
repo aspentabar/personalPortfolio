@@ -61,7 +61,7 @@ export const featuredProjects = [
     description:
       "A typography specimen for the typeface 'Filosofia', showcasing its features and history through the format of a diary.",
     tech: ["Adobe Indesign", "Typography", "Graphic Design", "Mockup"],
-    url: "/projects/Filosophia",
+    url: "/projects/Filosofia",
     categories: ["graphic", "all"],
   },
   {
