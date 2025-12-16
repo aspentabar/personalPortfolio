@@ -1218,7 +1218,7 @@ function MoreProjects({ currentProjectId }) {
     <section className="w-full pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="border-t border-gray-200 pt-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-700 mb-8">
             More Projects
           </h2>
           
@@ -1238,7 +1238,7 @@ function MoreProjects({ currentProjectId }) {
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold text-lg text-black mb-2">
+                  <h3 className="font-bold text-lg text-purple-700 mb-2">
                     {project.title}
                   </h3>
                   <p className="text-gray-600 text-sm">
@@ -1404,6 +1404,29 @@ export function ColorContest() {
             <RevealOnScroll>
               <section className="px-4 sm:px-6 lg:px-0">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-500 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">Final Exhibition</h2>
+                <div className="mb-6">
+                  <a
+                    href="https://ars.electronica.art/futurelab/en/projects-northeastern-university-2023/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-full font-medium transition-colors text-sm"
+                  >
+                    View on Ars Electronica
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
                 <div className="max-w-2xl">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
                     Color Contest was presented on the Ars Electronica facade in Linz, Austria, transforming the building into a massive interactive canvas. In the video below, you can hear the crowd actively voting for their favorite colors through cheering!

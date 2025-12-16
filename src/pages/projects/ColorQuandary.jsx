@@ -262,7 +262,7 @@ function MediaCarousel() {
   );
 }
 
-// More Projects Component
+// More Projects Component - Updated to match Filosofia styling
 function MoreProjects({ currentProjectId }) {
   const moreProjects = getRandomProjects(currentProjectId, 3);
   
@@ -270,7 +270,7 @@ function MoreProjects({ currentProjectId }) {
     <section className="w-full pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="border-t border-gray-200 pt-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-700 mb-8">
             More Projects
           </h2>
           
@@ -282,18 +282,18 @@ function MoreProjects({ currentProjectId }) {
                 className="group block bg-white rounded-lg shadow hover:shadow-xl transition-shadow overflow-hidden"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
               >
-                <div className="aspect-w-16 aspect-h-9 overflow-hidden">
+                <div className="relative w-full overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold text-lg text-blue-700 mb-2">
+                  <h3 className="font-bold text-lg text-purple-700 mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 text-sm line-clamp-2">
+                  <p className="text-gray-600 text-sm">
                     {project.description}
                   </p>
                 </div>
@@ -412,7 +412,7 @@ export function ColorQuandary() {
           <div className="space-y-16 md:space-y-28">
             <RevealOnScroll>
               <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6">Overview</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-4 md:mb-6">Overview</h2>
                 <div className="space-y-4">
                   <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700">
                     Color Quandary is an interactive color competition that engages viewers to vote with their feet for their favorite colors, creating a playful atmosphere on the main deck of the Ars Electronica Center.
@@ -435,7 +435,7 @@ export function ColorQuandary() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
             <section>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6">Ars Electronica Futurelab Academy</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 md:mb-6">Ars Electronica Futurelab Academy</h2>
               <div className="max-w-2xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
                   I was selected by Northeastern University's Design Department to take part in the Ars Electronica Futurelab Academy in Linz, Austria. This collaborative program brings together art, technology, and research at a world-renowned research museum.
@@ -472,7 +472,7 @@ export function ColorQuandary() {
             {/* Design & Development Section */}
             <RevealOnScroll>
               <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6">Design & Development</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 md:mb-6">Design & Development</h2>
                 <div className="max-w-2xl mb-16 md:mb-24">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
                     After whiteboard brainstorming ways to gamify the façade, my team and I finalized our concept and developed the installation using Java and Processing.js, running simulations on our laptops to accurately mirror how the Ars Electronica media façade would behave at full architectural scale. With support from Ars Electronica Futurelab researchers, we also integrated motion sensors to track human movement in front of the building, allowing the façade to react dynamically to people in the public space.
@@ -485,7 +485,7 @@ export function ColorQuandary() {
             {/* Final Presentation Section */}
             <RevealOnScroll>
               <section className="px-4 sm:px-6 lg:px-0">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-900 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">Final Presentation</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">Final Presentation</h2>
                 <div className="max-w-2xl">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
                     At the closing presentation, our project was showcased live to an international audience of researchers, scientists, artists, and the local Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous play sparked by the visual competition.
