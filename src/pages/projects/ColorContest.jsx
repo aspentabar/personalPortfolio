@@ -2,6 +2,9 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { featuredProjects, getRandomProjects } from '../Projects'; // Adjust path as needed
 import p5 from 'p5'; // You'll need to install this: npm install p5
+import color1 from "../../assets/color1.jpeg"; // Import color1 image
+import ars9 from "../../assets/ars9.jpeg"; // Import ars9 image
+import colorVideo from "../../assets/color.mp4"; // Import color video
 
 // P5.js Color Contest Sketch Component
 function ColorContestSketch() {
@@ -28,10 +31,10 @@ function ColorContestSketch() {
       const sketch = (p) => {
         // Cube class
         class Cube {
-          constructor() {
+          constructor(cubeSize) {
             this.x = 0;
             this.y = 0;
-            this.dims = 50;
+            this.dims = cubeSize; // Now dynamic based on canvas size
             this.color1 = 255;
             this.color2 = 255;
             this.color3 = 255;
@@ -83,15 +86,16 @@ function ColorContestSketch() {
 
         // Grid class
         class Grid {
-          constructor(gridSize) {
+          constructor(gridSize, canvasSize) {
             this.gridSize = gridSize;
+            this.cubeSize = canvasSize / gridSize; // Dynamic cube size based on canvas
             this.grid = Array(gridSize).fill().map(() => Array(gridSize).fill(null));
           }
 
           initPrintGridLayout() {
             for (let i = 0; i < this.gridSize; i++) {
               for (let j = 0; j < this.gridSize; j++) {
-                let currCube = new Cube();
+                let currCube = new Cube(this.cubeSize);
 
                 if (i === 0 && j === 0) {
                   // Red
@@ -155,7 +159,7 @@ function ColorContestSketch() {
             let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
             for (let i = 0; i < numRows; i++) {
               for (let j = 0; j < numCols; j++) {
-                tempGrid[i][j] = new Cube();
+                tempGrid[i][j] = new Cube(this.cubeSize);
                 tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
                 tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
                 tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
@@ -287,7 +291,7 @@ function ColorContestSketch() {
             let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
             for (let i = 0; i < numRows; i++) {
               for (let j = 0; j < numCols; j++) {
-                tempGrid[i][j] = new Cube();
+                tempGrid[i][j] = new Cube(this.cubeSize);
                 tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
                 tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
                 tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
@@ -489,9 +493,11 @@ function ColorContestSketch() {
         let frameCounter = 0;
 
         p.setup = () => {
-          p.createCanvas(500, 500);
+          // Responsive canvas size
+          const size = Math.min(500, window.innerWidth - 40); // Leave 20px padding on each side for mobile
+          p.createCanvas(size, size);
           p.background(0);
-          currGrid = new Grid(10);
+          currGrid = new Grid(10, size); // Pass canvas size to grid
           currGrid.initPrintGridLayout();
         };
 
@@ -512,7 +518,9 @@ function ColorContestSketch() {
               p.noLoop();
               setIsRunning(false);
               
-              p.textSize(48);
+              // Responsive text size
+              const textSize = p.width > 400 ? 48 : 32;
+              p.textSize(textSize);
               p.textAlign(p.CENTER);
               p.fill(255);
               p.stroke(0);
@@ -576,10 +584,10 @@ function ColorContestSketch() {
       const sketch = (p) => {
         // Cube class
         class Cube {
-          constructor() {
+          constructor(cubeSize) {
             this.x = 0;
             this.y = 0;
-            this.dims = 50;
+            this.dims = cubeSize; // Now dynamic based on canvas size
             this.color1 = 255;
             this.color2 = 255;
             this.color3 = 255;
@@ -631,15 +639,16 @@ function ColorContestSketch() {
 
         // Grid class
         class Grid {
-          constructor(gridSize) {
+          constructor(gridSize, canvasSize) {
             this.gridSize = gridSize;
+            this.cubeSize = canvasSize / gridSize; // Dynamic cube size based on canvas
             this.grid = Array(gridSize).fill().map(() => Array(gridSize).fill(null));
           }
 
           initPrintGridLayout() {
             for (let i = 0; i < this.gridSize; i++) {
               for (let j = 0; j < this.gridSize; j++) {
-                let currCube = new Cube();
+                let currCube = new Cube(this.cubeSize);
 
                 if (i === 0 && j === 0) {
                   // Red
@@ -703,7 +712,7 @@ function ColorContestSketch() {
             let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
             for (let i = 0; i < numRows; i++) {
               for (let j = 0; j < numCols; j++) {
-                tempGrid[i][j] = new Cube();
+                tempGrid[i][j] = new Cube(this.cubeSize);
                 tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
                 tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
                 tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
@@ -835,7 +844,7 @@ function ColorContestSketch() {
             let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
             for (let i = 0; i < numRows; i++) {
               for (let j = 0; j < numCols; j++) {
-                tempGrid[i][j] = new Cube();
+                tempGrid[i][j] = new Cube(this.cubeSize);
                 tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
                 tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
                 tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
@@ -1037,7 +1046,9 @@ function ColorContestSketch() {
         let frameCounter = 0;
 
         p.setup = () => {
-          p.createCanvas(500, 500);
+          // Responsive canvas size
+          const size = Math.min(500, window.innerWidth - 40); // Leave 20px padding on each side for mobile
+          p.createCanvas(size, size);
           p.background(0);
           currGrid = new Grid(10);
           currGrid.initPrintGridLayout();
@@ -1060,7 +1071,9 @@ function ColorContestSketch() {
               p.noLoop();
               setIsRunning(false);
               
-              p.textSize(48);
+              // Responsive text size
+              const textSize = p.width > 400 ? 48 : 32;
+              p.textSize(textSize);
               p.textAlign(p.CENTER);
               p.fill(255);
               p.stroke(0);
@@ -1099,17 +1112,20 @@ function ColorContestSketch() {
 
   return (
     <div className="flex flex-col items-center">
-      <div ref={sketchRef} className="border-4 border-black rounded-lg shadow-2xl"></div>
-      {winner && (
-        <div className="mt-4 text-center">
-          <button 
-            onClick={handleRestart}
-            className="px-4 py-2 bg-black hover:bg-gray-800 text-white rounded-lg font-medium transition-colors"
-          >
-            Play Again
-          </button>
-        </div>
-      )}
+      <div ref={sketchRef} className="border-2 sm:border-4 border-black rounded-lg shadow-2xl max-w-full"></div>
+      <div className="mt-3 sm:mt-4 text-center">
+        <button 
+          onClick={handleRestart}
+          disabled={!winner}
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 text-sm sm:text-base text-white rounded-lg font-medium transition-all ${
+            winner 
+              ? 'bg-black hover:bg-gray-800 cursor-pointer' 
+              : 'bg-gray-400 cursor-not-allowed opacity-50'
+          }`}
+        >
+          Play Again
+        </button>
+      </div>
     </div>
   );
 }
@@ -1151,207 +1167,46 @@ function RevealOnScroll({ children }) {
   );
 }
 
-// Media Carousel Component
-function MediaCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [hasBeenViewed, setHasBeenViewed] = useState(false);
-  const carouselRef = useRef(null);
-  
-  // Media items configuration - REPLACE THESE WITH YOUR ACTUAL IMAGES/VIDEOS
-  const mediaItems = [
-    { type: 'image', src: 'https://via.placeholder.com/800x600/4A90E2/FFFFFF?text=Design+1', alt: 'Design Process 1', fullView: false },
-    { type: 'image', src: 'https://via.placeholder.com/800x600/7B68EE/FFFFFF?text=Design+2', alt: 'Design Process 2', fullView: false },
-    { type: 'image', src: 'https://via.placeholder.com/800x600/6495ED/FFFFFF?text=Design+3', alt: 'Design Process 3', fullView: true },
-    { type: 'image', src: 'https://via.placeholder.com/800x600/5B9BD5/FFFFFF?text=Design+4', alt: 'Design Process 4', fullView: false },
-    { type: 'image', src: 'https://via.placeholder.com/800x600/4169E1/FFFFFF?text=Design+5', alt: 'Design Process 5', fullView: true },
-    { type: 'image', src: 'https://via.placeholder.com/800x600/1E90FF/FFFFFF?text=Design+6', alt: 'Design Process 6', fullView: false },
-    { type: 'image', src: 'https://via.placeholder.com/800x600/00BFFF/FFFFFF?text=Design+7', alt: 'Design Process 7', fullView: true }
-  ];
+// Video Player Component with Intersection Observer
+function VideoPlayer({ src }) {
+  const videoRef = useRef(null);
+  const [hasPlayed, setHasPlayed] = useState(false);
 
-  // Create extended array for infinite scroll effect
-  const extendedItems = [...mediaItems, ...mediaItems, ...mediaItems];
-  const offset = mediaItems.length;
-
-  // Navigation handlers
-  const handlePrevious = () => {
-    setCurrentIndex((prevIndex) => {
-      if (prevIndex === 0) {
-        return mediaItems.length - 2;
-      }
-      return prevIndex - 1;
-    });
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => {
-      if (prevIndex >= mediaItems.length - 2) {
-        return 0;
-      }
-      return prevIndex + 1;
-    });
-  };
-
-  // Detect when carousel enters viewport
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasBeenViewed) {
-          setHasBeenViewed(true);
+        if (entry.isIntersecting && !hasPlayed && videoRef.current) {
+          videoRef.current.play()
+            .then(() => {
+              setHasPlayed(true);
+            })
+            .catch((error) => {
+              console.log("Autoplay failed:", error);
+            });
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.5 } // Start when 50% of video is visible
     );
 
-    if (carouselRef.current) {
-      observer.observe(carouselRef.current);
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
     }
 
     return () => {
-      if (carouselRef.current) {
-        observer.unobserve(carouselRef.current);
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
       }
     };
-  }, [hasBeenViewed]);
-
-  // Auto-advance carousel after first view
-  useEffect(() => {
-    if (!isPaused && hasBeenViewed) {
-      const interval = setInterval(() => {
-        handleNext();
-      }, 5000);
-      
-      return () => clearInterval(interval);
-    }
-  }, [currentIndex, isPaused, hasBeenViewed]);
-
-  // Calculate carousel translation
-  const adjustedIndex = currentIndex + offset;
-  const itemWidth = 50;
-  const gapCompensation = 0.5;
-  const translateX = -(adjustedIndex * itemWidth) + gapCompensation;
+  }, [hasPlayed]);
 
   return (
-    <div ref={carouselRef}
-         className="relative mt-12" 
-         onMouseEnter={() => setIsPaused(true)}
-         onMouseLeave={() => setIsPaused(false)}>
-      <div className="flex items-center">
-        {/* Previous Button */}
-        <button
-          onClick={handlePrevious}
-          className="absolute -left-4 md:-left-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hidden sm:block"
-          aria-label="Previous item"
-        >
-          <svg
-            className="w-5 h-5 md:w-6 md:h-6 text-blue-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
-
-        {/* Media Container */}
-        <div className="w-full relative">
-          <div className="w-full overflow-hidden rounded-lg">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ 
-                transform: `translateX(calc(${translateX}% - 8px))`,
-              }}
-            >
-              {extendedItems.map((item, index) => (
-                <div 
-                  key={index} 
-                  className="flex-shrink-0 px-1 md:px-2"
-                  style={{ width: '50%' }}
-                >
-                  {item.type === 'image' ? (
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      className={`w-full h-[250px] md:h-[400px] rounded-lg ${
-                        item.fullView ? 'object-contain bg-gray-50' : 'object-cover'
-                      }`}
-                    />
-                  ) : (
-                    <video
-                      src={item.src}
-                      className="w-full h-[250px] md:h-[400px] rounded-lg object-cover"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-          {/* Edge masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-1 md:w-2 bg-white pointer-events-none z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-1 md:w-2 bg-white pointer-events-none z-10"></div>
-        </div>
-
-        {/* Next Button */}
-        <button
-          onClick={handleNext}
-          className="absolute -right-4 md:-right-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors hidden sm:block"
-          aria-label="Next item"
-        >
-          <svg
-            className="w-5 h-5 md:w-6 md:h-6 text-blue-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </button>
-      </div>
-
-      {/* Dots Indicator */}
-      <div className="flex justify-center mt-4 md:mt-6 gap-2">
-        {mediaItems.map((_, index) => {
-          let isActive = false;
-          if (currentIndex === index || currentIndex === index - 1) {
-            isActive = true;
-          }
-          if (currentIndex === mediaItems.length - 2 && index === mediaItems.length - 1) {
-            isActive = true;
-          }
-          
-          return (
-            <button
-              key={index}
-              onClick={() => {
-                if (index === mediaItems.length - 1) {
-                  setCurrentIndex(mediaItems.length - 2);
-                } else {
-                  setCurrentIndex(index);
-                }
-              }}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                isActive ? 'bg-blue-600 w-6' : 'bg-gray-300'
-              }`}
-              aria-label={`Go to item ${index + 1}`}
-            />
-          );
-        })}
-      </div>
-    </div>
+    <video 
+      ref={videoRef}
+      src={src}
+      className="w-full h-[380px] md:h-[550px] lg:h-[650px] object-cover"
+      controls
+      loop
+    />
   );
 }
 
@@ -1510,7 +1365,10 @@ export function ColorContest() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 md:mb-6">Design & Development</h2>
               <div className="max-w-2xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  The creative process began with extensive research into color theory, user psychology, and competitive game mechanics. We developed multiple prototypes using various technologies including web-based interfaces, physical installations, and projection mapping systems. Each iteration was tested with diverse user groups to ensure the experience remained intuitive while offering depth for those who wanted to explore further. The final implementation uses cutting-edge visualization techniques to create smooth, responsive animations that react instantly to user input.
+                  Color Contest was originally created as a simple 10x10 grid animation for computer screens, exploring how colors could compete for space in a confined digital environment. The initial prototype focused on the core mechanics of expansion and territorial conflict between the four colors, running as a self-contained p5.js sketch.
+                </p>
+                <p className="text-sm md:text-base leading-relaxed text-gray-700 mt-4">
+                  The project underwent significant development when it was selected for display on the Ars Electronica facade, transforming from a personal coding experiment into a large-scale public installation.
                 </p>
               </div>
             </section>
@@ -1518,7 +1376,22 @@ export function ColorContest() {
 
           <RevealOnScroll>
             <div className="mt-12 md:mt-20">
-              <MediaCarousel />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                <div className="flex justify-center">
+                  <img 
+                    src={color1}
+                    alt="Original Color Contest on computer" 
+                    className="w-3/4 md:w-4/5 h-auto rounded-lg"
+                  />
+                </div>
+                <div className="flex justify-center items-center h-full">
+                  <img 
+                    src={ars9}
+                    alt="Color Contest on Ars Electronica facade" 
+                    className="w-full md:w-[110%] h-auto rounded-lg"
+                  />
+                </div>
+              </div>
             </div>
           </RevealOnScroll>
         </div>
@@ -1533,28 +1406,15 @@ export function ColorContest() {
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-500 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">Final Exhibition</h2>
                 <div className="max-w-2xl">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    The Color Contest premiered at a major design festival, attracting thousands of participants over the course of the event. Visitors were immediately drawn to the vibrant display and intuitive interaction model, with many returning multiple times to see how the collective artwork had evolved.
+                    Color Contest was presented on the Ars Electronica facade in Linz, Austria, transforming the building into a massive interactive canvas. In the video below, you can hear the crowd actively voting for their favorite colors through cheering!
                   </p>
                 </div>
                 {/* Large presentation images */}
                 <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
-                  <div className="relative overflow-hidden rounded-xl lg:rounded-2xl shadow-xl">
-                    {/* Replace with your actual image */}
-                    <img 
-                      src="https://via.placeholder.com/1200x675/4A90E2/FFFFFF?text=Final+Exhibition+1" 
-                      alt="Final Exhibition 1" 
-                      className="w-full object-cover"
-                      style={{ aspectRatio: '16/9' }}
-                    />
-                  </div>
-                  <div className="relative overflow-hidden rounded-xl lg:rounded-2xl shadow-xl">
-                    {/* Replace with your actual image */}
-                    <img 
-                      src="https://via.placeholder.com/1200x675/7B68EE/FFFFFF?text=Final+Exhibition+2" 
-                      alt="Final Exhibition 2" 
-                      className="w-full object-cover"
-                      style={{ aspectRatio: '16/9' }}
-                    />
+                  <div className="flex justify-center">
+                    <div className="relative overflow-hidden rounded-xl lg:rounded-2xl shadow-xl w-full md:w-[85%] lg:w-4/5">
+                      <VideoPlayer src={colorVideo} />
+                    </div>
                   </div>
                 </div>
               </section>
