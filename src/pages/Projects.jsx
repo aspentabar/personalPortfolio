@@ -69,7 +69,7 @@ export const featuredProjects = [
     title: "Color Contest",
     image: color,
     description:
-      "An interactive color competition game where players vote with their movement to determine winning colors.",
+      "An interactive color contest where viewers can vote for a color as they compete for the space.",
     tech: ["Interactive Design", "Game Design", "Creative Coding"],
     url: "/projects/ColorContest",
     categories: ["HCI", "all"],
