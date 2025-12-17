@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { RevealOnScroll } from "../components/RevealOnScroll";
 import { Link } from "react-router-dom";
 
 // Images
@@ -127,7 +126,6 @@ export function Projects() {
 
   return (
     <section className="w-full overflow-x-hidden pt-16 pb-12 md:py-20">
-      <RevealOnScroll>
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mt-8 sm:mt-6 md:mt-10" />
           <div className="mb-2">
@@ -291,7 +289,6 @@ export function Projects() {
             ))}
           </div>
         </div>
-      </RevealOnScroll>
 
       {/* Styles for animations and scrollbar */}
       <style>{`
