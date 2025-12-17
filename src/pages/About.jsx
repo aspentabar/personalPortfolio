@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import aspenImg from "../assets/SelfPhoto.jpeg";
 import { RevealOnScroll } from "../components/RevealOnScroll";
 
@@ -74,6 +74,11 @@ const skillGroups = [
 ];
 
 export function About() {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section className="max-w-5xl mx-auto px-4 py-20">
       {/* Reduced margin on mobile, normal margin on desktop */}
