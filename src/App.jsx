@@ -10,7 +10,11 @@ import { Projects } from "./pages/Projects";
 import { ColorQuandary } from "./pages/projects/ColorQuandary";
 import "./index.css";
 import TuneLink from "./pages/projects/TuneLink";
-import { Filosofia } from "./pages/projects/FiloSofia";
+
+import Filosofia from "./pages/projects/Filosofia.jsx";
+
+
+
 import  OmNom   from "./pages/projects/OmNom";
 import { ColorContest } from "./pages/projects/ColorContest";
 
