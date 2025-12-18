@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL=./index.html">
+    <meta charset="UTF-8">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      // Remove the repo base from the pathname
+      var base = '/personalPortfolio';
+      var path = window.location.pathname;
+      
+      // If the path starts with the repo base, remove it
+      if (path.startsWith(base)) {
+        path = path.slice(base.length);
+      }
+
+      // Redirect to index.html + the original path
+      window.location.replace(base + '/index.html' + path + window.location.search + window.location.hash);
+    </script>
   </head>
   <body></body>
 </html>
