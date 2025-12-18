@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <title>Redirecting...</title>
     <script type="text/javascript">
-      // Remove the repo base from the pathname
-      var base = '/personalPortfolio';
-      var path = window.location.pathname;
-      
-      // If the path starts with the repo base, remove it
-      if (path.startsWith(base)) {
-        path = path.slice(base.length);
-      }
+      (function() {
+        const base = '/personalPortfolio';
+        let path = window.location.pathname;
 
-      // Redirect to index.html + the original path
-      window.location.replace(base + '/index.html' + path + window.location.search + window.location.hash);
+        // Remove the repo base from the start
+        if (path.startsWith(base)) {
+          path = path.slice(base.length);
+        }
+
+        // Only redirect if we are not already on index.html
+        if (!path.startsWith('/index.html')) {
+          window.location.replace(base + '/index.html' + path + window.location.search + window.location.hash);
+        }
+      })();
     </script>
   </head>
   <body></body>
