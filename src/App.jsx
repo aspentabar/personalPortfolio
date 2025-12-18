@@ -10,12 +10,8 @@ import { Projects } from "./pages/Projects";
 import { ColorQuandary } from "./pages/projects/ColorQuandary";
 import "./index.css";
 import TuneLink from "./pages/projects/TuneLink";
-
 import Filosofia from "./pages/projects/Filosofia.jsx";
-
-
-
-import  OmNom   from "./pages/projects/OmNom";
+import OmNom from "./pages/projects/OmNom";
 import { ColorContest } from "./pages/projects/ColorContest";
 
 function App() {
@@ -25,7 +21,7 @@ function App() {
   return (
     <>
       {!isLoaded && <LoadingScreen onComplete={() => setIsLoaded(true)} />}
-      <Router>
+      <Router basename="/personalPortfolio/">
         <div
           className={`min-h-screen transition-opacity duration-700 ${
             isLoaded ? "opacity-100" : "opacity-0"
@@ -42,7 +38,6 @@ function App() {
             <Route path="/projects/Filosofia" element={<Filosofia />} />
             <Route path="/projects/OmNom" element={<OmNom />} />
             <Route path="/projects/ColorContest" element={<ColorContest />} />
-            
           </Routes>
         </div>
       </Router>
