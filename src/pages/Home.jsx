@@ -146,7 +146,7 @@ function InteractiveCursorEffect() {
           Aspen Tabar
         </h1>
         <p className="text-2xl md:text-3xl text-gray-700 mb-4 font-medium select-none title">
-          Designer <span className="mx-3 text-purple-400">&amp;</span> Developerrr
+          Designer <span className="mx-3 text-purple-400">&amp;</span> Developer
         </p>
         <p className="text-sm md:text-base text-indigo-400 font-medium tracking-wider select-none subtitle">
           Exploring the intersection of computing and human experience
