@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { featuredProjects, getRandomProjects } from '../Projects'; // Adjust path as needed
+import { featuredProjects, getRandomProjects } from '../Projects';
 import tunelink3 from "../../assets/tunelink3.png";
 import tunelink4 from "../../assets/tunelink4.jpeg";
 import tunelink5 from "../../assets/tunelink5.jpeg";
@@ -67,7 +67,6 @@ function RevealOnScroll({ children }) {
     };
   }, []);
 
-
   return (
     <div
       ref={ref}
@@ -80,12 +79,10 @@ function RevealOnScroll({ children }) {
   );
 }
 
-
 // Activity 1 Single Image Carousel Component
 function Activity1Carousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Array of 5 images
   const activityImages = [
     { id: 1, src: tunelink27, alt: 'Activity 1 Image 1', caption: 'Pop Data Visualization' },
     { id: 2, src: tunelink28, alt: 'Activity 1 Image 2', caption: 'Rap Data Visualization' },
@@ -109,9 +106,8 @@ function Activity1Carousel() {
   const currentImage = activityImages[currentIndex];
 
   return (
-    <div className="relative mt-8">
+    <div className="relative">
       <div className="flex items-center justify-center">
-        {/* Previous Button */}
         <button
           onClick={handlePrevious}
           className="absolute left-0 md:-left-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
@@ -133,23 +129,20 @@ function Activity1Carousel() {
           </svg>
         </button>
 
-        {/* Single Image Display */}
-        <div className="w-full max-w-2xl">
-          <div 
-            className="flex flex-col animate-fadeIn"
-            style={{ animation: 'fadeIn 0.5s ease-in-out' }}
-          >
-            <img 
-              src={currentImage.src}
-              alt={currentImage.alt}
-              className="w-full rounded-lg object-contain transition-all duration-500"
-              style={{ maxHeight: '400px' }}
-            />
-            <p className="text-sm text-gray-600 mt-2 text-center">{currentImage.caption}</p>
+        <div className="w-full max-w-2xl overflow-hidden">
+          <div className="relative" style={{ minHeight: '420px' }}>
+            <div className="absolute inset-0 flex flex-col">
+              <img 
+                src={currentImage.src}
+                alt={currentImage.alt}
+                className="w-full rounded-lg object-contain"
+                style={{ maxHeight: '400px' }}
+              />
+              <p className="text-sm text-gray-600 mt-2 text-center">{currentImage.caption}</p>
+            </div>
           </div>
         </div>
 
-        {/* Next Button */}
         <button
           onClick={handleNext}
           className="absolute right-0 md:-right-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
@@ -172,14 +165,13 @@ function Activity1Carousel() {
         </button>
       </div>
 
-      {/* Dots Indicator */}
       <div className="flex justify-center mt-6 gap-2">
         {activityImages.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentIndex === index ? 'w-6' : ''
+            className={`h-2 rounded-full transition-all duration-300 ${
+              currentIndex === index ? 'w-6' : 'w-2'
             }`}
             style={{backgroundColor: currentIndex === index ? '#000000' : '#D1D5DB'}}
             aria-label={`Go to image ${index + 1}`}
@@ -194,7 +186,6 @@ function Activity1Carousel() {
 function DrawingConclusionsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Create array of 20 images
   const conclusions = [
     { id: 1, src: tunelink7, alt: 'Drawing conclusion 1', caption: 'User 1: Pop - Party in the USA' },
     { id: 2, src: tunelink8, alt: 'Drawing conclusion 2', caption: 'User 2: Pop - Party in the USA' },
@@ -233,15 +224,13 @@ function DrawingConclusionsCarousel() {
     });
   };
 
-  // Get current page items
   const startIdx = currentIndex * itemsPerPage;
   const endIdx = startIdx + itemsPerPage;
   const currentItems = conclusions.slice(startIdx, endIdx);
 
   return (
-    <div className="relative mt-8">
+    <div className="relative">
       <div className="flex items-center">
-        {/* Previous Button */}
         <button
           onClick={handlePrevious}
           className="absolute -left-4 md:-left-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
@@ -263,29 +252,29 @@ function DrawingConclusionsCarousel() {
           </svg>
         </button>
 
-        {/* Images Grid */}
-        <div className="w-full">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {currentItems.map((item) => (
-              <div 
-                key={item.id} 
-                className="flex flex-col"
-              >
-                <div className="flex-grow flex items-end">
-                  <img 
-                    src={item.src}
-                    alt={item.alt}
-                    className="w-full rounded-lg object-contain"
-                    style={{ maxHeight: '300px' }}
-                  />
+        <div className="w-full overflow-hidden">
+          <div className="relative" style={{ minHeight: '210px' }}>
+            <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-4 gap-4">
+              {currentItems.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="flex flex-col"
+                >
+                  <div className="flex-grow flex items-end">
+                    <img 
+                      src={item.src}
+                      alt={item.alt}
+                      className="w-full rounded-lg object-contain"
+                      style={{ maxHeight: '300px' }}
+                    />
+                  </div>
+                  <p className="text-sm text-gray-600 mt-2 text-center">{item.caption}</p>
                 </div>
-                <p className="text-sm text-gray-600 mt-2 text-center">{item.caption}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Next Button */}
         <button
           onClick={handleNext}
           className="absolute -right-4 md:-right-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
@@ -308,14 +297,13 @@ function DrawingConclusionsCarousel() {
         </button>
       </div>
 
-      {/* Dots Indicator */}
       <div className="flex justify-center mt-6 gap-2">
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              currentIndex === index ? 'w-6' : ''
+            className={`h-2 rounded-full transition-all duration-300 ${
+              currentIndex === index ? 'w-6' : 'w-2'
             }`}
             style={{backgroundColor: currentIndex === index ? '#000000' : '#D1D5DB'}}
             aria-label={`Go to page ${index + 1}`}
@@ -381,38 +369,6 @@ export default function TuneLink() {
     }
   }, []);
 
-  // Add CSS for fade animation
-  useEffect(() => {
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes fadeInSmooth {
-        0% {
-          opacity: 0;
-          transform: translateY(20px) scale(0.95);
-        }
-        50% {
-          opacity: 0.5;
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-    `;
-    document.head.appendChild(style);
-    return () => document.head.removeChild(style);
-  }, []);
-
   return (
     <section className="min-h-screen bg-white">
       {/* Header Section */}
@@ -456,7 +412,7 @@ export default function TuneLink() {
           <RevealOnScroll>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 md:gap-6 mt-6 md:mt-8">
               <div className="flex flex-col items-start">
-                <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#4FD17A'}}>
+                <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#de24cb'}}>
                   Role
                 </p>
                 <p className="text-neutral-950 text-sm md:text-base">
@@ -464,7 +420,7 @@ export default function TuneLink() {
                 </p>
               </div>
               <div className="flex flex-col items-start">
-                <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#4FD17A'}}>
+                <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#de24cb'}}>
                   Focus
                 </p>
                 <p className="text-neutral-950 text-sm md:text-base">
@@ -472,7 +428,7 @@ export default function TuneLink() {
                 </p>
               </div>
               <div className="flex flex-col items-start">
-                <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#4FD17A'}}>
+                <p className="uppercase font-bold tracking-wider text-xs md:text-sm" style={{color: '#de24cb'}}>
                   Tools
                 </p>
                 <p className="text-neutral-950 text-sm md:text-base">
@@ -569,13 +525,11 @@ export default function TuneLink() {
               />
             </div>
             
-            <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 mt-10" style={{color: '#000000'}}>
+            <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-1 mt-10" style={{color: '#000000'}}>
               Results
             </h4>
             {/* Activity 1 Image Carousel */}
-            <div className="mb-12">
-              <Activity1Carousel />
-            </div>
+            <Activity1Carousel />
             
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 mt-16" style={{color: '#000000'}}>
               Activity 2
@@ -593,7 +547,7 @@ export default function TuneLink() {
               />
             </div>
             
-            <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 mt-10" style={{color: '#000000'}}>
+            <h4 className="text-lg sm:text-xl md:text-2xl font-bold mb-1 mt-10" style={{color: '#000000'}}>
               Results
             </h4>
             {/* Drawing Conclusions Carousel */}

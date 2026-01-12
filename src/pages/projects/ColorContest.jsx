@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { featuredProjects, getRandomProjects } from '../Projects'; // Adjust path as needed
-import p5 from 'p5'; // You'll need to install this: npm install p5
-import color1 from "../../assets/color1.jpeg"; // Import color1 image
-import ars9 from "../../assets/ars9.jpeg"; // Import ars9 image
-import colorVideo from "../../assets/color.mp4"; // Import color video
+import { featuredProjects, getRandomProjects } from '../Projects';
+import p5 from 'p5';
+import color1 from "../../assets/color1.jpeg";
+import ars9 from "../../assets/ars9.jpeg";
+import colorVideo from "../../assets/color.mp4";
 
 // P5.js Color Contest Sketch Component
 function ColorContestSketch() {
@@ -12,7 +12,7 @@ function ColorContestSketch() {
   const p5Instance = useRef(null);
   const [winner, setWinner] = useState(null);
   const [isRunning, setIsRunning] = useState(true);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => {
     // Clean up any existing instance first
@@ -21,1093 +21,516 @@ function ColorContestSketch() {
       p5Instance.current = null;
     }
 
-    // Only create sketch if container exists and we haven't initialized yet
+    // Only create sketch if container exists
     if (!sketchRef.current) return;
     
-    // Add a small delay to ensure DOM is ready
-    const initTimeout = setTimeout(() => {
-      if (isInitialized) return;
-      
-      const sketch = (p) => {
-        // Cube class
-        class Cube {
-          constructor(cubeSize) {
-            this.x = 0;
-            this.y = 0;
-            this.dims = cubeSize; // Now dynamic based on canvas size
-            this.color1 = 255;
-            this.color2 = 255;
-            this.color3 = 255;
-            this.isRed = false;
-            this.isBlue = false;
-            this.isGreen = false;
-            this.isYellow = false;
-            this.isWhite = false;
-          }
+    const sketch = (p) => {
+      // Cube class
+      class Cube {
+        constructor(cubeSize) {
+          this.x = 0;
+          this.y = 0;
+          this.dims = cubeSize;
+          this.color1 = 255;
+          this.color2 = 255;
+          this.color3 = 255;
+          this.isRed = false;
+          this.isBlue = false;
+          this.isGreen = false;
+          this.isYellow = false;
+          this.isWhite = false;
+        }
 
-          printCube(i, j) {
-            p.fill(this.color1, this.color2, this.color3);
-            p.rect(i, j, this.dims, this.dims);
-          }
+        printCube(i, j) {
+          p.fill(this.color1, this.color2, this.color3);
+          p.rect(i, j, this.dims, this.dims);
+        }
 
-          setColor1(currColorNum) { this.color1 = currColorNum; }
-          setColor2(currColorNum) { this.color2 = currColorNum; }
-          setColor3(currColorNum) { this.color3 = currColorNum; }
-          getColor1() { return this.color1; }
-          getColor2() { return this.color2; }
-          getColor3() { return this.color3; }
-          getDims() { return this.dims; }
-          
-          setAllToFalse() {
-            this.isRed = false;
-            this.isBlue = false;
-            this.isGreen = false;
-            this.isYellow = false;
-          }
-          
-          setIsRed(currBoolean) { this.isRed = currBoolean; }
-          setIsBlue(currBoolean) { this.isBlue = currBoolean; }
-          setIsGreen(currBoolean) { this.isGreen = currBoolean; }
-          setIsYellow(currBoolean) { this.isYellow = currBoolean; }
-          setIsWhite(currBoolean) { this.isWhite = currBoolean; }
-          setX(xVal) { this.x = xVal; }
-          setY(yVal) { this.y = yVal; }
-          
-          getIsWhite() { return this.isWhite; }
-          getIsRed() { return this.isRed; }
-          getIsBlue() { return this.isBlue; }
-          getIsGreen() { return this.isGreen; }
-          getIsYellow() { return this.isYellow; }
-          
-          isColored() {
-            return this.isRed || this.isBlue || this.isGreen || this.isYellow;
+        setColor1(currColorNum) { this.color1 = currColorNum; }
+        setColor2(currColorNum) { this.color2 = currColorNum; }
+        setColor3(currColorNum) { this.color3 = currColorNum; }
+        getColor1() { return this.color1; }
+        getColor2() { return this.color2; }
+        getColor3() { return this.color3; }
+        getDims() { return this.dims; }
+        
+        setAllToFalse() {
+          this.isRed = false;
+          this.isBlue = false;
+          this.isGreen = false;
+          this.isYellow = false;
+        }
+        
+        setIsRed(currBoolean) { this.isRed = currBoolean; }
+        setIsBlue(currBoolean) { this.isBlue = currBoolean; }
+        setIsGreen(currBoolean) { this.isGreen = currBoolean; }
+        setIsYellow(currBoolean) { this.isYellow = currBoolean; }
+        setIsWhite(currBoolean) { this.isWhite = currBoolean; }
+        setX(xVal) { this.x = xVal; }
+        setY(yVal) { this.y = yVal; }
+        
+        getIsWhite() { return this.isWhite; }
+        getIsRed() { return this.isRed; }
+        getIsBlue() { return this.isBlue; }
+        getIsGreen() { return this.isGreen; }
+        getIsYellow() { return this.isYellow; }
+        
+        isColored() {
+          return this.isRed || this.isBlue || this.isGreen || this.isYellow;
+        }
+      }
+
+      // Grid class
+      class Grid {
+        constructor(gridSize, canvasSize) {
+          this.gridSize = gridSize;
+          this.cubeSize = canvasSize / gridSize;
+          this.grid = Array(gridSize).fill().map(() => Array(gridSize).fill(null));
+        }
+
+        initPrintGridLayout() {
+          for (let i = 0; i < this.gridSize; i++) {
+            for (let j = 0; j < this.gridSize; j++) {
+              let currCube = new Cube(this.cubeSize);
+
+              if (i === 0 && j === 0) {
+                currCube.setColor1(255);
+                currCube.setColor2(0);
+                currCube.setColor3(0);
+                currCube.setIsRed(true);
+                currCube.setX(0);
+                currCube.setY(0);
+              } else if (i === 9 && j === 0) {
+                currCube.setColor1(0);
+                currCube.setColor2(255);
+                currCube.setColor3(0);
+                currCube.setIsGreen(true);
+                currCube.setX(0);
+                currCube.setY(9);
+              } else if (i === 0 && j === 9) {
+                currCube.setColor1(0);
+                currCube.setColor2(0);
+                currCube.setColor3(255);
+                currCube.setIsBlue(true);
+                currCube.setX(9);
+                currCube.setY(0);
+              } else if (i === 9 && j === 9) {
+                currCube.setColor1(255);
+                currCube.setColor2(255);
+                currCube.setColor3(0);
+                currCube.setIsYellow(true);
+                currCube.setX(9);
+                currCube.setY(9);
+              } else {
+                currCube.setColor1(0);
+                currCube.setColor2(0);
+                currCube.setColor3(0);
+                currCube.setIsWhite(true);
+                currCube.setX(i);
+                currCube.setY(j);
+              }
+              
+              this.grid[i][j] = currCube;
+              currCube.printCube(i * currCube.getDims(), j * currCube.getDims());
+            }
           }
         }
 
-        // Grid class
-        class Grid {
-          constructor(gridSize, canvasSize) {
-            this.gridSize = gridSize;
-            this.cubeSize = canvasSize / gridSize; // Dynamic cube size based on canvas
-            this.grid = Array(gridSize).fill().map(() => Array(gridSize).fill(null));
+        changeStateOfBoard() {
+          let numRows = this.grid.length;
+          let numCols = this.grid[0].length;
+          
+          let redCount = this.getRedCount();
+          let blueCount = this.getBlueCount();
+          let greenCount = this.getGreenCount();
+          let yellowCount = this.getYellowCount();
+          
+          let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
+          for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numCols; j++) {
+              tempGrid[i][j] = new Cube(this.cubeSize);
+              tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
+              tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
+              tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
+              tempGrid[i][j].setIsYellow(this.grid[i][j].getIsYellow());
+              tempGrid[i][j].setColor1(this.grid[i][j].getColor1());
+              tempGrid[i][j].setColor2(this.grid[i][j].getColor2());
+              tempGrid[i][j].setColor3(this.grid[i][j].getColor3());
+            }
           }
-
-          initPrintGridLayout() {
-            for (let i = 0; i < this.gridSize; i++) {
-              for (let j = 0; j < this.gridSize; j++) {
-                let currCube = new Cube(this.cubeSize);
-
-                if (i === 0 && j === 0) {
-                  // Red
-                  currCube.setColor1(255);
-                  currCube.setColor2(0);
-                  currCube.setColor3(0);
-                  currCube.setIsRed(true);
-                  currCube.setX(0);
-                  currCube.setY(0);
-                } else if (i === 9 && j === 0) {
-                  // Green
-                  currCube.setColor1(0);
-                  currCube.setColor2(255);
-                  currCube.setColor3(0);
-                  currCube.setIsGreen(true);
-                  currCube.setX(0);
-                  currCube.setY(9);
-                } else if (i === 0 && j === 9) {
-                  // Blue
-                  currCube.setColor1(0);
-                  currCube.setColor2(0);
-                  currCube.setColor3(255);
-                  currCube.setIsBlue(true);
-                  currCube.setX(9);
-                  currCube.setY(0);
-                } else if (i === 9 && j === 9) {
-                  // Yellow
-                  currCube.setColor1(255);
-                  currCube.setColor2(255);
-                  currCube.setColor3(0);
-                  currCube.setIsYellow(true);
-                  currCube.setX(9);
-                  currCube.setY(9);
-                } else {
-                  // White (black actually)
-                  currCube.setColor1(0);
-                  currCube.setColor2(0);
-                  currCube.setColor3(0);
-                  currCube.setIsWhite(true);
-                  currCube.setX(i);
-                  currCube.setY(j);
+          
+          for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numCols; j++) {
+              if (redCount > 0 && this.grid[i][j].getIsRed() && i < numRows - 1 && j < numCols - 1) {
+                if(this.grid[i + 1][j].getIsWhite() && !this.grid[i + 1][j].isColored()) {
+                  tempGrid[i + 1][j].setIsRed(true);
+                  tempGrid[i + 1][j].setColor1(255);
+                  tempGrid[i + 1][j].setColor2(0);
+                  tempGrid[i + 1][j].setColor3(0);
                 }
-                
-                this.grid[i][j] = currCube;
-                currCube.printCube(i * currCube.getDims(), j * currCube.getDims());
+                if(this.grid[i][j + 1].getIsWhite() && !this.grid[i][j + 1].isColored()) {
+                  tempGrid[i][j + 1].setIsRed(true);
+                  tempGrid[i][j + 1].setColor1(255);
+                  tempGrid[i][j + 1].setColor2(0);
+                  tempGrid[i][j + 1].setColor3(0);
+                }
+              }
+              
+              if (blueCount > 0 && this.grid[i][j].getIsBlue() && i < numRows - 1 && j > 0) {
+                if(this.grid[i + 1][j].getIsWhite() && !this.grid[i + 1][j].isColored()) {
+                  tempGrid[i + 1][j].setIsBlue(true);
+                  tempGrid[i + 1][j].setColor1(0);
+                  tempGrid[i + 1][j].setColor2(0);
+                  tempGrid[i + 1][j].setColor3(255);
+                }
+                if(this.grid[i][j - 1].getIsWhite() && !this.grid[i][j - 1].isColored()) {
+                  tempGrid[i][j - 1].setIsBlue(true);
+                  tempGrid[i][j - 1].setColor1(0);
+                  tempGrid[i][j - 1].setColor2(0);
+                  tempGrid[i][j - 1].setColor3(255);
+                }
+              }
+              
+              if (greenCount > 0 && this.grid[i][j].getIsGreen() && i > 0 && j < numCols - 1) {
+                if(this.grid[i - 1][j].getIsWhite() && !this.grid[i - 1][j].isColored()) {
+                  tempGrid[i - 1][j].setIsGreen(true);
+                  tempGrid[i - 1][j].setColor1(0);
+                  tempGrid[i - 1][j].setColor2(255);
+                  tempGrid[i - 1][j].setColor3(0);
+                }
+                if(this.grid[i][j + 1].getIsWhite() && !this.grid[i][j + 1].isColored()) {
+                  tempGrid[i][j + 1].setIsGreen(true);
+                  tempGrid[i][j + 1].setColor1(0);
+                  tempGrid[i][j + 1].setColor2(255);
+                  tempGrid[i][j + 1].setColor3(0);
+                }
+              }
+              
+              if (yellowCount > 0 && this.grid[i][j].getIsYellow() && i > 0 && j > 0) {
+                if(this.grid[i - 1][j].getIsWhite() && !this.grid[i - 1][j].isColored()) {
+                  tempGrid[i - 1][j].setIsYellow(true);
+                  tempGrid[i - 1][j].setColor1(255);
+                  tempGrid[i - 1][j].setColor2(255);
+                  tempGrid[i - 1][j].setColor3(0);
+                }
+                if(this.grid[i][j - 1].getIsWhite() && !this.grid[i][j - 1].isColored()) {
+                  tempGrid[i][j - 1].setIsYellow(true);
+                  tempGrid[i][j - 1].setColor1(255);
+                  tempGrid[i][j - 1].setColor2(255);
+                  tempGrid[i][j - 1].setColor3(0);
+                }
               }
             }
           }
-
-          changeStateOfBoard() {
-            let numRows = this.grid.length;
-            let numCols = this.grid[0].length;
-            
-            // First, check which colors are still active
-            let redCount = this.getRedCount();
-            let blueCount = this.getBlueCount();
-            let greenCount = this.getGreenCount();
-            let yellowCount = this.getYellowCount();
-            
-            // Temporary grid to store the updated states
-            let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                tempGrid[i][j] = new Cube(this.cubeSize);
-                tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
-                tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
-                tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
-                tempGrid[i][j].setIsYellow(this.grid[i][j].getIsYellow());
-                tempGrid[i][j].setColor1(this.grid[i][j].getColor1());
-                tempGrid[i][j].setColor2(this.grid[i][j].getColor2());
-                tempGrid[i][j].setColor3(this.grid[i][j].getColor3());
-              }
+          
+          for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numCols; j++) {
+              this.grid[i][j].setIsRed(tempGrid[i][j].getIsRed());
+              this.grid[i][j].setIsGreen(tempGrid[i][j].getIsGreen());
+              this.grid[i][j].setIsBlue(tempGrid[i][j].getIsBlue());
+              this.grid[i][j].setIsYellow(tempGrid[i][j].getIsYellow());
+              this.grid[i][j].setColor1(tempGrid[i][j].getColor1());
+              this.grid[i][j].setColor2(tempGrid[i][j].getColor2());
+              this.grid[i][j].setColor3(tempGrid[i][j].getColor3());
             }
-            
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                // Red - only expand if red still exists
-                if (redCount > 0 && this.grid[i][j].getIsRed() && i < numRows - 1 && j < numCols - 1) {
-                  if(this.grid[i + 1][j].getIsWhite() && !this.grid[i + 1][j].isColored()) {
+          }
+          
+          this.printCurrGrid();
+        }
+
+        fight() {
+          let numRows = this.grid.length;
+          let numCols = this.grid[0].length;
+          
+          let redCount = 0;
+          let blueCount = 0;
+          let greenCount = 0;
+          let yellowCount = 0;
+          
+          for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numCols; j++) {
+              if (this.grid[i][j].getIsRed()) redCount++;
+              else if (this.grid[i][j].getIsBlue()) blueCount++;
+              else if (this.grid[i][j].getIsGreen()) greenCount++;
+              else if (this.grid[i][j].getIsYellow()) yellowCount++;
+            }
+          }
+          
+          let activeColors = [];
+          if (redCount > 0) activeColors.push(1);
+          if (blueCount > 0) activeColors.push(2);
+          if (greenCount > 0) activeColors.push(3);
+          if (yellowCount > 0) activeColors.push(4);
+          
+          let rando = 0;
+          if (activeColors.length > 0) {
+            rando = activeColors[Math.floor(p.random(0, activeColors.length))];
+          }
+          
+          let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
+          for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numCols; j++) {
+              tempGrid[i][j] = new Cube(this.cubeSize);
+              tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
+              tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
+              tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
+              tempGrid[i][j].setIsYellow(this.grid[i][j].getIsYellow());
+              tempGrid[i][j].setColor1(this.grid[i][j].getColor1());
+              tempGrid[i][j].setColor2(this.grid[i][j].getColor2());
+              tempGrid[i][j].setColor3(this.grid[i][j].getColor3());
+            }
+          }
+          
+          for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numCols; j++) {
+              if(redCount > 0 && rando === 1) {
+                if (this.grid[i][j].getIsRed() && i < numRows - 1 && j < numCols - 1) {
+                  if(this.grid[i + 1][j].isColored() && !this.grid[i + 1][j].getIsRed()) {
+                    tempGrid[i + 1][j].setAllToFalse();
                     tempGrid[i + 1][j].setIsRed(true);
                     tempGrid[i + 1][j].setColor1(255);
                     tempGrid[i + 1][j].setColor2(0);
                     tempGrid[i + 1][j].setColor3(0);
                   }
-                  if(this.grid[i][j + 1].getIsWhite() && !this.grid[i][j + 1].isColored()) {
+                  if(this.grid[i][j + 1].isColored() && !this.grid[i][j + 1].getIsRed()) {
+                    tempGrid[i][j + 1].setAllToFalse();
                     tempGrid[i][j + 1].setIsRed(true);
                     tempGrid[i][j + 1].setColor1(255);
                     tempGrid[i][j + 1].setColor2(0);
                     tempGrid[i][j + 1].setColor3(0);
                   }
-                }
-                
-                // Blue - only expand if blue still exists
-                if (blueCount > 0 && this.grid[i][j].getIsBlue() && i < numRows - 1 && j > 0) {
-                  if(this.grid[i + 1][j].getIsWhite() && !this.grid[i + 1][j].isColored()) {
-                    tempGrid[i + 1][j].setIsBlue(true);
-                    tempGrid[i + 1][j].setColor1(0);
-                    tempGrid[i + 1][j].setColor2(0);
-                    tempGrid[i + 1][j].setColor3(255);
+                  
+                  if (redCount === 99 && i + 1 < numRows && j + 1 < numCols && this.grid[i + 1][j + 1].isColored() && !this.grid[i + 1][j + 1].getIsRed()) {
+                    tempGrid[i + 1][j + 1].setAllToFalse();
+                    tempGrid[i + 1][j + 1].setIsRed(true);
+                    tempGrid[i + 1][j + 1].setColor1(255);
+                    tempGrid[i + 1][j + 1].setColor2(0);
+                    tempGrid[i + 1][j + 1].setColor3(0);
                   }
-                  if(this.grid[i][j - 1].getIsWhite() && !this.grid[i][j - 1].isColored()) {
+                }
+              }
+              
+              if(blueCount > 0 && rando === 2) {
+                if (this.grid[i][j].getIsBlue() && i < numRows - 1 && j > 0) {
+                  if(this.grid[i][j - 1].isColored() && !this.grid[i][j - 1].getIsBlue()) {
+                    tempGrid[i][j - 1].setAllToFalse();
                     tempGrid[i][j - 1].setIsBlue(true);
                     tempGrid[i][j - 1].setColor1(0);
                     tempGrid[i][j - 1].setColor2(0);
                     tempGrid[i][j - 1].setColor3(255);
                   }
+                  if(this.grid[i + 1][j].isColored() && !this.grid[i + 1][j].getIsBlue()) {
+                    tempGrid[i + 1][j].setAllToFalse();
+                    tempGrid[i + 1][j].setIsBlue(true);
+                    tempGrid[i + 1][j].setColor1(0);
+                    tempGrid[i + 1][j].setColor2(0);
+                    tempGrid[i + 1][j].setColor3(255);
+                  }
+                  
+                  if (blueCount === 99 && i + 1 < numRows && j - 1 >= 0 && this.grid[i + 1][j - 1].isColored() && !this.grid[i + 1][j - 1].getIsBlue()) {
+                    tempGrid[i + 1][j - 1].setAllToFalse();
+                    tempGrid[i + 1][j - 1].setIsBlue(true);
+                    tempGrid[i + 1][j - 1].setColor1(0);
+                    tempGrid[i + 1][j - 1].setColor2(0);
+                    tempGrid[i + 1][j - 1].setColor3(255);
+                  }
                 }
-                
-                // Green - only expand if green still exists
-                if (greenCount > 0 && this.grid[i][j].getIsGreen() && i > 0 && j < numCols - 1) {
-                  if(this.grid[i - 1][j].getIsWhite() && !this.grid[i - 1][j].isColored()) {
+              }
+              
+              if(greenCount > 0 && rando === 3) {
+                if (this.grid[i][j].getIsGreen() && i > 0 && j < numCols - 1) {
+                  if(this.grid[i - 1][j].isColored() && !this.grid[i - 1][j].getIsGreen()) {
+                    tempGrid[i - 1][j].setAllToFalse();
                     tempGrid[i - 1][j].setIsGreen(true);
                     tempGrid[i - 1][j].setColor1(0);
                     tempGrid[i - 1][j].setColor2(255);
                     tempGrid[i - 1][j].setColor3(0);
                   }
-                  if(this.grid[i][j + 1].getIsWhite() && !this.grid[i][j + 1].isColored()) {
+                  if(this.grid[i][j + 1].isColored() && !this.grid[i][j + 1].getIsGreen()) {
+                    tempGrid[i][j + 1].setAllToFalse();
                     tempGrid[i][j + 1].setIsGreen(true);
                     tempGrid[i][j + 1].setColor1(0);
                     tempGrid[i][j + 1].setColor2(255);
                     tempGrid[i][j + 1].setColor3(0);
                   }
-                }
-                
-                // Yellow - only expand if yellow still exists
-                if (yellowCount > 0 && this.grid[i][j].getIsYellow() && i > 0 && j > 0) {
-                  if(this.grid[i - 1][j].getIsWhite() && !this.grid[i - 1][j].isColored()) {
-                    tempGrid[i - 1][j].setIsYellow(true);
-                    tempGrid[i - 1][j].setColor1(255);
-                    tempGrid[i - 1][j].setColor2(255);
-                    tempGrid[i - 1][j].setColor3(0);
+                  
+                  if (greenCount === 99 && i - 1 >= 0 && j + 1 < numCols && this.grid[i - 1][j + 1].isColored() && !this.grid[i - 1][j + 1].getIsGreen()) {
+                    tempGrid[i - 1][j + 1].setAllToFalse();
+                    tempGrid[i - 1][j + 1].setIsGreen(true);
+                    tempGrid[i - 1][j + 1].setColor1(0);
+                    tempGrid[i - 1][j + 1].setColor2(255);
+                    tempGrid[i - 1][j + 1].setColor3(0);
                   }
-                  if(this.grid[i][j - 1].getIsWhite() && !this.grid[i][j - 1].isColored()) {
+                }
+              }
+              
+              if(yellowCount > 0 && rando === 4) {
+                if (this.grid[i][j].getIsYellow() && i > 0 && j > 0) {
+                  if(this.grid[i][j - 1].isColored() && !this.grid[i][j - 1].getIsYellow()) {
+                    tempGrid[i][j - 1].setAllToFalse();
                     tempGrid[i][j - 1].setIsYellow(true);
                     tempGrid[i][j - 1].setColor1(255);
                     tempGrid[i][j - 1].setColor2(255);
                     tempGrid[i][j - 1].setColor3(0);
                   }
-                }
-              }
-            }
-            
-            // Update the original grid
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                this.grid[i][j].setIsRed(tempGrid[i][j].getIsRed());
-                this.grid[i][j].setIsGreen(tempGrid[i][j].getIsGreen());
-                this.grid[i][j].setIsBlue(tempGrid[i][j].getIsBlue());
-                this.grid[i][j].setIsYellow(tempGrid[i][j].getIsYellow());
-                this.grid[i][j].setColor1(tempGrid[i][j].getColor1());
-                this.grid[i][j].setColor2(tempGrid[i][j].getColor2());
-                this.grid[i][j].setColor3(tempGrid[i][j].getColor3());
-              }
-            }
-            
-            this.printCurrGrid();
-          }
-
-          fight() {
-            let numRows = this.grid.length;
-            let numCols = this.grid[0].length;
-            
-            // Count active colors
-            let redCount = 0;
-            let blueCount = 0;
-            let greenCount = 0;
-            let yellowCount = 0;
-            
-            // First pass: count all colors
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                if (this.grid[i][j].getIsRed()) redCount++;
-                else if (this.grid[i][j].getIsBlue()) blueCount++;
-                else if (this.grid[i][j].getIsGreen()) greenCount++;
-                else if (this.grid[i][j].getIsYellow()) yellowCount++;
-              }
-            }
-            
-            // Determine which colors are still active (have at least 1 cell)
-            let activeColors = [];
-            if (redCount > 0) activeColors.push(1);
-            if (blueCount > 0) activeColors.push(2);
-            if (greenCount > 0) activeColors.push(3);
-            if (yellowCount > 0) activeColors.push(4);
-            
-            // Only pick from active colors for the random fighter
-            let rando = 0;
-            if (activeColors.length > 0) {
-              rando = activeColors[Math.floor(p.random(0, activeColors.length))];
-            }
-            
-            // Temporary grid
-            let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                tempGrid[i][j] = new Cube(this.cubeSize);
-                tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
-                tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
-                tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
-                tempGrid[i][j].setIsYellow(this.grid[i][j].getIsYellow());
-                tempGrid[i][j].setColor1(this.grid[i][j].getColor1());
-                tempGrid[i][j].setColor2(this.grid[i][j].getColor2());
-                tempGrid[i][j].setColor3(this.grid[i][j].getColor3());
-              }
-            }
-            
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                // Red fighting logic - only if red is active
-                if(redCount > 0 && rando === 1) {
-                  if (this.grid[i][j].getIsRed() && i < numRows - 1 && j < numCols - 1) {
-                    if(this.grid[i + 1][j].isColored() && !this.grid[i + 1][j].getIsRed()) {
-                      tempGrid[i + 1][j].setAllToFalse();
-                      tempGrid[i + 1][j].setIsRed(true);
-                      tempGrid[i + 1][j].setColor1(255);
-                      tempGrid[i + 1][j].setColor2(0);
-                      tempGrid[i + 1][j].setColor3(0);
-                    }
-                    if(this.grid[i][j + 1].isColored() && !this.grid[i][j + 1].getIsRed()) {
-                      tempGrid[i][j + 1].setAllToFalse();
-                      tempGrid[i][j + 1].setIsRed(true);
-                      tempGrid[i][j + 1].setColor1(255);
-                      tempGrid[i][j + 1].setColor2(0);
-                      tempGrid[i][j + 1].setColor3(0);
-                    }
-                    
-                    // Diagonal attack for final push
-                    if (redCount === 99 && i + 1 < numRows && j + 1 < numCols && this.grid[i + 1][j + 1].isColored() && !this.grid[i + 1][j + 1].getIsRed()) {
-                      tempGrid[i + 1][j + 1].setAllToFalse();
-                      tempGrid[i + 1][j + 1].setIsRed(true);
-                      tempGrid[i + 1][j + 1].setColor1(255);
-                      tempGrid[i + 1][j + 1].setColor2(0);
-                      tempGrid[i + 1][j + 1].setColor3(0);
-                    }
+                  if(this.grid[i - 1][j].isColored() && !this.grid[i - 1][j].getIsYellow()) {
+                    tempGrid[i - 1][j].setAllToFalse();
+                    tempGrid[i - 1][j].setIsYellow(true);
+                    tempGrid[i - 1][j].setColor1(255);
+                    tempGrid[i - 1][j].setColor2(255);
+                    tempGrid[i - 1][j].setColor3(0);
                   }
-                }
-                
-                // Blue fighting logic - only if blue is active
-                if(blueCount > 0 && rando === 2) {
-                  if (this.grid[i][j].getIsBlue() && i < numRows - 1 && j > 0) {
-                    if(this.grid[i][j - 1].isColored() && !this.grid[i][j - 1].getIsBlue()) {
-                      tempGrid[i][j - 1].setAllToFalse();
-                      tempGrid[i][j - 1].setIsBlue(true);
-                      tempGrid[i][j - 1].setColor1(0);
-                      tempGrid[i][j - 1].setColor2(0);
-                      tempGrid[i][j - 1].setColor3(255);
-                    }
-                    if(this.grid[i + 1][j].isColored() && !this.grid[i + 1][j].getIsBlue()) {
-                      tempGrid[i + 1][j].setAllToFalse();
-                      tempGrid[i + 1][j].setIsBlue(true);
-                      tempGrid[i + 1][j].setColor1(0);
-                      tempGrid[i + 1][j].setColor2(0);
-                      tempGrid[i + 1][j].setColor3(255);
-                    }
-                    
-                    // Diagonal attack for final push
-                    if (blueCount === 99 && i + 1 < numRows && j - 1 >= 0 && this.grid[i + 1][j - 1].isColored() && !this.grid[i + 1][j - 1].getIsBlue()) {
-                      tempGrid[i + 1][j - 1].setAllToFalse();
-                      tempGrid[i + 1][j - 1].setIsBlue(true);
-                      tempGrid[i + 1][j - 1].setColor1(0);
-                      tempGrid[i + 1][j - 1].setColor2(0);
-                      tempGrid[i + 1][j - 1].setColor3(255);
-                    }
-                  }
-                }
-                
-                // Green fighting logic - only if green is active
-                if(greenCount > 0 && rando === 3) {
-                  if (this.grid[i][j].getIsGreen() && i > 0 && j < numCols - 1) {
-                    if(this.grid[i - 1][j].isColored() && !this.grid[i - 1][j].getIsGreen()) {
-                      tempGrid[i - 1][j].setAllToFalse();
-                      tempGrid[i - 1][j].setIsGreen(true);
-                      tempGrid[i - 1][j].setColor1(0);
-                      tempGrid[i - 1][j].setColor2(255);
-                      tempGrid[i - 1][j].setColor3(0);
-                    }
-                    if(this.grid[i][j + 1].isColored() && !this.grid[i][j + 1].getIsGreen()) {
-                      tempGrid[i][j + 1].setAllToFalse();
-                      tempGrid[i][j + 1].setIsGreen(true);
-                      tempGrid[i][j + 1].setColor1(0);
-                      tempGrid[i][j + 1].setColor2(255);
-                      tempGrid[i][j + 1].setColor3(0);
-                    }
-                    
-                    // Diagonal attack for final push
-                    if (greenCount === 99 && i - 1 >= 0 && j + 1 < numCols && this.grid[i - 1][j + 1].isColored() && !this.grid[i - 1][j + 1].getIsGreen()) {
-                      tempGrid[i - 1][j + 1].setAllToFalse();
-                      tempGrid[i - 1][j + 1].setIsGreen(true);
-                      tempGrid[i - 1][j + 1].setColor1(0);
-                      tempGrid[i - 1][j + 1].setColor2(255);
-                      tempGrid[i - 1][j + 1].setColor3(0);
-                    }
-                  }
-                }
-                
-                // Yellow fighting logic - only if yellow is active
-                if(yellowCount > 0 && rando === 4) {
-                  if (this.grid[i][j].getIsYellow() && i > 0 && j > 0) {
-                    if(this.grid[i][j - 1].isColored() && !this.grid[i][j - 1].getIsYellow()) {
-                      tempGrid[i][j - 1].setAllToFalse();
-                      tempGrid[i][j - 1].setIsYellow(true);
-                      tempGrid[i][j - 1].setColor1(255);
-                      tempGrid[i][j - 1].setColor2(255);
-                      tempGrid[i][j - 1].setColor3(0);
-                    }
-                    if(this.grid[i - 1][j].isColored() && !this.grid[i - 1][j].getIsYellow()) {
-                      tempGrid[i - 1][j].setAllToFalse();
-                      tempGrid[i - 1][j].setIsYellow(true);
-                      tempGrid[i - 1][j].setColor1(255);
-                      tempGrid[i - 1][j].setColor2(255);
-                      tempGrid[i - 1][j].setColor3(0);
-                    }
-                    
-                    // Diagonal attack for final push
-                    if (yellowCount === 99 && i - 1 >= 0 && j - 1 >= 0 && this.grid[i - 1][j - 1].isColored() && !this.grid[i - 1][j - 1].getIsYellow()) {
-                      tempGrid[i - 1][j - 1].setAllToFalse();
-                      tempGrid[i - 1][j - 1].setIsYellow(true);
-                      tempGrid[i - 1][j - 1].setColor1(255);
-                      tempGrid[i - 1][j - 1].setColor2(255);
-                      tempGrid[i - 1][j - 1].setColor3(0);
-                    }
+                  
+                  if (yellowCount === 99 && i - 1 >= 0 && j - 1 >= 0 && this.grid[i - 1][j - 1].isColored() && !this.grid[i - 1][j - 1].getIsYellow()) {
+                    tempGrid[i - 1][j - 1].setAllToFalse();
+                    tempGrid[i - 1][j - 1].setIsYellow(true);
+                    tempGrid[i - 1][j - 1].setColor1(255);
+                    tempGrid[i - 1][j - 1].setColor2(255);
+                    tempGrid[i - 1][j - 1].setColor3(0);
                   }
                 }
               }
             }
-            
-            // Update the original grid
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                this.grid[i][j].setIsRed(tempGrid[i][j].getIsRed());
-                this.grid[i][j].setIsGreen(tempGrid[i][j].getIsGreen());
-                this.grid[i][j].setIsBlue(tempGrid[i][j].getIsBlue());
-                this.grid[i][j].setIsYellow(tempGrid[i][j].getIsYellow());
-                this.grid[i][j].setColor1(tempGrid[i][j].getColor1());
-                this.grid[i][j].setColor2(tempGrid[i][j].getColor2());
-                this.grid[i][j].setColor3(tempGrid[i][j].getColor3());
-              }
-            }
-            
-            this.printCurrGrid();
           }
-
-          getRedCount() {
-            let count = 0;
-            for (let row of this.grid) {
-              for (let cube of row) {
-                if (cube.getIsRed()) count++;
-              }
+          
+          for (let i = 0; i < numRows; i++) {
+            for (let j = 0; j < numCols; j++) {
+              this.grid[i][j].setIsRed(tempGrid[i][j].getIsRed());
+              this.grid[i][j].setIsGreen(tempGrid[i][j].getIsGreen());
+              this.grid[i][j].setIsBlue(tempGrid[i][j].getIsBlue());
+              this.grid[i][j].setIsYellow(tempGrid[i][j].getIsYellow());
+              this.grid[i][j].setColor1(tempGrid[i][j].getColor1());
+              this.grid[i][j].setColor2(tempGrid[i][j].getColor2());
+              this.grid[i][j].setColor3(tempGrid[i][j].getColor3());
             }
-            return count;
           }
+          
+          this.printCurrGrid();
+        }
 
-          getBlueCount() {
-            let count = 0;
-            for (let row of this.grid) {
-              for (let cube of row) {
-                if (cube.getIsBlue()) count++;
-              }
+        getRedCount() {
+          let count = 0;
+          for (let row of this.grid) {
+            for (let cube of row) {
+              if (cube.getIsRed()) count++;
             }
-            return count;
           }
+          return count;
+        }
 
-          getGreenCount() {
-            let count = 0;
-            for (let row of this.grid) {
-              for (let cube of row) {
-                if (cube.getIsGreen()) count++;
-              }
+        getBlueCount() {
+          let count = 0;
+          for (let row of this.grid) {
+            for (let cube of row) {
+              if (cube.getIsBlue()) count++;
             }
-            return count;
           }
+          return count;
+        }
 
-          getYellowCount() {
-            let count = 0;
-            for (let row of this.grid) {
-              for (let cube of row) {
-                if (cube.getIsYellow()) count++;
-              }
+        getGreenCount() {
+          let count = 0;
+          for (let row of this.grid) {
+            for (let cube of row) {
+              if (cube.getIsGreen()) count++;
             }
-            return count;
           }
+          return count;
+        }
 
-          printCurrGrid() {
-            for (let i = 0; i < this.grid.length; i++) {
-              for (let j = 0; j < this.grid[0].length; j++) {
-                this.grid[i][j].printCube(i * this.grid[i][j].getDims(), j * this.grid[i][j].getDims());
-              }
+        getYellowCount() {
+          let count = 0;
+          for (let row of this.grid) {
+            for (let cube of row) {
+              if (cube.getIsYellow()) count++;
+            }
+          }
+          return count;
+        }
+
+        printCurrGrid() {
+          for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[0].length; j++) {
+              this.grid[i][j].printCube(i * this.grid[i][j].getDims(), j * this.grid[i][j].getDims());
             }
           }
         }
+      }
 
-        // Main sketch variables
-        let currGrid;
-        let counter = 0;
-        let frameCounter = 0;
+      let currGrid;
+      let counter = 0;
+      let frameCounter = 0;
 
-        p.setup = () => {
-          // Responsive canvas size
-          const size = Math.min(500, window.innerWidth - 40); // Leave 20px padding on each side for mobile
-          p.createCanvas(size, size);
-          p.background(0);
-          currGrid = new Grid(10, size); // Pass canvas size to grid
-          currGrid.initPrintGridLayout();
-        };
-
-        p.draw = () => {
-          // Control speed with frame counter
-          frameCounter++;
-          if (frameCounter % 33 !== 0) return; // Approx 550ms at 60fps
-          
-          if (counter < 9) {
-            currGrid.changeStateOfBoard();
-          } else if (counter >= 9) {
-            let redCount = currGrid.getRedCount();
-            let blueCount = currGrid.getBlueCount();
-            let greenCount = currGrid.getGreenCount();
-            let yellowCount = currGrid.getYellowCount();
-            
-            if (redCount === 100 || blueCount === 100 || greenCount === 100 || yellowCount === 100) {
-              p.noLoop();
-              setIsRunning(false);
-              
-              // Responsive text size
-              const textSize = p.width > 400 ? 48 : 32;
-              p.textSize(textSize);
-              p.textAlign(p.CENTER);
-              p.fill(255);
-              p.stroke(0);
-              p.strokeWeight(3);
-              
-              let winnerText = '';
-              if (redCount === 100) {
-                winnerText = 'Red wins!';
-                setWinner('Red');
-              } else if (blueCount === 100) {
-                winnerText = 'Blue wins!';
-                setWinner('Blue');
-              } else if (greenCount === 100) {
-                winnerText = 'Green wins!';
-                setWinner('Green');
-              } else if (yellowCount === 100) {
-                winnerText = 'Yellow wins!';
-                setWinner('Yellow');
-              }
-              p.text(winnerText, p.width / 2, p.height / 2);
-            } else {
-              currGrid.fight();
-            }
-          }
-          counter++;
-        };
+      p.setup = () => {
+        const size = Math.min(500, window.innerWidth - 40);
+        p.createCanvas(size, size);
+        p.background(0);
+        currGrid = new Grid(10, size);
+        currGrid.initPrintGridLayout();
       };
 
-      // Create the p5 instance only if container exists and no instance exists
-      if (sketchRef.current && !p5Instance.current) {
-        p5Instance.current = new p5(sketch, sketchRef.current);
-        setIsInitialized(true);
-      }
-    }, 50);
+      p.draw = () => {
+        frameCounter++;
+        if (frameCounter % 33 !== 0) return;
+        
+        if (counter < 9) {
+          currGrid.changeStateOfBoard();
+        } else if (counter >= 9) {
+          let redCount = currGrid.getRedCount();
+          let blueCount = currGrid.getBlueCount();
+          let greenCount = currGrid.getGreenCount();
+          let yellowCount = currGrid.getYellowCount();
+          
+          if (redCount === 100 || blueCount === 100 || greenCount === 100 || yellowCount === 100) {
+            p.noLoop();
+            setIsRunning(false);
+            
+            const textSize = p.width > 400 ? 48 : 32;
+            p.textSize(textSize);
+            p.textAlign(p.CENTER);
+            p.fill(255);
+            p.stroke(0);
+            p.strokeWeight(3);
+            
+            let winnerText = '';
+            if (redCount === 100) {
+              winnerText = 'Red wins!';
+              setWinner('Red');
+            } else if (blueCount === 100) {
+              winnerText = 'Blue wins!';
+              setWinner('Blue');
+            } else if (greenCount === 100) {
+              winnerText = 'Green wins!';
+              setWinner('Green');
+            } else if (yellowCount === 100) {
+              winnerText = 'Yellow wins!';
+              setWinner('Yellow');
+            }
+            p.text(winnerText, p.width / 2, p.height / 2);
+          } else {
+            currGrid.fight();
+          }
+        }
+        counter++;
+      };
+    };
 
-    // Cleanup function
+    if (sketchRef.current) {
+      p5Instance.current = new p5(sketch, sketchRef.current);
+    }
+
     return () => {
-      clearTimeout(initTimeout);
       if (p5Instance.current) {
         p5Instance.current.remove();
         p5Instance.current = null;
       }
-      setIsInitialized(false);
     };
-  }, []); // Empty dependency array ensures this only runs once
+  }, [resetKey]); // Re-run when resetKey changes
 
   const handleRestart = () => {
-    // Clean up the existing instance
-    if (p5Instance.current) {
-      p5Instance.current.remove();
-      p5Instance.current = null;
-    }
-    
-    // Reset states
     setWinner(null);
     setIsRunning(true);
-    setIsInitialized(false);
-    
-    // Create a new instance after a brief delay
-    setTimeout(() => {
-      const sketch = (p) => {
-        // Cube class
-        class Cube {
-          constructor(cubeSize) {
-            this.x = 0;
-            this.y = 0;
-            this.dims = cubeSize; // Now dynamic based on canvas size
-            this.color1 = 255;
-            this.color2 = 255;
-            this.color3 = 255;
-            this.isRed = false;
-            this.isBlue = false;
-            this.isGreen = false;
-            this.isYellow = false;
-            this.isWhite = false;
-          }
-
-          printCube(i, j) {
-            p.fill(this.color1, this.color2, this.color3);
-            p.rect(i, j, this.dims, this.dims);
-          }
-
-          setColor1(currColorNum) { this.color1 = currColorNum; }
-          setColor2(currColorNum) { this.color2 = currColorNum; }
-          setColor3(currColorNum) { this.color3 = currColorNum; }
-          getColor1() { return this.color1; }
-          getColor2() { return this.color2; }
-          getColor3() { return this.color3; }
-          getDims() { return this.dims; }
-          
-          setAllToFalse() {
-            this.isRed = false;
-            this.isBlue = false;
-            this.isGreen = false;
-            this.isYellow = false;
-          }
-          
-          setIsRed(currBoolean) { this.isRed = currBoolean; }
-          setIsBlue(currBoolean) { this.isBlue = currBoolean; }
-          setIsGreen(currBoolean) { this.isGreen = currBoolean; }
-          setIsYellow(currBoolean) { this.isYellow = currBoolean; }
-          setIsWhite(currBoolean) { this.isWhite = currBoolean; }
-          setX(xVal) { this.x = xVal; }
-          setY(yVal) { this.y = yVal; }
-          
-          getIsWhite() { return this.isWhite; }
-          getIsRed() { return this.isRed; }
-          getIsBlue() { return this.isBlue; }
-          getIsGreen() { return this.isGreen; }
-          getIsYellow() { return this.isYellow; }
-          
-          isColored() {
-            return this.isRed || this.isBlue || this.isGreen || this.isYellow;
-          }
-        }
-
-        // Grid class
-        class Grid {
-          constructor(gridSize, canvasSize) {
-            this.gridSize = gridSize;
-            this.cubeSize = canvasSize / gridSize; // Dynamic cube size based on canvas
-            this.grid = Array(gridSize).fill().map(() => Array(gridSize).fill(null));
-          }
-
-          initPrintGridLayout() {
-            for (let i = 0; i < this.gridSize; i++) {
-              for (let j = 0; j < this.gridSize; j++) {
-                let currCube = new Cube(this.cubeSize);
-
-                if (i === 0 && j === 0) {
-                  // Red
-                  currCube.setColor1(255);
-                  currCube.setColor2(0);
-                  currCube.setColor3(0);
-                  currCube.setIsRed(true);
-                  currCube.setX(0);
-                  currCube.setY(0);
-                } else if (i === 9 && j === 0) {
-                  // Green
-                  currCube.setColor1(0);
-                  currCube.setColor2(255);
-                  currCube.setColor3(0);
-                  currCube.setIsGreen(true);
-                  currCube.setX(0);
-                  currCube.setY(9);
-                } else if (i === 0 && j === 9) {
-                  // Blue
-                  currCube.setColor1(0);
-                  currCube.setColor2(0);
-                  currCube.setColor3(255);
-                  currCube.setIsBlue(true);
-                  currCube.setX(9);
-                  currCube.setY(0);
-                } else if (i === 9 && j === 9) {
-                  // Yellow
-                  currCube.setColor1(255);
-                  currCube.setColor2(255);
-                  currCube.setColor3(0);
-                  currCube.setIsYellow(true);
-                  currCube.setX(9);
-                  currCube.setY(9);
-                } else {
-                  // White (black actually)
-                  currCube.setColor1(0);
-                  currCube.setColor2(0);
-                  currCube.setColor3(0);
-                  currCube.setIsWhite(true);
-                  currCube.setX(i);
-                  currCube.setY(j);
-                }
-                
-                this.grid[i][j] = currCube;
-                currCube.printCube(i * currCube.getDims(), j * currCube.getDims());
-              }
-            }
-          }
-
-          changeStateOfBoard() {
-            let numRows = this.grid.length;
-            let numCols = this.grid[0].length;
-            
-            // First, check which colors are still active
-            let redCount = this.getRedCount();
-            let blueCount = this.getBlueCount();
-            let greenCount = this.getGreenCount();
-            let yellowCount = this.getYellowCount();
-            
-            // Temporary grid to store the updated states
-            let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                tempGrid[i][j] = new Cube(this.cubeSize);
-                tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
-                tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
-                tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
-                tempGrid[i][j].setIsYellow(this.grid[i][j].getIsYellow());
-                tempGrid[i][j].setColor1(this.grid[i][j].getColor1());
-                tempGrid[i][j].setColor2(this.grid[i][j].getColor2());
-                tempGrid[i][j].setColor3(this.grid[i][j].getColor3());
-              }
-            }
-            
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                // Red - only expand if red still exists
-                if (redCount > 0 && this.grid[i][j].getIsRed() && i < numRows - 1 && j < numCols - 1) {
-                  if(this.grid[i + 1][j].getIsWhite() && !this.grid[i + 1][j].isColored()) {
-                    tempGrid[i + 1][j].setIsRed(true);
-                    tempGrid[i + 1][j].setColor1(255);
-                    tempGrid[i + 1][j].setColor2(0);
-                    tempGrid[i + 1][j].setColor3(0);
-                  }
-                  if(this.grid[i][j + 1].getIsWhite() && !this.grid[i][j + 1].isColored()) {
-                    tempGrid[i][j + 1].setIsRed(true);
-                    tempGrid[i][j + 1].setColor1(255);
-                    tempGrid[i][j + 1].setColor2(0);
-                    tempGrid[i][j + 1].setColor3(0);
-                  }
-                }
-                
-                // Blue - only expand if blue still exists
-                if (blueCount > 0 && this.grid[i][j].getIsBlue() && i < numRows - 1 && j > 0) {
-                  if(this.grid[i + 1][j].getIsWhite() && !this.grid[i + 1][j].isColored()) {
-                    tempGrid[i + 1][j].setIsBlue(true);
-                    tempGrid[i + 1][j].setColor1(0);
-                    tempGrid[i + 1][j].setColor2(0);
-                    tempGrid[i + 1][j].setColor3(255);
-                  }
-                  if(this.grid[i][j - 1].getIsWhite() && !this.grid[i][j - 1].isColored()) {
-                    tempGrid[i][j - 1].setIsBlue(true);
-                    tempGrid[i][j - 1].setColor1(0);
-                    tempGrid[i][j - 1].setColor2(0);
-                    tempGrid[i][j - 1].setColor3(255);
-                  }
-                }
-                
-                // Green - only expand if green still exists
-                if (greenCount > 0 && this.grid[i][j].getIsGreen() && i > 0 && j < numCols - 1) {
-                  if(this.grid[i - 1][j].getIsWhite() && !this.grid[i - 1][j].isColored()) {
-                    tempGrid[i - 1][j].setIsGreen(true);
-                    tempGrid[i - 1][j].setColor1(0);
-                    tempGrid[i - 1][j].setColor2(255);
-                    tempGrid[i - 1][j].setColor3(0);
-                  }
-                  if(this.grid[i][j + 1].getIsWhite() && !this.grid[i][j + 1].isColored()) {
-                    tempGrid[i][j + 1].setIsGreen(true);
-                    tempGrid[i][j + 1].setColor1(0);
-                    tempGrid[i][j + 1].setColor2(255);
-                    tempGrid[i][j + 1].setColor3(0);
-                  }
-                }
-                
-                // Yellow - only expand if yellow still exists
-                if (yellowCount > 0 && this.grid[i][j].getIsYellow() && i > 0 && j > 0) {
-                  if(this.grid[i - 1][j].getIsWhite() && !this.grid[i - 1][j].isColored()) {
-                    tempGrid[i - 1][j].setIsYellow(true);
-                    tempGrid[i - 1][j].setColor1(255);
-                    tempGrid[i - 1][j].setColor2(255);
-                    tempGrid[i - 1][j].setColor3(0);
-                  }
-                  if(this.grid[i][j - 1].getIsWhite() && !this.grid[i][j - 1].isColored()) {
-                    tempGrid[i][j - 1].setIsYellow(true);
-                    tempGrid[i][j - 1].setColor1(255);
-                    tempGrid[i][j - 1].setColor2(255);
-                    tempGrid[i][j - 1].setColor3(0);
-                  }
-                }
-              }
-            }
-            
-            // Update the original grid
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                this.grid[i][j].setIsRed(tempGrid[i][j].getIsRed());
-                this.grid[i][j].setIsGreen(tempGrid[i][j].getIsGreen());
-                this.grid[i][j].setIsBlue(tempGrid[i][j].getIsBlue());
-                this.grid[i][j].setIsYellow(tempGrid[i][j].getIsYellow());
-                this.grid[i][j].setColor1(tempGrid[i][j].getColor1());
-                this.grid[i][j].setColor2(tempGrid[i][j].getColor2());
-                this.grid[i][j].setColor3(tempGrid[i][j].getColor3());
-              }
-            }
-            
-            this.printCurrGrid();
-          }
-
-          fight() {
-            let numRows = this.grid.length;
-            let numCols = this.grid[0].length;
-            
-            // Count active colors
-            let redCount = 0;
-            let blueCount = 0;
-            let greenCount = 0;
-            let yellowCount = 0;
-            
-            // First pass: count all colors
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                if (this.grid[i][j].getIsRed()) redCount++;
-                else if (this.grid[i][j].getIsBlue()) blueCount++;
-                else if (this.grid[i][j].getIsGreen()) greenCount++;
-                else if (this.grid[i][j].getIsYellow()) yellowCount++;
-              }
-            }
-            
-            // Determine which colors are still active (have at least 1 cell)
-            let activeColors = [];
-            if (redCount > 0) activeColors.push(1);
-            if (blueCount > 0) activeColors.push(2);
-            if (greenCount > 0) activeColors.push(3);
-            if (yellowCount > 0) activeColors.push(4);
-            
-            // Only pick from active colors for the random fighter
-            let rando = 0;
-            if (activeColors.length > 0) {
-              rando = activeColors[Math.floor(p.random(0, activeColors.length))];
-            }
-            
-            // Temporary grid
-            let tempGrid = Array(numRows).fill().map(() => Array(numCols).fill(null));
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                tempGrid[i][j] = new Cube(this.cubeSize);
-                tempGrid[i][j].setIsRed(this.grid[i][j].getIsRed());
-                tempGrid[i][j].setIsGreen(this.grid[i][j].getIsGreen());
-                tempGrid[i][j].setIsBlue(this.grid[i][j].getIsBlue());
-                tempGrid[i][j].setIsYellow(this.grid[i][j].getIsYellow());
-                tempGrid[i][j].setColor1(this.grid[i][j].getColor1());
-                tempGrid[i][j].setColor2(this.grid[i][j].getColor2());
-                tempGrid[i][j].setColor3(this.grid[i][j].getColor3());
-              }
-            }
-            
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                // Red fighting logic - only if red is active
-                if(redCount > 0 && rando === 1) {
-                  if (this.grid[i][j].getIsRed() && i < numRows - 1 && j < numCols - 1) {
-                    if(this.grid[i + 1][j].isColored() && !this.grid[i + 1][j].getIsRed()) {
-                      tempGrid[i + 1][j].setAllToFalse();
-                      tempGrid[i + 1][j].setIsRed(true);
-                      tempGrid[i + 1][j].setColor1(255);
-                      tempGrid[i + 1][j].setColor2(0);
-                      tempGrid[i + 1][j].setColor3(0);
-                    }
-                    if(this.grid[i][j + 1].isColored() && !this.grid[i][j + 1].getIsRed()) {
-                      tempGrid[i][j + 1].setAllToFalse();
-                      tempGrid[i][j + 1].setIsRed(true);
-                      tempGrid[i][j + 1].setColor1(255);
-                      tempGrid[i][j + 1].setColor2(0);
-                      tempGrid[i][j + 1].setColor3(0);
-                    }
-                    
-                    // Diagonal attack for final push
-                    if (redCount === 99 && i + 1 < numRows && j + 1 < numCols && this.grid[i + 1][j + 1].isColored() && !this.grid[i + 1][j + 1].getIsRed()) {
-                      tempGrid[i + 1][j + 1].setAllToFalse();
-                      tempGrid[i + 1][j + 1].setIsRed(true);
-                      tempGrid[i + 1][j + 1].setColor1(255);
-                      tempGrid[i + 1][j + 1].setColor2(0);
-                      tempGrid[i + 1][j + 1].setColor3(0);
-                    }
-                  }
-                }
-                
-                // Blue fighting logic - only if blue is active
-                if(blueCount > 0 && rando === 2) {
-                  if (this.grid[i][j].getIsBlue() && i < numRows - 1 && j > 0) {
-                    if(this.grid[i][j - 1].isColored() && !this.grid[i][j - 1].getIsBlue()) {
-                      tempGrid[i][j - 1].setAllToFalse();
-                      tempGrid[i][j - 1].setIsBlue(true);
-                      tempGrid[i][j - 1].setColor1(0);
-                      tempGrid[i][j - 1].setColor2(0);
-                      tempGrid[i][j - 1].setColor3(255);
-                    }
-                    if(this.grid[i + 1][j].isColored() && !this.grid[i + 1][j].getIsBlue()) {
-                      tempGrid[i + 1][j].setAllToFalse();
-                      tempGrid[i + 1][j].setIsBlue(true);
-                      tempGrid[i + 1][j].setColor1(0);
-                      tempGrid[i + 1][j].setColor2(0);
-                      tempGrid[i + 1][j].setColor3(255);
-                    }
-                    
-                    // Diagonal attack for final push
-                    if (blueCount === 99 && i + 1 < numRows && j - 1 >= 0 && this.grid[i + 1][j - 1].isColored() && !this.grid[i + 1][j - 1].getIsBlue()) {
-                      tempGrid[i + 1][j - 1].setAllToFalse();
-                      tempGrid[i + 1][j - 1].setIsBlue(true);
-                      tempGrid[i + 1][j - 1].setColor1(0);
-                      tempGrid[i + 1][j - 1].setColor2(0);
-                      tempGrid[i + 1][j - 1].setColor3(255);
-                    }
-                  }
-                }
-                
-                // Green fighting logic - only if green is active
-                if(greenCount > 0 && rando === 3) {
-                  if (this.grid[i][j].getIsGreen() && i > 0 && j < numCols - 1) {
-                    if(this.grid[i - 1][j].isColored() && !this.grid[i - 1][j].getIsGreen()) {
-                      tempGrid[i - 1][j].setAllToFalse();
-                      tempGrid[i - 1][j].setIsGreen(true);
-                      tempGrid[i - 1][j].setColor1(0);
-                      tempGrid[i - 1][j].setColor2(255);
-                      tempGrid[i - 1][j].setColor3(0);
-                    }
-                    if(this.grid[i][j + 1].isColored() && !this.grid[i][j + 1].getIsGreen()) {
-                      tempGrid[i][j + 1].setAllToFalse();
-                      tempGrid[i][j + 1].setIsGreen(true);
-                      tempGrid[i][j + 1].setColor1(0);
-                      tempGrid[i][j + 1].setColor2(255);
-                      tempGrid[i][j + 1].setColor3(0);
-                    }
-                    
-                    // Diagonal attack for final push
-                    if (greenCount === 99 && i - 1 >= 0 && j + 1 < numCols && this.grid[i - 1][j + 1].isColored() && !this.grid[i - 1][j + 1].getIsGreen()) {
-                      tempGrid[i - 1][j + 1].setAllToFalse();
-                      tempGrid[i - 1][j + 1].setIsGreen(true);
-                      tempGrid[i - 1][j + 1].setColor1(0);
-                      tempGrid[i - 1][j + 1].setColor2(255);
-                      tempGrid[i - 1][j + 1].setColor3(0);
-                    }
-                  }
-                }
-                
-                // Yellow fighting logic - only if yellow is active
-                if(yellowCount > 0 && rando === 4) {
-                  if (this.grid[i][j].getIsYellow() && i > 0 && j > 0) {
-                    if(this.grid[i][j - 1].isColored() && !this.grid[i][j - 1].getIsYellow()) {
-                      tempGrid[i][j - 1].setAllToFalse();
-                      tempGrid[i][j - 1].setIsYellow(true);
-                      tempGrid[i][j - 1].setColor1(255);
-                      tempGrid[i][j - 1].setColor2(255);
-                      tempGrid[i][j - 1].setColor3(0);
-                    }
-                    if(this.grid[i - 1][j].isColored() && !this.grid[i - 1][j].getIsYellow()) {
-                      tempGrid[i - 1][j].setAllToFalse();
-                      tempGrid[i - 1][j].setIsYellow(true);
-                      tempGrid[i - 1][j].setColor1(255);
-                      tempGrid[i - 1][j].setColor2(255);
-                      tempGrid[i - 1][j].setColor3(0);
-                    }
-                    
-                    // Diagonal attack for final push
-                    if (yellowCount === 99 && i - 1 >= 0 && j - 1 >= 0 && this.grid[i - 1][j - 1].isColored() && !this.grid[i - 1][j - 1].getIsYellow()) {
-                      tempGrid[i - 1][j - 1].setAllToFalse();
-                      tempGrid[i - 1][j - 1].setIsYellow(true);
-                      tempGrid[i - 1][j - 1].setColor1(255);
-                      tempGrid[i - 1][j - 1].setColor2(255);
-                      tempGrid[i - 1][j - 1].setColor3(0);
-                    }
-                  }
-                }
-              }
-            }
-            
-            // Update the original grid
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                this.grid[i][j].setIsRed(tempGrid[i][j].getIsRed());
-                this.grid[i][j].setIsGreen(tempGrid[i][j].getIsGreen());
-                this.grid[i][j].setIsBlue(tempGrid[i][j].getIsBlue());
-                this.grid[i][j].setIsYellow(tempGrid[i][j].getIsYellow());
-                this.grid[i][j].setColor1(tempGrid[i][j].getColor1());
-                this.grid[i][j].setColor2(tempGrid[i][j].getColor2());
-                this.grid[i][j].setColor3(tempGrid[i][j].getColor3());
-              }
-            }
-            
-            this.printCurrGrid();
-          }
-
-          getRedCount() {
-            let count = 0;
-            for (let row of this.grid) {
-              for (let cube of row) {
-                if (cube.getIsRed()) count++;
-              }
-            }
-            return count;
-          }
-
-          getBlueCount() {
-            let count = 0;
-            for (let row of this.grid) {
-              for (let cube of row) {
-                if (cube.getIsBlue()) count++;
-              }
-            }
-            return count;
-          }
-
-          getGreenCount() {
-            let count = 0;
-            for (let row of this.grid) {
-              for (let cube of row) {
-                if (cube.getIsGreen()) count++;
-              }
-            }
-            return count;
-          }
-
-          getYellowCount() {
-            let count = 0;
-            for (let row of this.grid) {
-              for (let cube of row) {
-                if (cube.getIsYellow()) count++;
-              }
-            }
-            return count;
-          }
-
-          printCurrGrid() {
-            for (let i = 0; i < this.grid.length; i++) {
-              for (let j = 0; j < this.grid[0].length; j++) {
-                this.grid[i][j].printCube(i * this.grid[i][j].getDims(), j * this.grid[i][j].getDims());
-              }
-            }
-          }
-        }
-
-        // Main sketch variables
-        let currGrid;
-        let counter = 0;
-        let frameCounter = 0;
-
-        p.setup = () => {
-          // Responsive canvas size
-          const size = Math.min(500, window.innerWidth - 40); // Leave 20px padding on each side for mobile
-          p.createCanvas(size, size);
-          p.background(0);
-          currGrid = new Grid(10);
-          currGrid.initPrintGridLayout();
-        };
-
-        p.draw = () => {
-          // Control speed with frame counter
-          frameCounter++;
-          if (frameCounter % 33 !== 0) return; // Approx 550ms at 60fps
-          
-          if (counter < 9) {
-            currGrid.changeStateOfBoard();
-          } else if (counter >= 9) {
-            let redCount = currGrid.getRedCount();
-            let blueCount = currGrid.getBlueCount();
-            let greenCount = currGrid.getGreenCount();
-            let yellowCount = currGrid.getYellowCount();
-            
-            if (redCount === 100 || blueCount === 100 || greenCount === 100 || yellowCount === 100) {
-              p.noLoop();
-              setIsRunning(false);
-              
-              // Responsive text size
-              const textSize = p.width > 400 ? 48 : 32;
-              p.textSize(textSize);
-              p.textAlign(p.CENTER);
-              p.fill(255);
-              p.stroke(0);
-              p.strokeWeight(3);
-              
-              let winnerText = '';
-              if (redCount === 100) {
-                winnerText = 'Red wins!';
-                setWinner('Red');
-              } else if (blueCount === 100) {
-                winnerText = 'Blue wins!';
-                setWinner('Blue');
-              } else if (greenCount === 100) {
-                winnerText = 'Green wins!';
-                setWinner('Green');
-              } else if (yellowCount === 100) {
-                winnerText = 'Yellow wins!';
-                setWinner('Yellow');
-              }
-              p.text(winnerText, p.width / 2, p.height / 2);
-            } else {
-              currGrid.fight();
-            }
-          }
-          counter++;
-        };
-      };
-
-      // Create the p5 instance only if container exists
-      if (sketchRef.current && !p5Instance.current) {
-        p5Instance.current = new p5(sketch, sketchRef.current);
-        setIsInitialized(true);
-      }
-    }, 100);
+    setResetKey(prev => prev + 1); // Trigger re-mount
   };
 
   return (
@@ -1167,7 +590,6 @@ function RevealOnScroll({ children }) {
   );
 }
 
-// Video Player Component with Intersection Observer
 function VideoPlayer({ src }) {
   const videoRef = useRef(null);
   const [hasPlayed, setHasPlayed] = useState(false);
@@ -1185,7 +607,7 @@ function VideoPlayer({ src }) {
             });
         }
       },
-      { threshold: 0.5 } // Start when 50% of video is visible
+      { threshold: 0.5 }
     );
 
     if (videoRef.current) {
@@ -1210,7 +632,6 @@ function VideoPlayer({ src }) {
   );
 }
 
-// More Projects Component
 function MoreProjects({ currentProjectId }) {
   const moreProjects = getRandomProjects(currentProjectId, 3);
   
@@ -1254,7 +675,6 @@ function MoreProjects({ currentProjectId }) {
   );
 }
 
-// Main Component
 export function ColorContest() {
   const videoRef = useRef(null);
 
@@ -1271,7 +691,6 @@ export function ColorContest() {
 
   return (
     <section className="min-h-screen bg-white">
-      {/* Header Section */}
       <div className="bg-gray-100 pt-24 sm:pt-16 pb-10 md:pt-32 md:pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
@@ -1306,7 +725,6 @@ export function ColorContest() {
             </div>
           </RevealOnScroll>
 
-          {/* Information Grid */}
           <RevealOnScroll>
             <div className="flex flex-wrap gap-4 md:gap-6 mt-8">
               <div className="flex flex-col items-start">
@@ -1327,7 +745,6 @@ export function ColorContest() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 md:py-16">
-        {/* Main Color Contest Interactive Sketch */}
         <RevealOnScroll>
           <div className="mb-20 md:mb-36 -mx-0 sm:-mx-6 lg:-mx-12">
             <div className="flex flex-col items-center">
@@ -1340,7 +757,6 @@ export function ColorContest() {
           </div>
         </RevealOnScroll>
 
-        {/* Overview Section */}
         <div className="-mx-4 sm:-mx-6 lg:-mx-12">
           <div className="space-y-16 md:space-y-28">
             <RevealOnScroll>
@@ -1357,7 +773,6 @@ export function ColorContest() {
         </div>
       </div>
 
-      {/* Project Context Section */}
       <div className="bg-gray-100 py-16 md:py-24 mb-16 md:mb-28 mt-16 md:mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <RevealOnScroll>
@@ -1400,7 +815,6 @@ export function ColorContest() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="-mx-4 sm:-mx-6 lg:-mx-12">
           <div className="space-y-16 md:space-y-28">
-            {/* Final Presentation Section */}
             <RevealOnScroll>
               <section className="px-4 sm:px-6 lg:px-0">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-500 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">Final Exhibition</h2>
@@ -1432,7 +846,6 @@ export function ColorContest() {
                     Color Contest was presented on the Ars Electronica facade in Linz, Austria, transforming the building into a massive interactive canvas. In the video below, you can hear the crowd actively voting for their favorite colors through cheering!
                   </p>
                 </div>
-                {/* Large presentation images */}
                 <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
                   <div className="flex justify-center">
                     <div className="relative overflow-hidden rounded-xl lg:rounded-2xl shadow-xl w-full md:w-[85%] lg:w-4/5">
@@ -1446,7 +859,6 @@ export function ColorContest() {
         </div>
       </div>
 
-      {/* More Projects Section */}
       <MoreProjects currentProjectId="ColorContest" />
     </section>
   );

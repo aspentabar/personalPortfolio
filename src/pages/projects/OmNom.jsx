@@ -244,62 +244,16 @@ export default function OmNom() {
             </h2>
             <div className="max-w-3xl">
               <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-8">
-                We conducted 6 in-depth interviews with participants ranging from college students to working professionals to understand their cooking habits, pain points, and needs. Our research focused on understanding decision-making around meal preparation and barriers to cooking at home.
+                We conducted 6 in-depth interviews with participants ranging from college students to working professionals to understand their cooking habits and pain points. Our research revealed that time constraints are the biggest barrier to cooking at home, while users strongly desire to reduce food waste but lack effective planning tools. Based on these findings, we identified key user needs: quick recipe generation from available ingredients, personalized dietary recommendations, clear cooking instructions, and ingredient tracking to minimize waste.
               </p>
             </div>
             
-            <div className="flex justify-center mb-12">
+            <div className="flex justify-center mt-12">
               <img 
                 src={omnom9}
                 alt="User Research Process" 
                 className="w-full max-w-3xl rounded-lg"
               />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="text-lg font-bold mb-3" style={{color: '#4CA347'}}>Key Findings</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2">•</span>
-                    <span className="text-sm text-gray-700">Time constraints are the biggest barrier to cooking</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2">•</span>
-                    <span className="text-sm text-gray-700">Users want to reduce food waste but lack planning</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2">•</span>
-                    <span className="text-sm text-gray-700">Recipe discovery happens mainly through social media</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2">•</span>
-                    <span className="text-sm text-gray-700">Cooking skill level affects willingness to try new recipes</span>
-                  </li>
-                </ul>
-              </div>
-              
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <h3 className="text-lg font-bold mb-3" style={{color: '#4CA347'}}>User Needs</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2">•</span>
-                    <span className="text-sm text-gray-700">Quick recipe generation based on available ingredients</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2">•</span>
-                    <span className="text-sm text-gray-700">Personalized recommendations for dietary restrictions</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2">•</span>
-                    <span className="text-sm text-gray-700">Clear, easy-to-follow cooking instructions</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-green-600 mr-2">•</span>
-                    <span className="text-sm text-gray-700">Ingredient tracking to minimize waste</span>
-                  </li>
-                </ul>
-              </div>
             </div>
           </section>
         </RevealOnScroll>
@@ -408,7 +362,7 @@ export default function OmNom() {
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-8">
-                  We conducted Wizard of Oz testing with 4 participants to evaluate the app's core functionality before building the AI components. Key tasks included ingredient recognition and profile customization.
+                  We conducted Wizard of Oz testing with 4 participants to evaluate the app's core functionality before building the AI components. Key tasks included ingredient recognition and profile customization. Testing revealed that navigation to the home page needed improvement, the review page purpose was unclear, the ingredient icon required clarification, and users wanted calorie and time filters. Based on this feedback, we added a home icon to the navigation bar, clarified review page instructions, combined filter and sort functions, and updated the ingredient icon design.
                 </p>
               </div>
               
@@ -418,28 +372,6 @@ export default function OmNom() {
                   alt="Wizard of Oz Testing Process" 
                   className="w-full max-w-5xl rounded-lg"
                 />
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white p-6 rounded-xl">
-                  <h3 className="text-lg font-bold mb-3" style={{color: '#4CA347'}}>Key Findings</h3>
-                  <ul className="space-y-2">
-                    <li className="text-sm text-gray-700">• Navigation to home page needed improvement</li>
-                    <li className="text-sm text-gray-700">• Review page purpose was unclear</li>
-                    <li className="text-sm text-gray-700">• Icon for ingredients needed clarification</li>
-                    <li className="text-sm text-gray-700">• Users wanted calorie and time filters</li>
-                  </ul>
-                </div>
-                
-                <div className="bg-white p-6 rounded-xl">
-                  <h3 className="text-lg font-bold mb-3" style={{color: '#4CA347'}}>Design Iterations</h3>
-                  <ul className="space-y-2">
-                    <li className="text-sm text-gray-700">• Added home icon to navigation bar</li>
-                    <li className="text-sm text-gray-700">• Clarified review page instructions</li>
-                    <li className="text-sm text-gray-700">• Combined filter and sort functions</li>
-                    <li className="text-sm text-gray-700">• Updated ingredient icon design</li>
-                  </ul>
-                </div>
               </div>
             </section>
           </RevealOnScroll>
