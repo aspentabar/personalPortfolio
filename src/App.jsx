@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       {!isLoaded && <LoadingScreen onComplete={() => setIsLoaded(true)} />}
-      <Router basename="/personalPortfolio/">
+      <Router basename="/">
         <div
           className={`min-h-screen transition-opacity duration-700 ${
             isLoaded ? "opacity-100" : "opacity-0"
