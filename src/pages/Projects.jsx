@@ -55,16 +55,6 @@ export const featuredProjects = [
     categories: ["ux", "all"],
   },
   {
-    id: "Filosophia",
-    title: "Filosofia's Diary",
-    image: Typebook,
-    description:
-      "A typography specimen for the typeface 'Filosofia', showcasing its features and history through the format of a diary.",
-    tech: ["Adobe Indesign", "Typography", "Graphic Design", "Mockup"],
-    url: "/projects/Filosofia",
-    categories: ["graphic", "all"],
-  },
-  {
     id: "ColorContest",
     title: "Color Contest",
     image: color,
@@ -73,6 +63,16 @@ export const featuredProjects = [
     tech: ["Interactive Design", "Game Design", "Creative Coding"],
     url: "/projects/ColorContest",
     categories: ["HCI", "all"],
+  },
+  {
+    id: "Filosophia",
+    title: "Filosofia's Diary",
+    image: Typebook,
+    description:
+      "A typography specimen for the typeface 'Filosofia', showcasing its features and history through the format of a diary.",
+    tech: ["Adobe Indesign", "Typography", "Graphic Design", "Mockup"],
+    url: "/projects/Filosofia",
+    categories: ["graphic", "all"],
   },
   {
     id: "PlaystationVR",
@@ -150,9 +150,9 @@ export function Projects() {
             </h1>
           </div>
 
-          {/* Filter Bar - Scrollable container */}
-          <div className="mb-6 md:mb-8 border-b border-gray-200 pt-3 md:pt-5 -mx-4 px-4 sm:mx-0 sm:px-0">
-            <div className="flex overflow-x-auto scrollbar-hide pb-1">
+          {/* Filter Bar - Scrollable container - FIXED: Only horizontal scrolling */}
+          <div className="mb-6 md:mb-8 border-b border-gray-200 pt-3 md:pt-5 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto overflow-y-hidden">
+            <div className="flex scrollbar-hide pb-1">
               <div className="flex flex-nowrap">
                 {categories.map((cat) => (
                   <button

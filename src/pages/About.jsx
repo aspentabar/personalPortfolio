@@ -98,7 +98,7 @@ export function About() {
               <span className="font-semibold text-purple-700">Currently seeking:</span> Full-time positions starting May 2025.
               <div className="mt-3 flex flex-row gap-2 items-center">
                 <a
-                  href="mailto:aspentabar@gmail.com"
+                  href="mailto:aspentabar26@gmail.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Email Aspen"
