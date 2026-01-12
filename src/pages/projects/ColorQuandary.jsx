@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { featuredProjects, getRandomProjects } from '../Projects'; // Adjust path as needed
+import { featuredProjects, getRandomProjects } from '../Projects';
 import ArsVid from "../../assets/ArsVid1.mp4";
 import Ars1 from "../../assets/ars1.jpeg";
 import Ars2 from "../../assets/ars2.jpeg";
@@ -78,7 +78,6 @@ function MediaCarousel() {
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) => {
       if (prevIndex === 0) {
-        // Skip to second-to-last pair (items 5-6)
         return mediaItems.length - 2;
       }
       return prevIndex - 1;
@@ -87,8 +86,6 @@ function MediaCarousel() {
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => {
-      // When we're at the second-to-last position (showing items 5-6), 
-      // jump to first position (items 0-1)
       if (prevIndex >= mediaItems.length - 2) {
         return 0;
       }
@@ -229,12 +226,10 @@ function MediaCarousel() {
       {/* Dots Indicator */}
       <div className="flex justify-center mt-4 md:mt-6 gap-2">
         {mediaItems.map((_, index) => {
-          // Adjust dot highlighting for carousel positions
           let isActive = false;
           if (currentIndex === index || currentIndex === index - 1) {
             isActive = true;
           }
-          // Special case for wrapping - only highlight last dot when at position 0 if it's actually visible
           if (currentIndex === mediaItems.length - 2 && index === mediaItems.length - 1) {
             isActive = true;
           }
@@ -243,7 +238,6 @@ function MediaCarousel() {
             <button
               key={index}
               onClick={() => {
-                // Adjust click behavior to match carousel positions
                 if (index === mediaItems.length - 1) {
                   setCurrentIndex(mediaItems.length - 2);
                 } else {
@@ -262,9 +256,21 @@ function MediaCarousel() {
   );
 }
 
-// More Projects Component - Updated to match Filosofia styling
+// More Projects Component
 function MoreProjects({ currentProjectId }) {
   const moreProjects = getRandomProjects(currentProjectId, 3);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   return (
     <section className="w-full pt-24 pb-16">
@@ -282,13 +288,23 @@ function MoreProjects({ currentProjectId }) {
                 className="group block bg-white rounded-lg shadow hover:shadow-xl transition-shadow overflow-hidden"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
               >
-                <div className="relative w-full overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                {isMobile ? (
+                  <div className="relative w-full overflow-hidden" style={{ paddingTop: '66.67%' }}>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative w-full overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
                 <div className="p-4">
                   <h3 className="font-bold text-lg text-purple-700 mb-2">
                     {project.title}
@@ -491,7 +507,7 @@ export function ColorQuandary() {
                     At the closing presentation, our project was showcased live to an international audience of researchers, scientists, artists, and the local Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous play sparked by the visual competition.
                   </p>
                 </div>
-                {/* Large presentation images - Updated alignment */}
+                {/* Large presentation images */}
                 <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">
                   <div className="relative overflow-hidden rounded-xl lg:rounded-2xl shadow-xl">
                     <img 
@@ -514,8 +530,6 @@ export function ColorQuandary() {
             </RevealOnScroll>
           </div>
         </div>
-
-
       </div>
 
       {/* More Projects Section */}

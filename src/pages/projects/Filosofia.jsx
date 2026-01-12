@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { featuredProjects, getRandomProjects } from '../Projects'; // Adjust path as needed
+import { featuredProjects, getRandomProjects } from '../Projects';
 
 // Video
 import FiloVid from "../../assets/filovid.mp4";
@@ -106,7 +106,6 @@ function MockupGallery() {
     setErrorImages(prev => ({ ...prev, [index]: true }));
   };
 
-  // Debug: Log the first image source to check if imports are working
   useEffect(() => {
     console.log('First image source:', mockupItems[0]?.src);
     console.log('All image sources:', mockupItems.map(item => item.src));
@@ -116,7 +115,6 @@ function MockupGallery() {
     <div className="mt-12 space-y-6 md:space-y-8 max-w-3xl mx-auto">
       {mockupItems.map((item, index) => (
         <div key={index} className="relative overflow-hidden rounded-lg shadow-lg bg-gray-50">
-          {/* Loading placeholder */}
           {!loadedImages[index] && !errorImages[index] && (
             <div className="absolute inset-0 flex items-center justify-center min-h-[200px]">
               <div className="text-gray-400">
@@ -128,7 +126,6 @@ function MockupGallery() {
             </div>
           )}
           
-          {/* Error state */}
           {errorImages[index] && (
             <div className="flex flex-col items-center justify-center min-h-[200px] p-8 text-center">
               <svg className="w-12 h-12 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,7 +136,6 @@ function MockupGallery() {
             </div>
           )}
           
-          {/* Image */}
           {!errorImages[index] && (
             <img
               src={item.src}
@@ -162,7 +158,6 @@ function MockupGallery() {
 function FilosofiaCarousel() {
   const [currentPage, setCurrentPage] = useState(0);
   
-  // Filosofia pages configuration
   const filosofiaPages = [
     { src: Filosofia1, alt: 'Filosofia Page 1' },
     { src: Filosofia2, alt: 'Filosofia Page 2' },
@@ -178,7 +173,6 @@ function FilosofiaCarousel() {
     { src: Filosofia12, alt: 'Filosofia Page 12' }
   ];
   
-  // Navigation handlers
   const handlePrevious = () => {
     setCurrentPage((prev) => (prev === 0 ? filosofiaPages.length - 1 : prev - 1));
   };
@@ -189,9 +183,7 @@ function FilosofiaCarousel() {
 
   return (
     <div className="relative mt-12">
-
       <div className="flex items-center justify-center">
-        {/* Previous Button */}
         <button
           onClick={handlePrevious}
           className="absolute left-0 md:-left-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
@@ -212,7 +204,6 @@ function FilosofiaCarousel() {
           </svg>
         </button>
 
-        {/* Page Display - Scaled up slightly */}
         <div className="w-full max-w-3xl px-8 md:px-12">
           <div className="relative overflow-hidden rounded-lg shadow-xl bg-gray-50">
             <img
@@ -224,7 +215,6 @@ function FilosofiaCarousel() {
           </div>
         </div>
 
-        {/* Next Button */}
         <button
           onClick={handleNext}
           className="absolute right-0 md:-right-12 z-10 p-1.5 md:p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
@@ -246,7 +236,6 @@ function FilosofiaCarousel() {
         </button>
       </div>
 
-      {/* Dots Indicator */}
       <div className="flex justify-center mt-6 gap-2 flex-wrap">
         {filosofiaPages.map((_, index) => (
           <button
@@ -266,6 +255,18 @@ function FilosofiaCarousel() {
 // More Projects Component
 function MoreProjects({ currentProjectId }) {
   const moreProjects = getRandomProjects(currentProjectId, 3);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   return (
     <section className="w-full pt-24 pb-16 bg-gray-100">
@@ -283,13 +284,23 @@ function MoreProjects({ currentProjectId }) {
                 className="group block bg-white rounded-lg shadow hover:shadow-xl transition-shadow overflow-hidden"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
               >
-                <div className="relative w-full overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                {isMobile ? (
+                  <div className="relative w-full overflow-hidden" style={{ paddingTop: '66.67%' }}>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative w-full overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
                 <div className="p-4">
                   <h3 className="font-bold text-lg text-purple-700 mb-2">
                     {project.title}

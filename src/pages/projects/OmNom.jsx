@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { featuredProjects, getRandomProjects } from '../Projects'; // Adjust path as needed
+import { featuredProjects, getRandomProjects } from '../Projects';
 import omnom2 from "../../assets/omnom2.png";
 import omnom3 from "../../assets/omnom3.png";
 import omnom5 from "../../assets/omnom5.png";
@@ -12,7 +12,6 @@ import omnom10 from "../../assets/omnom10.png";
 import omnom11 from "../../assets/omnom11.png";
 import omnomvid from "../../assets/omnom.mp4";
 
-// Placeholder images - replace these with your actual image imports
 const placeholderImg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23e0e0e0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='24'%3EImage Placeholder%3C/text%3E%3C/svg%3E";
 
 // Scroll reveal animation
@@ -56,6 +55,18 @@ function RevealOnScroll({ children }) {
 // More Projects Component
 function MoreProjects({ currentProjectId }) {
   const moreProjects = getRandomProjects(currentProjectId, 3);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   return (
     <section className="w-full pt-24 pb-16">
@@ -73,13 +84,23 @@ function MoreProjects({ currentProjectId }) {
                 className="group block bg-white rounded-lg shadow hover:shadow-xl transition-shadow overflow-hidden"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
               >
-                <div className="relative w-full overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                {isMobile ? (
+                  <div className="relative w-full overflow-hidden" style={{ paddingTop: '66.67%' }}>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative w-full overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
                 <div className="p-4">
                   <h3 className="font-bold text-lg text-purple-700 mb-2">
                     {project.title}
@@ -325,7 +346,6 @@ export default function OmNom() {
                   We created detailed user stories and storyboards to visualize how our personas would interact with OmNom.ai in their daily lives, from discovering the app to successfully cooking meals.
                 </p>
               </div>
-              {/* Two storyboard images side by side */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
                 <img src={omnom5} alt="Eric's User Journey Storyboard" className="w-full rounded-lg shadow-md" />
                 <img src={omnom6} alt="Emily's User Journey Storyboard" className="w-full rounded-lg shadow-md" />

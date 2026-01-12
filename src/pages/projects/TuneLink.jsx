@@ -253,7 +253,7 @@ function DrawingConclusionsCarousel() {
         </button>
 
         <div className="w-full overflow-hidden">
-          <div className="relative" style={{ minHeight: '210px' }}>
+          <div className="relative" style={{ minHeight: '330px' }}>
             <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-4 gap-4">
               {currentItems.map((item) => (
                 <div 
@@ -317,6 +317,18 @@ function DrawingConclusionsCarousel() {
 // More Projects Component
 function MoreProjects({ currentProjectId }) {
   const moreProjects = getRandomProjects(currentProjectId, 3);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   
   return (
     <section className="w-full pt-24 pb-16">
@@ -334,13 +346,23 @@ function MoreProjects({ currentProjectId }) {
                 className="group block bg-white rounded-lg shadow hover:shadow-xl transition-shadow overflow-hidden"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}
               >
-                <div className="relative w-full overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                {isMobile ? (
+                  <div className="relative w-full overflow-hidden" style={{ paddingTop: '66.67%' }}>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                ) : (
+                  <div className="relative w-full overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-48 md:h-56 lg:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                )}
                 <div className="p-4">
                   <h3 className="font-bold text-lg text-purple-700 mb-2">
                     {project.title}

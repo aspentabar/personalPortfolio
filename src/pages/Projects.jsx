@@ -60,7 +60,7 @@ export const featuredProjects = [
     image: color,
     description:
       "An interactive color contest where viewers can vote for a color as they compete for the space.",
-    tech: ["Interactive Design", "Game Design", "Creative Coding"],
+    tech: ["Interactive Design", "Game Design", "Creative Coding", "User Experience"],
     url: "/projects/ColorContest",
     categories: ["HCI", "all"],
   },
@@ -90,7 +90,7 @@ export const featuredProjects = [
     title: "Personal Portfolio",
     image: PortfolioImg,
     description:
-      "You're already here! This React-based portfolio showcases my work with a touch of purple magic. Cute, isn't it?",
+      "You're already here! This React-based portfolio showcases my work with a touch of purple!",
     tech: ["React", "Tailwind CSS", "Vite", "JavaScript"],
     url: "https://github.com/aspentabar/personalPortfolio",
     categories: ["web", "ux", "all"],
@@ -205,11 +205,11 @@ export function Projects() {
                     rel="noopener noreferrer"
                     className="block group"
                   >
-                    <div className="relative w-full overflow-hidden">
+                    <div className="relative w-full overflow-hidden" style={{ paddingTop: '66.67%' }}>
                       <img
                         src={proj.image}
                         alt={proj.title}
-                        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                        className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-5 sm:p-6 md:p-7">
@@ -238,11 +238,11 @@ export function Projects() {
                 ) : proj.comingSoon ? (
                   // Coming Soon project - non-clickable and no hover effects
                   <div className="block cursor-not-allowed opacity-90">
-                    <div className="relative w-full overflow-hidden">
+                    <div className="relative w-full overflow-hidden" style={{ paddingTop: '66.67%' }}>
                       <img
                         src={proj.image}
                         alt={proj.title}
-                        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 object-cover object-center"
+                        className="absolute inset-0 w-full h-full object-cover object-center"
                       />
                     </div>
                     <div className="p-5 sm:p-6 md:p-7">
@@ -270,11 +270,11 @@ export function Projects() {
                 ) : (
                   // Regular project link
                   <Link to={proj.url} className="block group" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
-                    <div className="relative w-full overflow-hidden">
+                    <div className="relative w-full overflow-hidden" style={{ paddingTop: '66.67%' }}>
                       <img
                         src={proj.image}
                         alt={proj.title}
-                        className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                        className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <div className="p-5 sm:p-6 md:p-7">
