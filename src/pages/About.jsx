@@ -33,6 +33,7 @@ const skillGroups = [
     skills: [
       "Java",
       "Python",
+      "C#",
       "Git",
       "HTML",
       "CSS",
@@ -40,7 +41,7 @@ const skillGroups = [
       "React",
       "React Native",
       "SQL",
-      "Processing.js",
+      "p5.js",
     ],
   },
   {
@@ -69,6 +70,7 @@ const skillGroups = [
       "Tinkercad",
       "Hoverlay",
       "Google Analytics",
+      "macOS",
     ],
   },
 ];
