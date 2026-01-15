@@ -415,7 +415,7 @@ export default function Filosofia() {
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 md:mb-6">Project Overview</h2>
                 <div className="space-y-4 max-w-4xl">
                   <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700">
-                    This project is a comprehensive typography specimen that brings the Filosofia typeface to life through storytelling, visual analysis, and typographic exploration. I studied its origins, design qualities, and unique ligatures, highlighting how Zuzana Licko's reinterpretation of Bodoni informed its elegant, high-contrast character. Through this work, I aimed to demonstrate how typography can communicate both information and emotion.
+                  This typography specimen brings the Filosofia typeface to life through storytelling and typographic exploration. By examining its origins, design qualities, and distinctive ligatures, the project highlights how Zuzana Licko's contemporary reinterpretation of Bodoni informed Filosofia's elegant character.
                   </p>
                 </div>
               </section>

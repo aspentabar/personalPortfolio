@@ -39,7 +39,7 @@ export const featuredProjects = [
     title: "TuneLink",
     image: TuneinkImg,
     description:
-      "A social music app that connects listeners through collectible icons that reflect their shared tastes and listening habits.",
+      "A social app that connects music listeners through collectible icons that reflect their shared tastes and listening habits.",
     tech: ["Figma", "User Interface", "User Interviews", "Mobile App Design"],
     url: "/projects/TuneLink",
     categories: ["ux", "all"],
@@ -60,7 +60,7 @@ export const featuredProjects = [
     image: color,
     description:
       "An interactive color contest where viewers can vote for a color as they compete for the space.",
-    tech: ["Interactive Design", "Game Design", "Creative Coding", "User Experience"],
+    tech: ["Game Design", "Creative Coding", "User Experience"],
     url: "/projects/ColorContest",
     categories: ["HCI", "all"],
   },
@@ -90,7 +90,7 @@ export const featuredProjects = [
     title: "Personal Portfolio",
     image: PortfolioImg,
     description:
-      "You're already here! This React-based portfolio showcases my work with a touch of purple!",
+      "You're already here! This portfolio showcases my work with a touch of purple!",
     tech: ["React", "Tailwind CSS", "Vite", "JavaScript"],
     url: "https://github.com/aspentabar/personalPortfolio",
     categories: ["web", "ux", "all"],

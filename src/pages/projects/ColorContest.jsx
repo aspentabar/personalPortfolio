@@ -751,7 +751,7 @@ export function ColorContest() {
               </div>
               <div className="flex flex-col items-start">
                 <p className="text-green-500 uppercase font-bold tracking-wider text-xs md:text-sm">Focus</p>
-                <p className="text-neutral-950 text-sm md:text-base">Interactive Design</p>
+                <p className="text-neutral-950 text-sm md:text-base">Game Design, User Experience</p>
               </div>
               <div className="flex flex-col items-start">
                 <p className="text-yellow-400 uppercase font-bold tracking-wider text-xs md:text-sm">Tools</p>
@@ -798,7 +798,7 @@ export function ColorContest() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 md:mb-6">Design & Development</h2>
               <div className="max-w-2xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  Color Contest was originally created as a simple 10x10 grid animation for computer screens, exploring how colors could compete for space in a confined digital environment. The initial prototype focused on the core mechanics of expansion and territorial conflict between the four colors, running as a self-contained p5.js sketch.
+                  Color Contest was originally created as a simple 10x10 grid animation for computer screens, exploring how colors could compete for space in a confined digital environment. The initial prototype focused on the core mechanics of expansion and territorial conflict between the four colors, running as a p5.js sketch.
                 </p>
                 <p className="text-sm md:text-base leading-relaxed text-gray-700 mt-4">
                   The project underwent significant development when it was selected for display on the Ars Electronica facade, transforming from a personal coding experiment into a large-scale public installation.
@@ -861,7 +861,7 @@ export function ColorContest() {
                 </div>
                 <div className="max-w-2xl">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    Color Contest was presented on the Ars Electronica facade in Linz, Austria, transforming the building into a massive interactive canvas. In the video below, you can hear the crowd actively voting for their favorite colors through cheering!
+                    Color Contest was presented on the Ars Electronica facade in Linz, Austria, transforming the building into a massive canvas. In the video below, you can hear the crowd actively voting for their favorite colors through cheering!
                   </p>
                 </div>
                 <div className="mt-16 md:mt-24 space-y-4 md:space-y-6">

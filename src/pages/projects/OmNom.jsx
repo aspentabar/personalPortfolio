@@ -265,7 +265,7 @@ export default function OmNom() {
             </h2>
             <div className="max-w-3xl">
               <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-8">
-                We conducted 6 in-depth interviews with participants ranging from college students to working professionals to understand their cooking habits and pain points. Our research revealed that time constraints are the biggest barrier to cooking at home, while users strongly desire to reduce food waste but lack effective planning tools. Based on these findings, we identified key user needs: quick recipe generation from available ingredients, personalized dietary recommendations, clear cooking instructions, and ingredient tracking to minimize waste.
+                We conducted 6 interviews with participants ranging from college students to working professionals to understand their cooking habits and pain points. Our research revealed that time constraints are the biggest barrier to cooking at home, while users strongly desire to reduce food waste but lack effective planning tools. Based on these findings, we identified key user needs: quick recipe generation from available ingredients, personalized dietary recommendations, clear cooking instructions, and ingredient tracking to minimize waste.
               </p>
             </div>
             
@@ -325,7 +325,7 @@ export default function OmNom() {
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  Based on our research, we developed two primary personas representing our target users: Eric, a retired engineer eager to explore cooking, and Emily, a busy student needing quick, efficient meal solutions.
+                  Based on our research, we developed two primary personas representing our target users: Eric, a retired engineer eager to explore cooking, and Emily, a busy student needing quick, efficient meal suggestions.
                 </p>
               </div>
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 mt-12 max-w-7xl mx-auto">
@@ -343,7 +343,7 @@ export default function OmNom() {
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  We created detailed user stories and storyboards to visualize how our personas would interact with OmNom.ai in their daily lives, from discovering the app to successfully cooking meals.
+                  We created user storyboards to visualize how our personas would interact with OmNom.ai in their daily lives, from discovering the app to successfully cooking meals.
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
@@ -382,7 +382,7 @@ export default function OmNom() {
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700 mb-8">
-                  We conducted Wizard of Oz testing with 4 participants to evaluate the app's core functionality before building the AI components. Key tasks included ingredient recognition and profile customization. Testing revealed that navigation to the home page needed improvement, the review page purpose was unclear, the ingredient icon required clarification, and users wanted calorie and time filters. Based on this feedback, we added a home icon to the navigation bar, clarified review page instructions, combined filter and sort functions, and updated the ingredient icon design.
+                  We conducted Wizard of Oz testing with 4 participants to evaluate the app's core functionality. Key tasks included ingredient recognition and profile customization. Testing revealed that navigation to the home page needed improvement, the review page purpose was unclear, the ingredient icon required clarification, and users wanted calorie and time filters. Based on this feedback, we added a home icon to the navigation bar, clarified review page instructions, combined filter and sort functions, and updated the ingredient icon design.
                 </p>
               </div>
               
@@ -421,7 +421,7 @@ export default function OmNom() {
               </div>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  The final prototype features a complete visual identity with an intuitive camera-based ingredient recognition system, personalized recipe recommendations, and streamlined user flows that make cooking accessible for users of all skill levels.
+                  The final prototype features a complete high fidelity prototype with an AI based camera ingredient recognition system, personalized recipe recommendations, and complete profile customization.
                 </p>
               </div>
               

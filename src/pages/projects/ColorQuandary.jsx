@@ -491,7 +491,7 @@ export function ColorQuandary() {
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-4 md:mb-6">Design & Development</h2>
                 <div className="max-w-2xl mb-16 md:mb-24">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    After whiteboard brainstorming ways to gamify the façade, my team and I finalized our concept and developed the installation using Java and Processing.js, running simulations on our laptops to accurately mirror how the Ars Electronica media façade would behave at full architectural scale. With support from Ars Electronica Futurelab researchers, we also integrated motion sensors to track human movement in front of the building, allowing the façade to react dynamically to people in the public space.
+                    After whiteboard brainstorming ways to gamify the façade, my team and I finalized our concept and developed the installation using Java and p5.js, running simulations on our laptops to accurately mirror how the Ars Electronica media façade would behave at full architectural scale. With support from Ars Electronica Futurelab researchers, we also integrated motion sensors to track human movement in front of the building, allowing the façade to react dynamically to people in the public space.
                   </p>
                 </div>
                 <MediaCarousel />
@@ -504,7 +504,7 @@ export function ColorQuandary() {
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-700 mb-4 md:mb-6 mt-16 md:mt-20 lg:mt-32">Final Presentation</h2>
                 <div className="max-w-2xl">
                   <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                    At the closing presentation, our project was showcased live to an international audience of researchers, scientists, artists, and the local Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous play sparked by the visual competition.
+                    At the closing presentation, our project was showcased live to an international audience of researchers, scientists, artists, and the local Linz community. Visitors experienced Color Quandary directly on the plaza, engaging in spontaneous play sparked from the visual competition.
                   </p>
                 </div>
                 {/* Large presentation images */}

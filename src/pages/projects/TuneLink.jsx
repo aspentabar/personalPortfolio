@@ -136,7 +136,7 @@ function Activity1Carousel() {
                 src={currentImage.src}
                 alt={currentImage.alt}
                 className="w-full rounded-lg object-contain"
-                style={{ maxHeight: '400px' }}
+                style={{ maxHeight: '390px' }}
               />
               <p className="text-sm text-gray-600 mt-2 text-center">{currentImage.caption}</p>
             </div>
@@ -402,7 +402,7 @@ export default function TuneLink() {
                 TuneLink
               </h1>
               <p className="text-base sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-4xl mb-4 md:mb-8">
-                A social music app that connects listeners through collectible icons that reflect their shared tastes and listening habits.
+              A social app that connects music listeners through collectible icons that reflect their shared tastes and listening habits.
               </p>
               <div className="flex flex-wrap gap-3">
               <a
@@ -438,7 +438,7 @@ export default function TuneLink() {
                   Role
                 </p>
                 <p className="text-neutral-950 text-sm md:text-base">
-                  UX Designer & Researcher
+                  UI/UX Designer & Researcher
                 </p>
               </div>
               <div className="flex flex-col items-start">
@@ -446,7 +446,7 @@ export default function TuneLink() {
                   Focus
                 </p>
                 <p className="text-neutral-950 text-sm md:text-base">
-                  Social Interaction, UX, Prototyping
+                  UI/UX, Prototyping, Social Interaction
                 </p>
               </div>
               <div className="flex flex-col items-start">
@@ -551,7 +551,9 @@ export default function TuneLink() {
               Results
             </h4>
             {/* Activity 1 Image Carousel */}
-            <Activity1Carousel />
+            <div>
+              <Activity1Carousel />
+            </div>
             
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 mt-16" style={{color: '#000000'}}>
               Activity 2
@@ -660,7 +662,7 @@ export default function TuneLink() {
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  I created workflows to visualize how users would complete key actions, like discovering new connections or earning music icons. These flows helped refine the user's journey.
+                  I created workflows to visualize how users would complete key actions, like discovering new connections or changing profile icons. These flows helped refine the user's journey.
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
@@ -690,7 +692,7 @@ export default function TuneLink() {
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  Initial paper sketches explored different layout possibilities for TuneLink's main screens. These wireframes emphasized clear navigation, a minimal look, and easily recognizable visual cues tied to the music icons. Rapid sketching helped me iterate quickly before committing to digital prototypes.
+                  Initial paper sketches explored different layout possibilities for TuneLink's main screens. These wireframes shows my initial ideas, a simplistic look, and easily accessible design. Rapid sketching helped me iterate quickly before committing to digital prototypes.
                 </p>
               </div>
               <img 
@@ -732,7 +734,7 @@ export default function TuneLink() {
               </div>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  The low-fidelity wireframes translated early ideas into functional screen designs. They demonstrated the placement of icons, menus, and navigation elements, and were used for early usability feedback to confirm that users could intuitively navigate between listening stats, profiles, and chat features.
+                  The low-fidelity wireframes translated early ideas into functional screen designs. They demonstrated the placement of icons, menus, and navigation elements, and were used for early usability feedback to confirm that users could intuitively navigate between listening stats, profiles, chat features, and the map.
                 </p>
               </div>
               <div className="-mx-4 sm:-mx-6 lg:-mx-12 mt-6">
@@ -780,7 +782,7 @@ export default function TuneLink() {
               </h2>
               <div className="max-w-3xl">
                 <p className="text-sm md:text-base leading-relaxed text-gray-700">
-                  In designing TuneLink, I studied Snapchat's interface to understand how its simple iconography and smooth transitions create an intuitive user experience. I applied similar interaction patterns to make TuneLink feel natural and engaging. I also examined Spotify's visual language, drawing inspiration from its color palette and typography to build familiarity and trust. The result is a cohesive design that blends the playful interactivity of Snapchat with the visual identity and familiarity of Spotify.
+                In designing TuneLink, I examined Spotify's visual language, drawing inspiration from its color palette and typography to build familiarity and trust. In addition, I researched and incorporated UI components from Snapchat create an intuitive user experience.
                 </p>
               </div>
               <img 
